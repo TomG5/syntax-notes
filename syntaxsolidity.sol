@@ -1,3 +1,35 @@
+//  Tipos de dados básicos
+
+string          : Dados textuais de tamanho dinâmico / “Olá, mundo”
+bytes*          : Dados textuais de tamanho fixo gravados em hexadecimal / "a" => 61
+bool            : Verdadeiro ou falso / true ou false
+int**           : Número inteiro, positivo ou negativo / -123
+uint**          : Número inteiro e positivo / 1462
+fixed/ufixed    : Número com decimal / 3,296 (ainda não implementado)
+address         : Endereço de carteira de criptoativos / 0xa09f2562ga097o036cv
+address payable : Endereço recebível de fundos / 0xa09f2562ga097o036cv
+enum            : LIsta de opções representando índices até 256 / {GoStraight, Reverse, Still}
+
+*Varia conforme limitação de 'bytes'
+**Varia conforme limitação de 'bits'
+***Strings não permitem adição, busca ou mensuração do tamanho de caracteres
+****Codificação de caracteres fora do alfabeto ASCII precisa da keyword unicode prévio ao texto
+
+//  Tipos de dados referênciais
+
+"fixed array"   : Lista de dados de um único tipo com quantidade fixa / int[3] = [1, 2, 3];
+"dynamic array" : Lista de dados de um único tipo com quantidade variável / int[] = [1, 2, 3, 4];
+mapping         : Coleção de pares de chaves e valores (tipo único) / 
+    mapping(address => bool) voters;
+        voters[msg.sender] = true;
+
+struct          : Coleção de valores de diferentes tipos / 
+    struct Car {string Modelo; int16 Ano};
+    Car[] public myCars;
+    Car memory myCars = Car({Modelo: Modelo, Ano: Ano});
+
+OBS: Alterar o tamanho de textos/números em variáveis dentro de structs pode enconomizar em custo de gas transacional
+
 //  Definição de constante
 
 Tipo de dado + 'constant' + Tipo de Constante (Pública ou Privada) + Nome + Valor
@@ -26,6 +58,14 @@ uint public my_age;
 
 State = Definidas a nível de contrato, são armazenadas permanentemente e custam elevado gas
 Local = Definidas a nível de função, sendo utilizadas apenas durante o período de execução sem custo
+
+//  Data Holders
+
+Storage = Mantém dados entre chamadas de funções, armazendo a variável no mesmo espaço que a referência (geralmente usado para variáveis/constantes State)
+Memory = Mantém dados temporariamente, armazenando variáveis referenciais como uma cópia independente da referência (geralmente usado para variáveis/constantes Local)
+
+int[] storage sameNumbers = numbers;
+int[] memory myNumbers = numbers;
 
 //  Variáveis globais
 
@@ -69,50 +109,14 @@ modifier Restriction() {
     _;
 }
 
+OBS: Modifiers podem receber parâmetros (sendo passados na implementação pelo uso dos inputs da própria função)
+
 //  Visibilidade de funções e variáveis
 
 public = acessível interna e externamente por todos (padrão para funções)
 private = restritos ao contrato onde são definidos, acessíveis somente por uma função 'Getter' (padrão para variável state)
 internal = limitação de funções ao próprio contrato e seus derivados
 external = limitação de funções a outros contratos e endereços externos
-
-//  Tipos de dados básicos
-
-string          : Dados textuais de tamanho dinâmico / “Olá, mundo”
-bytes*          : Dados textuais de tamanho fixo gravados em hexadecimal / "a" => 61
-bool            : Verdadeiro ou falso / true ou false
-int**           : Número inteiro, positivo ou negativo / -123
-uint**          : Número inteiro e positivo / 1462
-fixed/ufixed    : Número com decimal / 3,296 (ainda não implementado)
-address         : Endereço de carteira de criptoativos / 0xa09f2562ga097o036cv
-address payable : Endereço recebível de fundos / 0xa09f2562ga097o036cv
-enum            : LIsta de opções representando índices até 256 / {GoStraight, Reverse, Still}
-
-*Varia conforme limitação de 'bytes'
-**Varia conforme limitação de 'bits'
-***Strings não permitem adição, busca ou mensuração do tamanho de caracteres
-****Codificação de caracteres fora do alfabeto ASCII precisa da keyword unicode prévio ao texto
-
-//  Tipos de dados referênciais
-
-"fixed array"   : Lista de dados de um único tipo com quantidade fixa / int[3] = [1, 2, 3];
-"dynamic array" : Lista de dados de um único tipo com quantidade variável / int[] = [1, 2, 3, 4];
-mapping         : Coleção de pares de chaves e valores (tipo único) / 
-    mapping(address => bool) voters;
-        voters[msg.sender] = true;
-
-struct          : Coleção de valores de diferentes tipos / 
-    struct Car {string Modelo; int16 Ano};
-    Car[] public myCars;
-    Car memory myCars = Car({Modelo: Modelo, Ano: Ano});
-
-//  Data Holders
-
-Storage = Mantém dados entre chamadas de funções, armazendo a variável no mesmo espaço que a referência (geralmente usado para variáveis/constantes State)
-Memory = Mantém dados temporariamente, armazenando variáveis referenciais como uma cópia independente da referência (geralmente usado para variáveis/constantes Local)
-
-int[] storage sameNumbers = numbers;
-int[] memory myNumbers = numbers;
 
 //  Operadores
 
@@ -159,6 +163,25 @@ for (uint i = 0; i < maxcounter; i++) {
 array.length = tamanho
 array.push = adição de elemento
 array.pop = remover último elemento
+
+// Retorno de valores
+
+function multipleReturns() internal returns(uint a, uint b, uint c) {
+  return (1, 2, 3);
+}
+    // Atribuição múltipla
+function processMultipleReturns() external {
+  uint a;
+  uint b;
+  uint c;
+  (a, b, c) = multipleReturns();
+}
+
+    // Retorno individual
+function getLastReturnValue() external {
+  uint c;
+  (,,c) = multipleReturns();
+}
 
 //  Eventos
 
