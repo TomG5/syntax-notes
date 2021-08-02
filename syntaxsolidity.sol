@@ -1,3 +1,5 @@
+/// Solidity 0.8.X
+
 //  Tipos de dados básicos
 
 string          : Dados textuais de tamanho dinâmico / “Olá, mundo”
