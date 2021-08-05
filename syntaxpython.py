@@ -42,35 +42,35 @@ def somar_valores(valor1, valor2):
 
 ##  Funções Padrões:
 '''
-abs()       |   remover sinal numérico
-all()       |   retorna verdadeiro se todo elemento iterado for True
-any()       |   retorna verdadeiro se qualquer elemento iterado for True
-bin()       |   retorna valor binário de número inteiro
-chr()       |   retorna o caracter de um índice do padrão Unicode
-dict()      |   transforma variável em dicionário
-drop()      |   remove índice, coluna ou valores de uma matriz (adicionando parâmetro 'inplace=True' efetiva a mudança)
-filter()    |   filtra registros cujo resultado da função seja True #Sintaxe < filter(*** função ***, *** iteravel ***) >
-format()    |   inclui valores de variáveis em strings delimitadas por {} (utilizado após a string)
-frozenset() |   transforma variável em set imutável
-hash()      |   gera um hash do valor
-head()      |   printar primeiros resultados
-hex()       |   retorna valor hexadecimal de número inteiro
-index()     |   retorna o índice de um dado no objeto
-input()     |   recebe entrada de dados pelo usuário
-len()       |   conta quantos elementos tem no objeto
-list()      |   transforma variável em lista
-max()       |   máximo de múltiplos dados
-min()       |   mínimo de múltiplos dados
-ord()       |   retorna o número de um caracter no padrão Unicode
-range()     |   retorna elementos de um dado intervalo (inclusivo, não inclusivo)
-round()     |   arredonda valores conforme número de casas decimais delimitadas
-set()       |   transforma variável em set (esta função opera de forma iteradora, segregando os elementos a serem adicionados)
-sum()       |   soma de valores
-tail()      |   printar últimos resultados
-tuple()     |   transforma variável em tupla
-type()      |   retorna o tipo de dado da variável
-unique()    |   printar valores únicos de dada coluna, lista etc.
-zip()       |   integra múltiplos objetos iteráveis com base nos índices de seus elementos
+abs()       |   Remover sinal numérico
+all()       |   Retorna verdadeiro se todo elemento iterado for True
+any()       |   Retorna verdadeiro se qualquer elemento iterado for True
+bin()       |   Retorna valor binário de número inteiro
+chr()       |   Retorna o caracter de um índice do padrão Unicode
+dict()      |   Transforma variável em dicionário
+drop()      |   Remove índice, coluna ou valores de uma matriz (adicionando parâmetro 'inplace=True' efetiva a mudança)
+filter()    |   Filtra registros cujo resultado da função seja True #Sintaxe < filter(*** função ***, *** iteravel ***) >
+format()    |   Inclui valores de variáveis em strings delimitadas por {} (utilizado após a string)
+frozenset() |   Transforma variável em set imutável
+hash()      |   Gera um hash do valor
+head()      |   Printar primeiros resultados
+hex()       |   Retorna valor hexadecimal de número inteiro
+index()     |   Retorna o índice de um dado no objeto
+input()     |   Recebe entrada de dados pelo usuário
+len()       |   Conta quantos elementos tem no objeto
+list()      |   Transforma variável em lista
+max()       |   Máximo de múltiplos dados
+min()       |   Mínimo de múltiplos dados
+ord()       |   Retorna o número de um caracter no padrão Unicode
+range()     |   Retorna elementos de um dado intervalo (inclusivo, não inclusivo)
+round()     |   Arredonda valores conforme número de casas decimais delimitadas
+set()       |   Transforma variável em set (esta função opera de forma iteradora, segregando os elementos a serem adicionados)
+sum()       |   Soma de valores
+tail()      |   Ṕrintar últimos resultados
+tuple()     |   Transforma variável em tupla
+type()      |   Retorna o tipo de dado da variável
+unique()    |   Printar valores únicos de dada coluna, lista etc.
+zip()       |   Integra múltiplos objetos iteráveis com base nos índices de seus elementos
 '''
 
 ##  Operadores
@@ -142,13 +142,13 @@ close(file)
 
     ## Modos:
 
-'r'     |   aberto para leitura
-'w'     |   aberto para escrita, truncando o arquivo primeiro
-'x'     |   aberto exclusivamente para criação, falhando se o arquivo já existir
-'a'     |   aberto para escrita, agregando ao final do arquivo caso exista
-'b'     |   modo binário
-'t'     |   modo textual
-'+'     |   aberto para atualizar (leitura e escrita)
+'r'     |   Aberto para leitura
+'w'     |   Aberto para escrita, truncando o arquivo primeiro
+'x'     |   Aberto exclusivamente para criação, falhando se o arquivo já existir
+'a'     |   Aberto para escrita, agregando ao final do arquivo caso exista
+'b'     |   Modo binário
+'t'     |   Modo textual
+'+'     |   Aberto para atualizar (leitura e escrita)
 
     ## Anotações:
 
@@ -161,32 +161,32 @@ Para manipular arquivos multimídia utilizar o modo binário: rb, wb, ab
 '''
     ## Método  |   Descrição    |   Sintaxe:
 
-upper()       |     todas as letras maiúsculas                              |   my_string.upper()
-lower()       |     todas as letras minúsculas                              |   my_string.lower()
-isupper()     |     valida se são letras maiúsculas                         |   my_string.isupper()
-islower()     |     valida se são letras minúsculas                         |   my_string.islower()
-title()       |     todas as primeiras letras das palavras maiúsculas       |   my_string.title()
-strip()       |     remover espaços                                         |   my_string.strip()
-join()        |     juntar elementos                                        |   "separador".join(letras)
-split()       |     separar palavras da mesma string                        |   my_string.split("separador")
-replace()     |     substituir caracter                                     |   my_string.replace("antigo", "novo")
-find()        |     retorna o índice do caracter procurado na palavra       |   my_string.find("caracter")
-capitalize()  |     mantém apenas a primeira letra da string em maiúsculo   |   my_string.capitalize()
+upper()       |     Todas as letras maiúsculas                              |   my_string.upper()
+lower()       |     Todas as letras minúsculas                              |   my_string.lower()
+isupper()     |     Valida se são letras maiúsculas                         |   my_string.isupper()
+islower()     |     Valida se são letras minúsculas                         |   my_string.islower()
+title()       |     Todas as primeiras letras das palavras maiúsculas       |   my_string.title()
+strip()       |     Remover espaços                                         |   my_string.strip()
+join()        |     Juntar elementos                                        |   "separador".join(letras)
+split()       |     Separar palavras da mesma string                        |   my_string.split("separador")
+replace()     |     Substituir caracter                                     |   my_string.replace("antigo", "novo")
+find()        |     Retorna o índice do caracter procurado na palavra       |   my_string.find("caracter")
+capitalize()  |     Mantém apenas a primeira letra da string em maiúsculo   |   my_string.capitalize()
 
     ## Slicers:
 
-var[0:3]    |   pegar os dígitos das posições 0, 1 e 2 da string
-var[:3]     |   pegar os três primeiros dígitos da string
-var[3:]     |   pegar do índice 3 ao último da string
-var[-3]     |   pegar os últimos três dígitos da string
-var[:]      |   pegar todos os dígitos
+var[0:3]    |   Pegar os dígitos das posições 0, 1 e 2 da string
+var[:3]     |   Pegar os três primeiros dígitos da string
+var[3:]     |   Pegar do índice 3 ao último da string
+var[-3]     |   Pegar os últimos três dígitos da string
+var[:]      |   Pegar todos os dígitos
 
     ## Escape Sequences:
 
-\b  : remove caracter anterior
-\n  : nova linha
-\t  : tabulação horizontal
-\r  : remove caracteres anteriores
+\b  : Remove caracter anterior
+\n  : Nova linha
+\t  : Tabulação horizontal
+\r  : Remove caracteres anteriores
 '''
 
 ##  Manipulação de Listas
@@ -201,28 +201,28 @@ my_list[índice] = *** valor novo ***
 
     ## Método  |   Descrição    |   Sintaxe:
 
-append()      |     adiciona um valor ao final da lista                                 |   my_list.append(valor)
-extend()      |     adiciona valores de uma lista dentro de outra na sequência          |   my_list.extend(outra_lista)
-insert()      |     adiciona dado em lista em dada posição                              |   my_list.insert(índice, valor)
-remove()      |     remover item de lista por valor                                     |   my_list.remove(valor)
-pop()         |     remover item de lista por índice (caso em branco remove o último)   |   my_list.pop(índice)
-clear()       |     limpa toda a lista                                                  |   my_list.clear()
-sort()        |     ordena itens de uma lista                                           |   my_list.sort()
-count()       |     conta a frequência de dado elemento numa lista                      |   my_list.count(valor)
-index()       |     retorna índice de item em lista                                     |   my_list.index(valor)
-reverse()     |     reverte a ordem da lista                                            |   my_list.reverse()
+append()      |     Adiciona um valor ao final da lista                                 |   my_list.append(valor)
+extend()      |     Adiciona valores de uma lista dentro de outra na sequência          |   my_list.extend(outra_lista)
+insert()      |     Adiciona dado em lista em dada posição                              |   my_list.insert(índice, valor)
+remove()      |     Remover item de lista por valor                                     |   my_list.remove(valor)
+pop()         |     Remover item de lista por índice (caso em branco remove o último)   |   my_list.pop(índice)
+clear()       |     Limpa toda a lista                                                  |   my_list.clear()
+sort()        |     Ordena itens de uma lista                                           |   my_list.sort()
+count()       |     Conta a frequência de dado elemento numa lista                      |   my_list.count(valor)
+index()       |     Retorna índice de item em lista                                     |   my_list.index(valor)
+reverse()     |     Reverte a ordem da lista                                            |   my_list.reverse()
 
-del           |     remover item de lista por índice ou slice                                   |   del my_list[índice]
-sorted()      |     ordena itens de uma lista                                                   |   sorted(my_list)
-zip()         |     integra múltiplos objetos iteráveis com base nos índices de seus elementos  |   my_list = list(zip(obj1, obj2))
+del           |     Remover item de lista por índice ou slice                                   |   del my_list[índice]
+sorted()      |     Ordena itens de uma lista                                                   |   sorted(my_list)
+zip()         |     Integra múltiplos objetos iteráveis com base nos índices de seus elementos  |   my_list = list(zip(obj1, obj2))
 
     ## Slicers:
 
-var[0:3]    |   pegar os elementos das posições 0, 1 e 2
-var[:3]     |   pegar os três primeiros elementos
-var[3:]     |   pegar do índice 3 ao último da lista
-var[-3]     |   pegar os últimos três elementos
-var[:]      |   pegar todos os elementos
+var[0:3]    |   Pegar os elementos das posições 0, 1 e 2
+var[:3]     |   Pegar os três primeiros elementos
+var[3:]     |   Pegar do índice 3 ao último da lista
+var[-3]     |   Pegar os últimos três elementos
+var[:]      |   Pegar todos os elementos
 
     ## List Comprehensions (Criação de listas a partir de objetos iteráveis):
 
@@ -248,13 +248,13 @@ my_dict[chave] = *** valor novo ***
 
     ## Método  |   Descrição    |   Sintaxe:
 
-update()  | atualiza ou adiciona dados a um dicionário conforme chave   |   my_dict.update({chave: valor}) ou my_dict.update(chave = valor)
-pop()     | remove item do dicionário                                   |   my_dict.pop(chave)
-clear()   | limpa todo o dicionário                                     |   my_dict.clear()
-get()     | procura dada chave e retorna valor                          |   my_dict.get(chave)
-keys()    | retorna chaves do dicionário                                |   my_dict.keys()
-values()  | retorna valores do dicionário                               |   my_dict.values()
-items()   | retorna conjuntos de chaves e valores do dicionário         |   my_dict.items()
+update()  | Atualiza ou adiciona dados a um dicionário conforme chave   |   my_dict.update({chave: valor}) ou my_dict.update(chave = valor)
+pop()     | Remove item do dicionário                                   |   my_dict.pop(chave)
+clear()   | Limpa todo o dicionário                                     |   my_dict.clear()
+get()     | Procura dada chave e retorna valor                          |   my_dict.get(chave)
+keys()    | Retorna chaves do dicionário                                |   my_dict.keys()
+values()  | Retorna valores do dicionário                               |   my_dict.values()
+items()   | Retorna conjuntos de chaves e valores do dicionário         |   my_dict.items()
 
 zip()     | integra múltiplos objetos iteráveis com base nos índices de seus elementos  |   my_dict = dict(zip(chaves, valores))
 
@@ -279,18 +279,18 @@ my_set[*** índice ***]
 
     ## Método  |   Descrição    |   Sintaxe:
 
-add()       |   adiciona novos valores      |   my_set.add(valor)
-update()    |   adiciona um set a outro     |   my_set.update(outro_set)
-clear()     |   limpa os elementos do set   |   my_set.clear()
+add()       |   Adiciona novos valores      |   my_set.add(valor)
+update()    |   Adiciona um set a outro     |   my_set.update(outro_set)
+clear()     |   Limpa os elementos do set   |   my_set.clear()
 
-zip()       |   integra múltiplos objetos iteráveis com base nos índices de seus elementos      |   my_set = set(zip(obj1, obj2))
+zip()       |   Integra múltiplos objetos iteráveis com base nos índices de seus elementos      |   my_set = set(zip(obj1, obj2))
 
     ## Operadores:
 
-|   :   união
-&   :   interseção
-–   :   diferença             # Elementos de A que não existem em B e C
-^   :   diferença simétrica   # Elementos que não existem em A e B, A e C ou B e C
+|   :   União
+&   :   Interseção
+–   :   Diferença             # Elementos de A que não existem em B e C
+^   :   Diferença Simétrica   # Elementos que não existem em A e B, A e C ou B e C
 
     ## Set Comprehensions (Criação de conjuntos a partir de objetos iteráveis):
 
@@ -304,7 +304,7 @@ old_set = {8, 13, -7, 4, -9, 2, 10}
 new_set = {num if num >= 0 else 0 for num in old_set}
 '''
 
-## Manipulação de Tuplas
+##  Manipulação de Tuplas
 '''
     ## Chamada:
 
@@ -312,65 +312,89 @@ my_tuple[*** índice ***]
 
     ## Método  |   Descrição    |   Sintaxe:
 
-index() |   retorna o índice de um valor da tupla                   |   my_tuple.index(valor)
-count() |   retorna a contagem da ocorrência de um valor na tupla   |   my_tuple.count(valor)
+index() |   Retorna o índice de um valor da tupla                   |   my_tuple.index(valor)
+count() |   Retorna a contagem da ocorrência de um valor na tupla   |   my_tuple.count(valor)
 
-zip()   |   integra múltiplos objetos iteráveis com base nos índices de seus elementos  |   my_tuple = tuple(zip(obj1, obj2))
+zip()   |   Integra múltiplos objetos iteráveis com base nos índices de seus elementos  |   my_tuple = tuple(zip(obj1, obj2))
 '''
 
-D) Alguns Módulos:
+##  Alguns Módulos:
+'''
+    ## os (Informações do Sistema)
 
-D1) os = informações do sistema
-os.getcwd -> diretório atual / os.chdir -> mudar diretório
-os.listdir -> listar pastas e arquivos do diretório
-os.mkdir -> criar pasta / os.makedirs -> criar múltiplos níveis de pastas
-os.rmdir -> remover pasta / os.removedirs -> remover múltiplos níveis de pastas
-os.rename -> renomear pasta ou arquivo
-os.stat -> informações da pasta/arquivo
+getcwd       |   Siretório atual                        |   os.getcwd()
+chdir        |   Mudar diretório                        |   os.chdir('caminho')
+listdir      |   Listar pastas e arquivos do diretório  |   os.listdir()
+mkdir        |   Criar pasta                            |   os.mkdir('diretório')
+makedirs     |   Criar múltiplos níveis de pastas       |   os.makedirs('diretórios')
+rmdir        |   Remover pasta                          |   os.rmdir('diretório')
+removedirs   |   Remover múltiplos níveis de pastas     |   os.removedirs('diretórios')
+rename       |   Renomear pasta ou arquivo              |   os.rename('nome antigo', 'nome novo')
 
-D2) math = cálculos matemáticos
-math.ceil -> arredondar para cima / math.floor -> arredondar para baixo
-math.sum -> somar lista / math.sqrt -> raiz quadrada
+    ## math (Cálculos)
 
-D3) time = período atual (para comparações)
-time.localtime() -> data e hora atual
-time.perf_counter() -> horário atual para contagens
+ceil()          |   Arredondar para cima                                |   math.ceil(valor)
+dist()          |   Calcular a distância euclidiana                     |   math.dist(ponto1, ponto2)
+factorial()     |   Fatorizar um número inteiro                         |   math.factorial(valor)
+floor()         |   Arredondar para baixo                               |   math.floor(valor)
+fsum()          |   Somar valores com maior precisão                    |   math.fsum(valor) ou math.sum(objeto iterável)
+lcm()           |   Mínimo múltiplo comum                               |   math.lcm(valor1, valor2, valorN)
+log()           |   Calcular o logaritmo                                |   math.log(valor, base)
+log10()         |   Calcular o logaritmo com base 10                    |   math.log10(valor)
+modf()          |   Retornar em separado os decimais e inteiros         |   math.modf(valor)
+pi()            |   Retornar o valor de pi                              |   math.pi
+prod()          |   Retornar o produto de todos os valores do objeto    |   math.prod(objeto iterável)
+sqrt()          |   Calcular raiz quadrada                              |   math.sqrt(valor)
 
-D4) datetime = período atual (para registros)
-datetime -> retorna datação (YY/MM/DD/HR/MIN/SEC) / year -> retorna o ano / month -> retorna o mês / day -> retorna o dia / weekday -> retorna o índice do dia da semana
-datetime.now -> retorna a datação atual
+    ## time (Período)
 
-D5) random = randomizar
-random.randint -> gerar número aleatório dentro de um range / random.choice -> escolhe um dado de uma determinada lista / random.seed -> gera números aleatórios com base num código de referência (Ex: 101)
-random.shuffle
+asctime()       |   Data e hora atual em formato textual                                    |   time.asctime()
+localtime()     |   Data e hora atual                                                       |   time.localtime()
+perf_counter()  |   Retorna o período atual em segundos fracionados - usado para contagens  |   time.perf_counter()
+sleep()         |   Suspende determinado processo por x segundos                            |   time.sleep(segundos)
 
-D6) pickle = salvar cópia do script em determinado estado de execução
-*variável = open(file_Name,'rb') -> para ler / *variável = open(file_Name,'wb') -> para editar / *variável = pickle.load(arquivo) -> para passar dados para nova variável 
-pickle.dump("entrada",*variável) -> insere informação no arquivo / *variável.close() -> fechar o arquivo / 
+    ## datetime (Datação)
 
-E) Bibliotecas:
+datetime()        |   Retorna datação (YY/MM/DD/HR/MIN/SEC)   |   datetime()
+year()            |   Retorna o ano                           |   datetime.year()
+month()           |   Retorna o mês                           |   datetime.month()
+day()             |   Retorna o dia                           |   datetime.day()
+weekday()         |   Retorna o índice do dia da semana       |   datetime.weekday()
+now()             |   Retorna a datação atual                 |   datetime.now()
 
-E1) matplotlib
-matplotlib.pyplot -> gerar gráficos
+    ## random (Pseudo-Randomizações)
 
-E2) numpy = gerar arrays/matrizes
-numpy.arange -> gerar array com base em dado range / numpy.copy -> copiar dados de variável/índice para outro / numpy.reshape -> alterar número de linhas/colunas de um array
-numpy.linspace -> gerar array com n número de linhas com base em range
+random()        |   Gera número aleatório entre 0.0 e 1.0                           |   random.random()
+randint()       |   Gera número aleatório dentro de um range de inteiros            |   random.randint(a, b)
+randrange()     |   Gera número aleatório conforme degrau em um range de inteiros   |   random.randrange(a, b, degrau)
+choice()        |   Escolhe um elemento qualquer de um objeto                       |   random.choice(objeto iterável)
+sample()        |   Gera amostra de itens (vindo de lista ou tupla)                 |   random.sample(pop, k)
+seed()          |   Gera números aleatórios com base num código de referência       |   random.seed(valor)
+shuffle()       |   Embaralha elementos de um objeto                                |   random.shuffle(objeto iterável)
 
-E3) pandas
-pandas.DataFrame -> criar tabela de dados (dados, índices, colunas) / pandas.read_csv -> ler dados de arquivo CSV
+    ## secret (Randomizações)
 
-E) hashlib
+choice()        |   Gera valor aleatório dentro de uma sequência    |   secrets.choice(objeto iterável)
+randbelow()     |   Gera número aleatório dentro de range           |   secrets.randbelow(valor)
 
-F) Coloração de mensagens no Python (terminal)
-Padrão ANSI -> Começa com: \033[ + código estilo + código cor + código cor de fundo + m -> Ex: \033[0:33:44m
-Estilos = 0 Normal / 1 Negrito / 2 Sublinhado / 3 Negativo
-Cores = 30 Branco / 31 Vermelho / 32 Verde / 33 Amarelo / 34 Azul / 35 Roxo / 36 Azul Piscina / 37 Cinza
-Cores de Fundo = Código Cor + 10
+    ## string (Relação de Caracteres)
 
-## Uso do módulo matplotlib para gerar gráfico
+ascii_letters()       |   Gera uma string com os caracteres em letra minúscula e maiúscula    |   string.ascii_letters
+ascii_lowercase()     |   Gera uma string com os caracteres em letra minúscula                |   string.ascii_lowercase
+ascii_uppercase()     |   Gera uma string com os caracteres em letra maiúscula                |   string.ascii_uppercase
+digits()              |   Gera uma string com os números base de 0 a 9                        |   string.digits
+punctuation()         |   Gera uma string com os caracteres especiais de pontuação            |   string.punctuation
+'''
 
-import matplotlib.pyplot as plt
+##  Algumas Bibliotecas:
+'''
+    ## matplotlib (Gerar gráficos)
+
+pyplot   |   Gerar gráficos  |   matplotlib.pyplot()
+
+Exemplo:
+
+import matplotlib.pyplot as plt # ou from matplotlib import pyplot as plt
 
 valores_x = [5, 4, 3, 2.5, 7]
 legenda = ["JAN", "FEV", "MAR", "ABR", "MAI"]
@@ -379,7 +403,16 @@ plt.xticks([1,2,3,4,5], legenda)
 plt.plot([1,2,3,4,5], valores_x)
 plt.show()
 
-## Uso dos módulos numpy e pandas para geração de tabela randômica
+    ## numpy (Gerar e gerir arrays/matrizes)
+
+numpy.arange -> gerar array com base em dado range / numpy.copy -> copiar dados de variável/índice para outro / numpy.reshape -> alterar número de linhas/colunas de um array
+numpy.linspace -> gerar array com n número de linhas com base em range
+
+    ## pandas (Gerar e gerir datasets)
+
+pandas.DataFrame -> criar tabela de dados (dados, índices, colunas) / pandas.read_csv -> ler dados de arquivo CSV
+
+Exemplo:
 
 import numpy as np
 import pandas as pd
@@ -392,9 +425,18 @@ df.drop('05', inplace = True)
 df.drop('D', axis = 1, inplace = True)
 
 print(df)
+'''
+
+##  Coloração de mensagens no Python (terminal)
+'''
+Padrão ANSI -> Começa com: \033[ + código estilo + código cor + código cor de fundo + m -> Ex: \033[0:33:44m
+Estilos = 0 Normal / 1 Negrito / 2 Sublinhado / 3 Negativo
+Cores = 30 Branco / 31 Vermelho / 32 Verde / 33 Amarelo / 34 Azul / 35 Roxo / 36 Azul Piscina / 37 Cinza
+Cores de Fundo = Código Cor + 10
+'''
 
 ## Salvando tabela da internet
-
+'''
 import requests
 import pandas as pd
 
@@ -404,13 +446,15 @@ dfs = pd.read_html(web_page.text)
 
 state_abbv = dfs[0]
 
-state_abbv.to_csv("c:/Users/Thomas/Documents/Python_Files/Datasets/state_abbv.csv")
-
-## Programação Orientada a Objetos
-
-# Objeto/Instância = item utilizado no algoritmo composto por código + dados (objetos são chamados de instâncias das classes) / Classe = classificação dos tipos de objetos
-# Método = Funções / Atributos = Variáveis
+state_abbv.to_csv("c:/Users/User/Python_Files/Datasets/state_abbv.csv")
 '''
+
+##  Programação Orientada a Objetos
+'''
+Objeto/Instância = item utilizado no algoritmo composto por código + dados (objetos são chamados de instâncias das classes)
+Classe = classificação dos tipos de objetos
+Método = Funções / Atributos = Variáveis
+
 There are four basic principles of OOP. They are encapsulation, abstraction, inheritance, and polymorphism.
 
 - Data encapsulation is the mechanism of hiding the internal data of objects from the world. All interaction with the object and its data are performed through its public methods. 
@@ -429,7 +473,8 @@ So, the name (or interface) stays the same, but the actions performed may be dif
 Class attributes are defined within the class but outside of any methods. Their value is the same for all instances of that class so you could consider them as the sort of "default" values for all objects.
 
 As for the instance variables, they store the data unique to each object of the class. They are defined within the class methods, notably, within the __init__ method.
-'''
+
+Exemplo:
 
 class funcionario:
 
@@ -523,6 +568,7 @@ import datetime
 data_atual = datetime.date(2019, 5, 31)
 
 # print(funcionario.dia_util(data_atual)) para verificar resultado da função estática
+'''
 
 ##  Notas
 '''
@@ -532,5 +578,6 @@ data_atual = datetime.date(2019, 5, 31)
 '''
 
 ##  Links Úteis
-
+'''
 https://docs.python.org/3.9/
+'''
