@@ -12,7 +12,7 @@
 -- Keys
 Primary | Unique identifiers of records in a table
 
-Foreign | Reference identifiers of primary keys from another table
+Foreign | Reference identifiers of primary keys from another or same table
 
 -- Uses
 OLTP (Online Transactional Processing)  | Serves the daily operations dataflow
@@ -45,14 +45,38 @@ EXPLAIN PLAN
 LOCK TABLE
 
 -- Types of Functions
-1) Aggregate   | Work with all the data in the column and generate a single result
-AVG()
-COUNT()
-MIN()
-MAX()
-SUM()
+1) Aggregate    | Works with all the data in the column and generate a single result
 
-2) Scalar      | Work with each separate row in the column and generate the respective result
+AVG()           | Calculate average of records  | AVG(values)
+COUNT()         | Count records                 | COUNT(values)
+MIN()           | Calculate minimum of records  | MIN(values) 
+MAX()           | Calculate maximum of records  | MAX(values)
+SUM()           | Calculate sum of records      | SUM(values)
+
+2) Scalar       | Works with each separate row in the column and generate the respective result
+
+RIGHT()         | Get characters from the right             | RIGHT(string, number of chars)
+LEFT()          | Get characters from the left              | LEFT(string, number of chars)
+LEN()           | Get total length                          | LEN(string)
+RTRIM()         | Remove spaces from the right              | RTRIM(string)
+LTRIM()         | Remove spaces from the left               | LTRIM(string)
+REPLACE()       | Replace string with another               | REPLACE(string, old part, new part)
+REVERSE()       | Reverse the order of a string             | REVERSE(string)
+SUBSTRING()     | Return part of a string                   | SUBSTRING(string, starting index, number of chars)
+LOWER()         | Transform string characters in lowercase  | LOWER(string)
+UPPER()         | Transform string characters in uppercase  | UPPER(string)
+
+DATEADD()       | Add a period to a date        | DATEADD(time unit, quantity, date)
+DATEDIFF()      | Return difference of dates    | DATEDIFF(time unit, date1, date2)
+DAY()           | Return the day of date        | DAY(date)
+MONTH()         | Return the month of date      | MONTH(date)
+YEAR()          | Return the year of date       | YEAR(date)
+GETDATE()       | Return the current date       | GETDATE()
+
+FLOOR()         | Round value down              | FLOOR(value)
+CEILING()       | Round value up                | CEILING(value)
+ROUND()         | Round at decimal length       | ROUND(value, decimals)
+
 
 -- Logical Operators (In order of precedence)
 NOT
@@ -94,8 +118,23 @@ SELECT * FROM mytable WHERE salary::text LIKE '_00000';     | (Any salary from 1
     -- Remove duplicates
 SELECT DISTINCT profession FROM mytable;
 
-    -- Concatenate columns or texts in a query
+    -- Concatenate columns
 SELECT CONCAT(f_name, ' ',l_name) AS "Full Name";
+
+    -- Join columns from multiple tables
+SELECT table1.name AS "Name", table2.salary AS "Salary" FROM table1 INNER JOIN table2 ON table1.name = table2.name ORDER BY table1.name;    | Inner Join
+SELECT table1.name AS "Name", table2.salary AS "Salary" FROM table1 INNER JOIN table2 USING(name) ORDER BY table1.name;                     | Inner Join
+SELECT A.id, A.name AS "Emp Name", B.manager AS "Manager" FROM table1 AS A, table1 AS B WHERE A.managerid = B.id;                           | Self Join
+SELECT * FROM table1 AS A LEFT JOIN table2 AS B ON A.id = B.id;                                                                             | Left Join
+SELECT * FROM table1 AS A RIGHT JOIN table2 AS B ON A.id = B.id;                                                                            | Right Join
+SELECT * FROM table1 CROSS JOIN table2;                                                                                                     | Cross Join (Cartesian Product)
+SELECT * FROM table1 AS A FULL JOIN table2 AS B ON A.id = B.id;                                                                             | Full Join
+
+    -- Group records by distinct values
+SELECT department, COUNT(id) FROM mytable GROUP BY department;
+
+    -- Filter groups
+SELECT department, COUNT(id) FROM mytable GROUP BY department HAVING COUNT(id) > 1000;
 
     -- Order results
 SELECT * FROM mytable ORDER BY first_name ASC, last_name DESC;
@@ -146,6 +185,7 @@ INTERVAL '4 weeks ago';
 -- Notes
 /*
 # "" is used for Table/Column and '' is used for strings
+# The order for operations is: FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER
 # PostgreSQL uses ISO-8601 standard to define how to manipulate dates and times | YYYY-MM-DDTHH:MM:SS+TMZONE
 # PostgreSQL is by default configured at UTC time zone and uses it to store the data received
 
