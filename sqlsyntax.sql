@@ -77,7 +77,6 @@ FLOOR()         | Round value down              | FLOOR(value)
 CEILING()       | Round value up                | CEILING(value)
 ROUND()         | Round at decimal length       | ROUND(value, decimals)
 
-
 -- Logical Operators (In order of precedence)
 NOT
 AND
@@ -92,8 +91,8 @@ OR
 != OR <>
 
 -- Casting
-CAST(column AS type) 'or' column::type
-
+CAST(column AS type); 
+column::type;
 
 -- Commom Functions and Operations
     -- Rename a column in a query
@@ -108,7 +107,8 @@ SELECT * FROM mytable WHERE NOT salary <= 10000;
 SELECT * FROM mytable WHERE age BETWEEN 20 AND 50;
 
     -- Filter records by presence in a list/set
-SELECT * FROM mytable WHERE id IN (id1, id2, id4, id9)
+SELECT * FROM mytable WHERE id IN (id1, id2, id4, id9);
+SELECT * FROM mytable WHERE id NOT IN (id1, id2, id4, id9);
 
     -- Filter records by pattern matching
 SELECT * FROM mytable WHERE first_name LIKE 'J%';           | (Anything post J)
@@ -120,6 +120,9 @@ SELECT DISTINCT profession FROM mytable;
 
     -- Concatenate columns
 SELECT CONCAT(f_name, ' ',l_name) AS "Full Name";
+
+    -- Order results
+SELECT * FROM mytable ORDER BY first_name ASC, last_name DESC;
 
     -- Join columns from multiple tables
 SELECT table1.name AS "Name", table2.salary AS "Salary" FROM table1 INNER JOIN table2 ON table1.name = table2.name ORDER BY table1.name;    | Inner Join
@@ -136,8 +139,25 @@ SELECT department, COUNT(id) FROM mytable GROUP BY department;
     -- Filter groups
 SELECT department, COUNT(id) FROM mytable GROUP BY department HAVING COUNT(id) > 1000;
 
-    -- Order results
-SELECT * FROM mytable ORDER BY first_name ASC, last_name DESC;
+    -- Filter by subgroups
+SELECT	EXTRACT(YEAR FROM orderdate) AS Year, EXTRACT(MONTH FROM orderdate) AS Month, EXTRACT(DAY FROM orderdate) AS Day, SUM(totalamount) AS totalamount FROM mytable
+
+GROUP BY 
+	ROLLUP (
+		EXTRACT(YEAR FROM orderdate), 
+		EXTRACT(MONTH FROM orderdate), 
+		EXTRACT(DAY FROM orderdate)
+		);
+
+    -- Use Subqueries
+SELECT * FROM mytable WHERE age > (SELECT AVG(age) FROM mytable2);
+
+    -- Calculate values by partitions of records (Window Function)
+SELECT department, emp, salary, AVG(salary) OVER (PARTITION BY department) FROM mytable;
+SELECT department, emp, salary, AVG(salary) OVER W1 FROM mytable WINDOW W1 AS (PARTITION BY department);
+
+    -- Conditional statements
+SELECT product, price CASE WHEN price > 100 THEN 'Sell' WHEN price BETWEEN 50 AND 100 THEN 'Hold' ELSE 'Buy' END FROM mytable;
 
     -- Check for NULL values
 SELECT * FROM mytable WHERE last_name IS NULL;
@@ -147,6 +167,9 @@ SELECT * FROM mytable WHERE last_name IS NOT NULL;
 
     -- Substitute NULL values
 SELECT COALESCE(name, 'No name provided') FROM mytable;
+
+    -- Conditional NULL return
+SELECT NULLIF(value1, value2);  | NULL if value1 = value2 else returns value1
 
     -- Check actual date and/or time
 SELECT now();           | Date, time and time zone
@@ -182,6 +205,44 @@ SELECT DATE_TRUNC('month', date '2021-06-11');  | Returns '2021-06-11' -- plus t
 INTERVAL '1 year 4 months 2 weeks 3 days 5 hours 20 minutes';
 INTERVAL '4 weeks ago';
 
+    -- Limit number of rows in output
+SELECT id FROM mytable LIMIT 100;   | 100 first records
+
+    -- Analyze execution
+EXPLAIN ANALYZE SELECT * FROM mytable;
+
+-- Indexing references
+
+    -- Index algorithms
+B-TREE  | Best for comparisons
+HASH    | Best for equalities
+GIN     | Best for arrays
+GIST    | Best for geometric data and text
+
+    -- Creating indexes
+CREATE INDEX idx1 ON mytable (name, role, salary);
+CREATE INDEX idx1 ON mytable (salary) WHERE salary > 50000;
+CREATE INDEX idx1 ON mytable (salary) USING HASH;
+
+    -- Deleting indexes
+DROP INDEX idx1;
+
+-- Types of views
+1) Materialized         | Stores data resulted from a query and keep it updated when main tables change
+
+CREATE VIEW myview AS SELECT * FROM mytable;
+CREATE OR REPLACE myview AS SELECT id, product FROM mytable;
+
+    -- Rename view
+
+ALTER VIEW myview RENAME TO myview2;
+
+    -- Delete view
+
+DROP VIEW myview;
+
+2) Non-Materialized     | Re-run query to generate and make available its results for another operation
+
 -- Notes
 /*
 # "" is used for Table/Column and '' is used for strings
@@ -190,4 +251,3 @@ INTERVAL '4 weeks ago';
 # PostgreSQL is by default configured at UTC time zone and uses it to store the data received
 
 */
-
