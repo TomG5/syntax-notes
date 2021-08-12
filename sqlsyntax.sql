@@ -1,25 +1,47 @@
 ----    RBDMS / SQL SYNTAX   ----
 
--- Structure
+---- Structure
 1) Database
 
 2) Schema
 
 3) Table
-3.1) Column/Attribute   | The collection of these is called Degree / The datatype limitation is called Constraint
+3.1) Column/Attribute   | The collection of these is called Degree
 3.2) Row/Tuple          | The collection of these is called Cardinality
 
--- Keys
+---- Keys
 Primary | Unique identifiers of records in a table
 
 Foreign | Reference identifiers of primary keys from another or same table
 
--- Uses
+---- Uses
 OLTP (Online Transactional Processing)  | Serves the daily operations dataflow
 
 OLAP (Online Analytical Processing)     | Serves the data analysis for insights
 
--- Commom Commands
+---- Data Types (Most commom)
+CHAR(N)         | Fixed length with space padding
+VARCHAR(N)      | Limited length without padding
+TEXT            | Unlimited length
+SMALLINT        | -32768 to 32767
+INT             | -2147483648 to 2147483647
+BIGINT          | Big numbers
+FLOAT4          | 6 decimals
+FLOAT8          | 15 decimals
+DECIMAL/NUMERIC | Big numbers
+BOOLEAN         | [true/false/null, 1/0/null, yes/no/null]
+ARRAY           | Set of elements of the same type          Ex.: int[]
+UUID            | Unique universal identifier
+DATE            | Dates
+
+---- Constraints
+NOT NULL        | Itself
+PRIMARY KEY     | Itself
+UNIQUE          | Itself
+CHECK           | Verify for a condition
+REFERENCES      | Foreign Key
+
+---- Types of Commands
 1) DCL (Data Control Language)
 GRANT
 REVOKE
@@ -44,7 +66,7 @@ CALL
 EXPLAIN PLAN
 LOCK TABLE
 
--- Types of Functions
+---- Types of Functions
 1) Aggregate    | Works with all the data in the column and generate a single result
 
 AVG()           | Calculate average of records  | AVG(values)
@@ -77,12 +99,12 @@ FLOOR()         | Round value down              | FLOOR(value)
 CEILING()       | Round value up                | CEILING(value)
 ROUND()         | Round at decimal length       | ROUND(value, decimals)
 
--- Logical Operators (In order of precedence)
+---- Logical Operators (In order of precedence)
 NOT
 AND
 OR
 
--- Comparison Operators
+---- Comparison Operators
 >
 <
 >=
@@ -90,11 +112,36 @@ OR
 =
 != OR <>
 
--- Casting
+---- Casting (changing data type)
 CAST(column AS type); 
 column::type;
 
--- Commom Functions and Operations
+---- Structural Commands
+CREATE DATABASE mydb;
+CREATE SCHEMA myschema;
+CREATE TABLE mytable (id INT NOT NULL, name VARCHAR(32) PRIMARY KEY, active BOOLEAN);
+CREATE TEMPORARY TABLE disposabletable (id INT NOT NULL, newsalary FLOAT4 NOT NULL);    | Disposed at the end of the session
+CREATE ROLE myrole;
+CREATE USER myuser WITH ENCRYPTED PASSWORD 'asdf';
+
+    -- Role Attributes
+LOGIN
+SUPERUSER
+CREATEDB
+CREATEROLE
+PASSWORD
+
+    -- Grant privileges
+GRANT ALL PRIVILEGES ON mytable TO thisuser;
+GRANT ALL ON ALL TABLES IN SCHEMA myschema TO thisuser;
+GRANT SELECT, INSERT, UPDATE ON mytable IN SCHEMA myschema TO thisuser;
+
+    -- Revoke privileges
+REVOKE ALL PRIVILEGES ON mytable FROM thisuser;
+REVOKE ALL ON ALL TABLES IN SCHEMA myschema FROM thisuser;
+REVOKE SELECT, INSERT, UPDATE ON mytable IN SCHEMA myschema FROM thisuser;
+
+---- Commom Query Functions and Operations
     -- Rename a column in a query
 SELECT f_name AS "First Name" FROM mytable;
 
@@ -132,6 +179,12 @@ SELECT * FROM table1 AS A LEFT JOIN table2 AS B ON A.id = B.id;                 
 SELECT * FROM table1 AS A RIGHT JOIN table2 AS B ON A.id = B.id;                                                                            | Right Join
 SELECT * FROM table1 CROSS JOIN table2;                                                                                                     | Cross Join (Cartesian Product)
 SELECT * FROM table1 AS A FULL JOIN table2 AS B ON A.id = B.id;                                                                             | Full Join
+
+    -- Union records from multiple queries
+SELECT * FROM mytable1 UNION SELECT * FROM mytable2;            | Union without duplicates
+SELECT * FROM mytable1 UNION ALL SELECT * FROM mytable2;        | Union with duplicates
+SELECT * FROM mytable1 INTERSECT [ALL] SELECT * FROM mytable2;  | Union records in commom
+SELECT * FROM mytable1 EXCEPT [ALL] SELECT * FROM mytable2;     | Union records exclusive to query1 
 
     -- Group records by distinct values
 SELECT department, COUNT(id) FROM mytable GROUP BY department;
@@ -211,7 +264,7 @@ SELECT id FROM mytable LIMIT 100;   | 100 first records
     -- Analyze execution
 EXPLAIN ANALYZE SELECT * FROM mytable;
 
--- Indexing references
+---- Indexing references
 
     -- Index algorithms
 B-TREE  | Best for comparisons
@@ -227,7 +280,7 @@ CREATE INDEX idx1 ON mytable (salary) USING HASH;
     -- Deleting indexes
 DROP INDEX idx1;
 
--- Types of views
+---- Types of views
 1) Materialized         | Stores data resulted from a query and keep it updated when main tables change
 
 CREATE VIEW myview AS SELECT * FROM mytable;
@@ -243,7 +296,7 @@ DROP VIEW myview;
 
 2) Non-Materialized     | Re-run query to generate and make available its results for another operation
 
--- Notes
+---- Notes
 /*
 # "" is used for Table/Column and '' is used for strings
 # The order for operations is: FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER
