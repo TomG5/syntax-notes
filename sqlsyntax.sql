@@ -15,9 +15,13 @@ OLTP (Online Transactional Processing)  | Serves the daily operations dataflow
 OLAP (Online Analytical Processing)     | Serves the data analysis for insights
 
 ---- Keys
-Primary Key | Column(s) with unique identifiers of records in a table
+Primary Key     | Column(s) with unique identifiers of records in a table
 
-Foreign Key | Column(s) referencing identifiers of primary keys from the same or another table
+Foreign Key     | Column(s) referencing identifiers of primary keys from the same or another table
+
+Super Key       | Combination of attributes to identify a record
+
+Candidate Key   | Minimum combination of attributes necessary to reference a record
 
 ---- Data Types (Most commom)
 CHAR(N)         | Fixed length with space padding
