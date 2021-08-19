@@ -299,7 +299,7 @@ GIN     | Best for arrays
 GIST    | Best for geometric data and text
 
     -- Creating indexes
-CREATE INDEX idx1 ON mytable ("name", role, salary);
+CREATE INDEX idx1 ON mytable ("name", "role", salary);
 CREATE INDEX idx1 ON mytable (salary) WHERE salary > 50000;
 CREATE INDEX idx1 ON mytable (salary) USING HASH;
 
@@ -325,7 +325,7 @@ DROP VIEW myview;
 ---- Notes
 /*
 # "" is used for Table/Column and '' is used for strings
-# The order for operations is: FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER -> LIMIT
+# The order for operations is: FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER BY -> LIMIT
 # PostgreSQL uses ISO-8601 standard to define how to manipulate dates and times | YYYY-MM-DDTHH:MM:SS+TMZONE
 # PostgreSQL is by default configured at UTC time zone and uses it to store the data received
 
