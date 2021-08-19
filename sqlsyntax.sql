@@ -1,4 +1,4 @@
-----    RBDMS / SQL SYNTAX   ----
+----    POSTGRES RDBMS / SQL SYNTAX   ----
 
 ---- Structure
 1) Database
@@ -24,19 +24,19 @@ Super Key       | Combination of attributes to identify a record
 Candidate Key   | Minimum combination of attributes necessary to reference a record
 
 ---- Data Types (Most commom)
-CHAR(N)         | Fixed length with space padding
-VARCHAR(N)      | Limited length without padding
-TEXT            | Unlimited length
-SMALLINT        | -32768 to 32767
-INT             | -2147483648 to 2147483647
-BIGINT          | Big integer numbers
-FLOAT4          | 6 decimals
-FLOAT8          | 15 decimals
-DECIMAL/NUMERIC | Big decimal numbers
-BOOLEAN         | [true/false/null, 1/0/null, yes/no/null]
-ARRAY           | Set of elements of the same type          Ex.: int[]
-UUID            | Unique universal identifier
-DATE            | Dates in 'yyyy-mm-dd'
+CHAR(N)                     | Fixed length with space padding
+VARCHAR(N)                  | Limited length without padding
+TEXT                        | Unlimited length
+SMALLINT                    | -32768 to 32767
+INT                         | -2147483648 to 2147483647
+BIGINT                      | Big integer numbers
+FLOAT4/REAL                 | 6 decimals
+FLOAT8/DOUBLE PRECISION     | 15 decimals
+DECIMAL/NUMERIC             | Big decimal numbers
+BOOLEAN                     | [true/false/null, 1/0/null, yes/no/null]
+ARRAY                       | Set of elements of the same type          Ex.: INT[]
+UUID                        | Unique universal identifier
+DATE                        | Dates in 'yyyy-mm-dd'
 
 ---- Custom Data Type
 CREATE DOMAIN Score SMALLINT CHECK (VALUE >=1 AND VALUE <= 5);                          | Conditional check for inputs
@@ -90,7 +90,7 @@ SUM           | Calculate sum of records      | SUM(values)
 
 RIGHT         | Get characters from the right             | RIGHT(string, number of chars)
 LEFT          | Get characters from the left              | LEFT(string, number of chars)
-LEN           | Get total length                          | LEN(string)
+LENGTH/LEN    | Get total length                          | LENGTH(string)
 RTRIM         | Remove spaces from the right              | RTRIM(string)
 LTRIM         | Remove spaces from the left               | LTRIM(string)
 REPLACE       | Replace string with another               | REPLACE(string, old part, new part)
@@ -99,12 +99,9 @@ SUBSTRING     | Return part of a string                   | SUBSTRING(string, st
 LOWER         | Transform string characters in lowercase  | LOWER(string)
 UPPER         | Transform string characters in uppercase  | UPPER(string)
 
-DATEADD       | Add a period to a date        | DATEADD(time unit, quantity, date)
-DATEDIFF      | Return difference of dates    | DATEDIFF(time unit, date1, date2)
 DAY           | Return the day of date        | DAY(date)
 MONTH         | Return the month of date      | MONTH(date)
 YEAR          | Return the year of date       | YEAR(date)
-GETDATE       | Return the current date       | GETDATE()
 
 FLOOR         | Round value down              | FLOOR(value)
 CEILING       | Round value up                | CEILING(value)
@@ -307,7 +304,20 @@ CREATE INDEX idx1 ON mytable (salary) USING HASH;
 DROP INDEX idx1;
 
 ---- Types of views
-1) Materialized         | Stores data resulted from a query and keep it updated when main tables change
+1) Materialized         | Stores data resulted from a query in disk (copy) and memory for fast execution, needing manual update
+
+CREATE MATERIALIZED VIEW myview AS SELECT * FROM mytable;
+CREATE TEMPORARY VIEW myview AS SELECT * FROM mytable;          | Temporary view, dropped when the session is ended
+
+    -- Rename view
+
+ALTER MATERIALIZED VIEW myview RENAME TO myview2;
+
+    -- Delete view
+
+DROP MATERIALIZED VIEW myview;
+
+2) Non-Materialized     | Re-runs query to generate and make available its results for another operation
 
 CREATE VIEW myview AS SELECT * FROM mytable;
 CREATE OR REPLACE myview AS SELECT id, product FROM mytable;
@@ -320,13 +330,10 @@ ALTER VIEW myview RENAME TO myview2;
 
 DROP VIEW myview;
 
-2) Non-Materialized     | Re-run query to generate and make available its results for another operation
-
 ---- Notes
 /*
 # "" is used for Table/Column and '' is used for strings
 # The order for operations is: FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER BY -> LIMIT
 # PostgreSQL uses ISO-8601 standard to define how to manipulate dates and times | YYYY-MM-DDTHH:MM:SS+TMZONE
 # PostgreSQL is by default configured at UTC time zone and uses it to store the data received
-
 */
