@@ -41,6 +41,7 @@ DATE                        | Dates in 'yyyy-mm-dd'
 ---- Custom Data Type
 CREATE DOMAIN Score SMALLINT CHECK (VALUE >=1 AND VALUE <= 5);                          | Conditional check for inputs
 CREATE TYPE Account AS (id UUID, full_name VARCHAR(25), balance DECIMAL, score Score);  | General Syntax
+CREATE TYPE "status" AS ENUM ('Open', 'Closed');                                        | Commom custom type
 
 ---- Constraints
 NOT NULL        | ...
@@ -71,11 +72,11 @@ GRANT / REVOKE
 2) DDL (Data Definition Language)
 CREATE / ALTER / DROP / RENAME / TRUNCATE / COMMENT
 
-3) DQL (Data Query Language)
-SELECT
-
-4) DML (Data Modification Language)
+3) DML (Data Modification Language)
 INSERT / UPDATE / DELETE / MERGE / CALL / EXPLAIN PLAN / LOCK TABLE
+
+4) DQL (Data Query Language)
+SELECT
 
 ---- Types of Functions
 1) Aggregate    | Works with all the data in the column and generate a single result
@@ -99,13 +100,13 @@ SUBSTRING     | Return part of a string                   | SUBSTRING(string, st
 LOWER         | Transform string characters in lowercase  | LOWER(string)
 UPPER         | Transform string characters in uppercase  | UPPER(string)
 
-DAY           | Return the day of date        | DAY(date)
-MONTH         | Return the month of date      | MONTH(date)
-YEAR          | Return the year of date       | YEAR(date)
+DAY           | Return the day of date      | DAY(date)
+MONTH         | Return the month of date    | MONTH(date)
+YEAR          | Return the year of date     | YEAR(date)
 
-FLOOR         | Round value down              | FLOOR(value)
-CEILING       | Round value up                | CEILING(value)
-ROUND         | Round at decimal length       | ROUND(value, decimals)
+FLOOR         | Round value down            | FLOOR(value)
+CEILING       | Round value up              | CEILING(value)
+ROUND         | Round at decimal length     | ROUND(value, decimals)
 
     -- Role Attributes
 LOGIN
@@ -113,6 +114,10 @@ SUPERUSER
 CREATEDB
 CREATEROLE
 PASSWORD
+
+---- Define an interval for operations
+INTERVAL '1 year 4 months 2 weeks 3 days 5 hours 20 minutes';
+INTERVAL '4 weeks ago';
 
 ---- Commom DCL Commands
     -- Grant privileges
@@ -142,11 +147,11 @@ SET TIME ZONE '';                       | Session level change
 ALTER USER postgres SET timezone = '';  | User level change
 
     -- Change tables
-ALTER TABLE mytable ADD COLUMN new_column INT;
-ALTER TABLE mytable ALTER COLUMN my_column TYPE TEXT;
-ALTER TABLE mytable ALTER COLUMN my_column SET NOT NULL;
-ALTER TABLE mytable RENAME COLUMN old_name TO new_name;
-ALTER TABLE mytable DROP COLUMN new_column;
+ALTER TABLE mytable ADD new_column UUID DEFAULT gen_random_uuid();  | Example using extension 'pgcrypto'
+ALTER TABLE mytable ALTER my_column TYPE TEXT;
+ALTER TABLE mytable ALTER my_column SET NOT NULL;
+ALTER TABLE mytable RENAME old_name TO new_name;
+ALTER TABLE mytable DROP new_column;
 
     -- Remove objects
 DROP DATABASE mydb;
@@ -156,12 +161,23 @@ DROP TABLE mytable;
     -- Truncate table (Delete all records)
 TRUNCATE TABLE mytable;
 
+---- Commom DML Commands
+    -- Insert data to table
+INSERT INTO mytable (myname, age, salary, birth_day) VALUES ('Joe Doe', 32, 55000, '1990-01-01'::DATE);
+
+    -- Update data in table
+UPDATE mytable SET begin_date = '2021-01-01'::DATE WHERE begin_date IS NULL;
+UPDATE mytable SET target_region = CASE WHEN "state" = 'NY' THEN 1 ELSE 0 END;
+
+    -- Delete data in table
+DELETE FROM mytable WHERE begin_date IS NULL;
+
 ---- Commom DQL Commands
     -- Rename a column in a query
 SELECT f_name AS "First Name" FROM mytable;
 
     -- Filter records
-SELECT * FROM mytable WHERE full_name = 'Joe Doe' AND age = 32 OR full_name = 'Jane Doe' AND age = 30;
+SELECT * FROM mytable WHERE (full_name = 'Joe Doe' AND age = 32) OR (full_name = 'Jane Doe' AND age = 30);
 SELECT * FROM mytable WHERE (state = 'NY' OR state = 'NJ') AND gender = 'F';
 SELECT * FROM mytable WHERE NOT salary <= 10000;
 
@@ -195,8 +211,8 @@ SELECT * FROM mytable ORDER BY first_name ASC, last_name DESC;
 SELECT table1.name AS "Name", table2.salary AS "Salary" FROM table1 INNER JOIN table2 ON table1.name = table2.name ORDER BY table1.name;    | Inner Join
 SELECT table1.name AS "Name", table2.salary AS "Salary" FROM table1 INNER JOIN table2 USING("name") ORDER BY table1.name;                   | Inner Join
 SELECT A.id, A.name AS "Emp Name", B.manager AS "Manager" FROM table1 AS A, table1 AS B WHERE A.managerid = B.id;                           | Self Join
-SELECT * FROM table1 AS A LEFT JOIN table2 AS B ON A.id = B.id;                                                                             | Left Join
-SELECT * FROM table1 AS A RIGHT JOIN table2 AS B ON A.id = B.id;                                                                            | Right Join
+SELECT * FROM table1 AS A LEFT JOIN table2 AS B ON A.id = B.id;                                                                             | Left Join (Incl. intersection)
+SELECT * FROM table1 AS A RIGHT JOIN table2 AS B ON A.id = B.id;                                                                            | Right Join (Incl. intersection)
 SELECT * FROM table1 CROSS JOIN table2;                                                                                                     | Cross Join (Cartesian Product)
 SELECT * FROM table1 AS A FULL JOIN table2 AS B ON A.id = B.id;                                                                             | Full Join
 
@@ -226,8 +242,13 @@ GROUP BY
 SELECT * FROM mytable WHERE age > (SELECT AVG(age) FROM mytable2);
 
     -- Calculate values by partitions of records (Window Function)
-SELECT department, emp, salary, AVG(salary) OVER (PARTITION BY department) FROM mytable;
+SELECT department, emp, salary, AVG(salary) OVER (PARTITION BY department ORDER BY department) FROM mytable;
 SELECT department, emp, salary, AVG(salary) OVER W1 FROM mytable WINDOW W1 AS (PARTITION BY department);
+SELECT vendor, RANK() OVER(ORDER BY sales DESC) AS "Rank" FROM mytable;
+SELECT vendor, DENSE_RANK() OVER(ORDER BY sales DESC) AS "Rank" FROM mytable;   | Maintains natural sequence without skipping ranks even with ties
+
+SELECT temp.number FROM (SELECT "number", LAG(number) OVER() AS "Last", LEAD(number) OVER() AS "Next" FROM mytable) AS temp 
+WHERE temp."Last" = "number" AND temp."Next" = "number";
 
     -- Conditional statements
 SELECT product, price CASE WHEN price > 100 THEN 'Sell' WHEN price BETWEEN 50 AND 100 THEN 'Hold' ELSE 'Buy' END FROM mytable;
@@ -242,7 +263,7 @@ SELECT * FROM mytable WHERE last_name IS NOT NULL;
 SELECT COALESCE("name", 'No name provided') FROM mytable;
 
     -- Conditional NULL return
-SELECT NULLIF(value1, value2);  | NULL if value1 = value2 else returns value1
+SELECT NULLIF(value1, value2);  | Null if value1 = value2 else returns value1
 
     -- Check actual date and/or time
 SELECT now();           | Date, time and time zone
@@ -267,25 +288,11 @@ SELECT DATE_TRUNC('year', date '2021-06-11');   | Returns '2021-01-01'
 SELECT DATE_TRUNC('month', date '2021-06-11');  | Returns '2021-06-01'
 SELECT DATE_TRUNC('month', date '2021-06-11');  | Returns '2021-06-11' -- plus truncates the time if it's a timestamp
 
-    -- Define an interval for operations
-INTERVAL '1 year 4 months 2 weeks 3 days 5 hours 20 minutes';
-INTERVAL '4 weeks ago';
-
     -- Limit number of rows in output
 SELECT id FROM mytable LIMIT 100;   | First 100 records
 
     -- Analyze execution
 EXPLAIN ANALYZE SELECT * FROM mytable;
-
----- Commom DML Commands
-    -- Insert data to table
-INSERT INTO mytable (myname, age, salary, birth_day) VALUES ('Joe Doe', 32, 55000, '1990-01-01'::DATE);
-
-    -- Update data in table
-UPDATE mytable SET begin_date = '2021-01-01'::DATE WHERE begin_date IS NULL;
-
-    -- Delete data in table
-DELETE FROM mytable WHERE begin_date IS NULL;
 
 ---- Indexing references
 
