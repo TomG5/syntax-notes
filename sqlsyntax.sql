@@ -163,7 +163,7 @@ TRUNCATE TABLE mytable;
 
 ---- Commom DML Commands
     -- Insert data to table
-INSERT INTO mytable (myname, age, salary, birth_day) VALUES ('Joe Doe', 32, 55000, '1990-01-01'::DATE);
+INSERT INTO mytable (myname, age, salary, birth_day) VALUES ('Joe Doe', 32, 55000, '1990-01-01'::DATE), ('Jane Doe', 30, 56000, '1994-01-01'::DATE);
 
     -- Update data in table
 UPDATE mytable SET begin_date = '2021-01-01'::DATE WHERE begin_date IS NULL;
