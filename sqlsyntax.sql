@@ -247,7 +247,7 @@ SELECT department, emp, salary, AVG(salary) OVER W1 FROM mytable WINDOW W1 AS (P
 SELECT vendor, RANK() OVER(ORDER BY sales DESC) AS "Rank" FROM mytable;
 SELECT vendor, DENSE_RANK() OVER(ORDER BY sales DESC) AS "Rank" FROM mytable;   | Maintains natural sequence without skipping ranks even with ties
 
-SELECT temp.number FROM (SELECT "number", LAG(number) OVER() AS "Last", LEAD(number) OVER() AS "Next" FROM mytable) AS temp 
+SELECT temp.number FROM (SELECT "number", LAG(number) OVER() AS "Last", LEAD(number) OVER() AS "Next", LEAD(number, 2) OVER() AS "Following Next" FROM mytable) AS temp 
 WHERE temp."Last" = "number" AND temp."Next" = "number";
 
     -- Conditional statements
@@ -289,7 +289,8 @@ SELECT DATE_TRUNC('month', date '2021-06-11');  | Returns '2021-06-01'
 SELECT DATE_TRUNC('month', date '2021-06-11');  | Returns '2021-06-11' -- plus truncates the time if it's a timestamp
 
     -- Limit number of rows in output
-SELECT id FROM mytable LIMIT 100;   | First 100 records
+SELECT id FROM mytable LIMIT 100;               | First 100 records
+SELECT id FROM mytable LIMIT 100 OFFSET 10;     | First 100 records after the 10th record
 
     -- Analyze execution
 EXPLAIN ANALYZE SELECT * FROM mytable;
