@@ -247,8 +247,11 @@ SELECT department, emp, salary, AVG(salary) OVER W1 FROM mytable WINDOW W1 AS (P
 SELECT vendor, RANK() OVER(ORDER BY sales DESC) AS "Rank" FROM mytable;
 SELECT vendor, DENSE_RANK() OVER(ORDER BY sales DESC) AS "Rank" FROM mytable;   | Maintains natural sequence without skipping ranks even with ties
 
-SELECT temp.number FROM (SELECT "number", LAG(number) OVER() AS "Last", LEAD(number) OVER() AS "Next", LEAD(number, 2) OVER() AS "Following Next" FROM mytable) AS temp 
-WHERE temp."Last" = "number" AND temp."Next" = "number";
+SELECT temp.number FROM (SELECT "number", LAG(number) OVER() AS "Last", LEAD(number) OVER() AS "Next", LEAD(number, 2) OVER() AS "Following Next" 
+FROM mytable) AS temp WHERE temp."Last" = "number" AND temp."Next" = "number";
+
+SELECT AVG(time) OVER(PARTITION BY racer ORDER BY race_date ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING) FROM mytable;
+SELECT AVG(time) OVER(PARTITION BY racer ORDER BY race_date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) FROM mytable;
 
     -- Conditional statements
 SELECT product, price CASE WHEN price > 100 THEN 'Sell' WHEN price BETWEEN 50 AND 100 THEN 'Hold' ELSE 'Buy' END FROM mytable;
