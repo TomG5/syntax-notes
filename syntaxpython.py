@@ -42,35 +42,31 @@ def somar_valores(valor1, valor2):
 
 ##  Funções Padrões:
 '''
-abs()       |   Remover sinal numérico
-all()       |   Retorna verdadeiro se todo elemento iterado for True
-any()       |   Retorna verdadeiro se qualquer elemento iterado for True
-bin()       |   Retorna valor binário de número inteiro
-chr()       |   Retorna o caracter de um índice do padrão Unicode
-dict()      |   Transforma variável em dicionário
-drop()      |   Remove índice, coluna ou valores de uma matriz (adicionando parâmetro 'inplace=True' efetiva a mudança)
-filter()    |   Filtra registros cujo resultado da função seja True #Sintaxe < filter(*** função ***, *** iteravel ***) >
-format()    |   Inclui valores de variáveis em strings delimitadas por {} (utilizado após a string)
-frozenset() |   Transforma variável em set imutável
-hash()      |   Gera um hash do valor
-head()      |   Printar primeiros resultados
-hex()       |   Retorna valor hexadecimal de número inteiro
-index()     |   Retorna o índice de um dado no objeto
-input()     |   Recebe entrada de dados pelo usuário
-len()       |   Conta quantos elementos tem no objeto
-list()      |   Transforma variável em lista
-max()       |   Máximo de múltiplos dados
-min()       |   Mínimo de múltiplos dados
-ord()       |   Retorna o número de um caracter no padrão Unicode
-range()     |   Retorna elementos de um dado intervalo (inclusivo, não inclusivo)
-round()     |   Arredonda valores conforme número de casas decimais delimitadas
-set()       |   Transforma variável em set (esta função opera de forma iteradora, segregando os elementos a serem adicionados)
-sum()       |   Soma de valores
-tail()      |   Ṕrintar últimos resultados
-tuple()     |   Transforma variável em tupla
-type()      |   Retorna o tipo de dado da variável
-unique()    |   Printar valores únicos de dada coluna, lista etc.
-zip()       |   Integra múltiplos objetos iteráveis com base nos índices de seus elementos
+abs()       |   Remover sinal numérico                                                                                          |   abs(número)
+all()       |   Retorna verdadeiro se todo elemento iterado for True                                                            |   all(iterável)
+any()       |   Retorna verdadeiro se qualquer elemento iterado for True                                                        |   any(iterável)
+bin()       |   Retorna valor binário de número inteiro                                                                         |   bin(número)
+chr()       |   Retorna o caracter de um índice do padrão Unicode                                                               |   chr(índice)
+dict()      |   Transforma variável em dicionário quando em formato compatível                                                  |   dict(objeto)
+filter()    |   Filtra registros cujo resultado da função seja True                                                             |   filter(função, iterável)
+format()    |   Inclui valores diretor ou de variáveis em strings                                                               |   'm{}_str{}ng'.format(valor1, valor2 etc.)
+frozenset() |   Transforma variável em set imutável                                                                             |   frozenset(iterável)
+hash()      |   Gera um hash do valor                                                                                           |   hash('valor')
+hex()       |   Retorna valor hexadecimal de número inteiro                                                                     |   hex(número)
+index()     |   Retorna o índice de um dado no objeto                                                                           |   objeto.index(valor)
+input()     |   Recebe entrada de dados pelo usuário                                                                            |   input(dados) ou input('Digite o valor aqui: ')
+len()       |   Conta quantos elementos tem no texto/objeto                                                                     |   len(texto ou objeto)
+list()      |   Transforma variável em lista                                                                                    |   list([valores] ou objeto)
+max()       |   Máximo de múltiplos dados                                                                                       |   max(valores ou objeto)
+min()       |   Mínimo de múltiplos dados                                                                                       |   min(valores ou objeto)
+ord()       |   Retorna o número de um caracter no padrão Unicode                                                               |   ord('caracter')
+range()     |   Retorna elementos de um dado intervalo (Início inclusivo, final não inclusivo, progressão)                      |   range(início, fim, offset)
+round()     |   Arredonda valores conforme número de casas decimais delimitadas                                                 |   round(valor, decimais)
+set()       |   Transforma variável em set (esta função opera de forma iteradora, segregando os elementos a serem adicionados)  |   set(elementos ou objeto)
+sum()       |   Soma de valores                                                                                                 |   sum(iterável)
+tuple()     |   Transforma variável em tupla                                                                                    |   tuple(string ou iterável)
+type()      |   Retorna o tipo de dado                                                                                          |   type(valor ou variável)
+zip()       |   Agrega múltiplos objetos iteráveis com base nos índices de seus elementos em tuplas (ver resultado com list(x)) |   zip(iterável1, iterável2 etc.)
 '''
 
 ##  Operadores
@@ -154,7 +150,7 @@ close(file)
 
 Utilizar o parâmetro 'encoding=utf8' para exibir caracteres especiais
 Utilizar a função readline/readlines para abrir arquivos muito grandes
-Para manipular arquivos multimídia utilizar o modo binário: rb, wb, ab
+Para manipular arquivos multimídia utilizar um modo binário: rb, wb, ab
 '''
 
 ##  Manipulação de Strings
@@ -165,9 +161,9 @@ upper()       |     Todas as letras maiúsculas                              |  
 lower()       |     Todas as letras minúsculas                              |   my_string.lower()
 isupper()     |     Valida se são letras maiúsculas                         |   my_string.isupper()
 islower()     |     Valida se são letras minúsculas                         |   my_string.islower()
-title()       |     Todas as primeiras letras das palavras maiúsculas       |   my_string.title()
+title()       |     Capitaliza as primeiras letras das palavras             |   my_string.title()
 strip()       |     Remover espaços                                         |   my_string.strip()
-join()        |     Juntar elementos                                        |   "separador".join(letras)
+join()        |     Juntar elementos                                        |   "separador".join(elementos)
 split()       |     Separar palavras da mesma string                        |   my_string.split("separador")
 replace()     |     Substituir caracter                                     |   my_string.replace("antigo", "novo")
 find()        |     Retorna o índice do caracter procurado na palavra       |   my_string.find("caracter")
@@ -185,7 +181,7 @@ var[:]      |   Pegar todos os dígitos
 
 \b  : Remove caracter anterior
 \n  : Nova linha
-\t  : Tabulação horizontal
+\t  : Tabulação
 \r  : Remove caracteres anteriores
 '''
 
@@ -394,7 +390,7 @@ pyplot   |   Gerar gráficos  |   matplotlib.pyplot()
 
 Exemplo:
 
-import matplotlib.pyplot as plt # ou from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt 'ou' from matplotlib import pyplot as plt
 
 valores_x = [5, 4, 3, 2.5, 7]
 legenda = ["JAN", "FEV", "MAR", "ABR", "MAI"]
@@ -405,12 +401,21 @@ plt.show()
 
     ## numpy (Gerar e gerir arrays/matrizes)
 
-numpy.arange -> gerar array com base em dado range / numpy.copy -> copiar dados de variável/índice para outro / numpy.reshape -> alterar número de linhas/colunas de um array
-numpy.linspace -> gerar array com n número de linhas com base em range
+numpy.arange        |   Gerar array com base em dado range
+numpy.copy          |   Copiar dados de variável/índice para outro
+numpy.reshape       |   Alterar número de linhas/colunas
+numpy.linspace      |   Gerar array com n número de linhas com base em range
+numpy.unique        |   Retornar relação de valores únicos
 
     ## pandas (Gerar e gerir datasets)
 
-pandas.DataFrame -> criar tabela de dados (dados, índices, colunas) / pandas.read_csv -> ler dados de arquivo CSV
+pandas.DataFrame    |   Criar tabela de dados (dados, índices, colunas)
+pandas.read_csv     |   Ler dados de arquivo de texto
+pandas.read_excel   |   Ler dados de arquivo Excel
+
+df.head             |   Retornar apenas x primeiras linhas da tabela
+df.tail             |   Retornar apenas x últimas linhas da tabela
+df.drop             |   Remover índice, coluna ou valores de uma tabela (adicionando parâmetro 'inplace=True' efetiva a mudança)
 
 Exemplo:
 
@@ -423,6 +428,7 @@ df = pd.DataFrame(np.random.randn(5, 4), index = "01 02 03 04 05".split(), colum
 
 df.drop('05', inplace = True)
 df.drop('D', axis = 1, inplace = True)
+df.head(2)
 
 print(df)
 '''
@@ -449,6 +455,24 @@ state_abbv = dfs[0]
 state_abbv.to_csv("c:/Users/User/Python_Files/Datasets/state_abbv.csv")
 '''
 
+## Acessar banco de dados (Exemplo via SQL Server)
+'''
+import pyodbc
+import pandas as pd
+
+server = 'myserver'
+database = 'mydb' 
+username = 'myuser'
+password = 'mypwd'
+
+cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+password)
+
+df = pd.read_sql_query('SELECT * FROM myschema.mytable', cnxn)
+print(df)
+
+cnxn.close()
+'''
+
 ##  Programação Orientada a Objetos
 '''
 Objeto/Instância = item utilizado no algoritmo composto por código + dados (objetos são chamados de instâncias das classes)
@@ -468,7 +492,7 @@ Abstraction also means that only the most relevant features of the object will b
 Often objects are very similar, so inheritance allows programmers to reuse common logic and at the same time introduce unique concepts into the classes.
 
 - Polymorphism literally means one name and many forms, and it concerns the inheritance of the classes. Just as the name suggests, it allows programmers to define different logic of the same method. 
-So, the name (or interface) stays the same, but the actions performed may be different. In practice, it is done with overloading or overriding.
+So, the name (or interface) stays the same, but the actions performed may be different for each type of object. In practice, it is done with overloading or overriding.
 
 Class attributes are defined within the class but outside of any methods. Their value is the same for all instances of that class so you could consider them as the sort of "default" values for all objects.
 
