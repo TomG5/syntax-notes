@@ -3,6 +3,8 @@
 //  Bibliotecas
 '''
 #include <stdio.h>  |   Standard Input-Output
+#include <string.h> |   Manipulation of Character Arrays
+#include <ctype.h>  |   Testing and Mapping Characters
 '''
 
 //  Tipos de Dados
@@ -38,7 +40,7 @@ sum_var = (float) x + (float) y;
 
 //  Estruturas de Dados
 '''
-Array   |   Grupo de valores do mesmo tipo na mesma variável  |   int my_var[5]
+Array   |   Grupo de n valores do mesmo tipo na mesma variável  |   int my_var[n] = {1, 2, 3, n};
 
 '''
 
@@ -53,6 +55,14 @@ unsigned long id = 91249102471209;
 float my_var, that_var;
 '''
 
+//  Definição de Constantes
+'''
+Formato: < const + tipo de dado + nome_variavel >
+Exemplo:
+
+const int total = 5;
+'''
+
 //  Definição de Funções
 '''
 Formato: < tipo de saída + nome_funcao(argumentos) {comandos} >
@@ -60,7 +70,7 @@ Exemplo:
 
 #include <stdio.h>
 
-int main() 
+int main(void) 
 {
     int my_num;
     scanf("%d", &my_num);
@@ -68,8 +78,46 @@ int main()
     return 1;
 }
 
+int main() 
+{
+    char* name = "Joe";
+    for (int c = 0, n = strlen(name); c < n; c++)
+    {
+        printf("%c\n", name[c]);
+    }
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char* argv[])
+{   
+    int result = atoi(argv[1]) * atoi(argv[2]);
+    printf("%i\n", result);
+    return result;
+}
+
 OBS: keyword "void" pode ser usada para indicar ausência de saída ou de argumentos 
 '''
+
+// Definição de Tipos de Dados (Structs)
+'''
+Formato: < typedef + struct {tipo de dado + nome do dado} nome_novotipo >
+Exemplo:
+
+typedef struct 
+{
+    char* name;
+    float height;
+} 
+person;
+
+person people[2];
+
+people[0].name = "Joe";
+people[0].number = 1.85;
+'''
+
 
 //  Operadores
 '''
@@ -171,4 +219,9 @@ for (int i = 0; i < 10; i++)
 // Notas
 '''
 - Para sequências de caracteres, utilizar "", para caracteres individuais, apenas ''
+- Strings são encerradas na leitura da memória com o caracter nulo ''\0''
 '''
+
+// Links
+
+https://manual.cs50.io/
