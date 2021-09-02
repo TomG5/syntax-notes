@@ -3,6 +3,7 @@
 //  Bibliotecas
 '''
 #include <stdio.h>  |   Standard Input-Output
+#include <stdlib.h> |   String conversion, Memory Allocation and Pseudo Random
 #include <string.h> |   Manipulation of Character Arrays
 #include <ctype.h>  |   Testing and Mapping Characters
 '''
@@ -36,6 +37,7 @@ sum_var = (float) x + (float) y;
 %li     |   Long Integer
 %x      |   Hexadecimal
 %s      |   String
+%p      |   Address
 '''
 
 //  Estruturas de Dados
@@ -78,6 +80,7 @@ int main(void)
     return 1;
 }
 
+----
 int main() 
 {
     char* name = "Joe";
@@ -86,6 +89,7 @@ int main()
         printf("%c\n", name[c]);
     }
 }
+-----
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -96,11 +100,22 @@ int main(int argc, char* argv[])
     printf("%i\n", result);
     return result;
 }
+----
+#include <stdio.h>
+
+int main(void)
+{
+    int n = 50;
+    int *x = &n;        // Pointer
+    printf("%p\n", x);
+    printf("%i\n", *x)
+}
+
 
 OBS: keyword "void" pode ser usada para indicar ausência de saída ou de argumentos 
 '''
 
-// Definição de Tipos de Dados (Structs)
+// Definição de Novos Tipos de Dados (Structs)
 '''
 Formato: < typedef + struct {tipo de dado + nome do dado} nome_novotipo >
 Exemplo:
@@ -130,6 +145,9 @@ people[0].number = 1.85;
 <=      |   Menor ou igual
 %       |   Módulo
 **      |   Exponenciação
+
+&       |   Retornar endereço na memória
+*       |   Acessar endereço na memória
 '''
 
 //  Condicionais
@@ -167,8 +185,6 @@ switch(my_guess)
 
 Formato 3: < var = (condição) ? {comandos se verdadeiro} : {comandos se falso} >
 Exemplo:
-
-#include <stdio.h>
 
 int main() 
 {
@@ -220,6 +236,7 @@ for (int i = 0; i < 10; i++)
 '''
 - Para sequências de caracteres, utilizar "", para caracteres individuais, apenas ''
 - Strings são encerradas na leitura da memória com o caracter nulo ''\0''
+- Um Pointer é uma variável que carrega o endereço de um dado valor
 '''
 
 // Links
