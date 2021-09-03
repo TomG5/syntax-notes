@@ -42,7 +42,7 @@ sum_var = (float) x + (float) y;
 
 //  Estruturas de Dados
 '''
-Array       |   Grupo de n valores do mesmo tipo na mesma variável                                      |   int my_var[n] = {1, 2, 3, n};
+Array       |   Grupo de n valores do mesmo tipo na mesma variável                                    |   int my_var[n] = {1, 2, 3, n};
 Linked List |   Grupo de valores do mesmo tipo na mesma variável sem uma ordenação lógica na memória  |   Exemplo abaixo*
 
 #include <stdio.h>
@@ -116,7 +116,6 @@ int main(void)
     }
     return 0;
 }
-
 '''
 
 //  Definição de Variáveis
