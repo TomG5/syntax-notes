@@ -42,7 +42,80 @@ sum_var = (float) x + (float) y;
 
 //  Estruturas de Dados
 '''
-Array   |   Grupo de n valores do mesmo tipo na mesma variável  |   int my_var[n] = {1, 2, 3, n};
+Array       |   Grupo de n valores do mesmo tipo na mesma variável                                      |   int my_var[n] = {1, 2, 3, n};
+Linked List |   Grupo de valores do mesmo tipo na mesma variável sem uma ordenação lógica na memória  |   Exemplo abaixo*
+
+#include <stdio.h>
+#include <stdlib.h>
+ 
+// Representação de um nó
+
+typedef struct node
+{
+    int number;
+    struct node *next;
+}
+node;
+ 
+int main(void)
+{
+    // Iniciação de lista com tamanho 0
+
+    node *list = NULL;
+ 
+    // Adicionar item na lista
+
+    node *n = malloc(sizeof(node));
+    if (n == NULL)
+    {
+        return 1;
+    }
+    n->number = 1;
+    n->next = NULL;
+    list = n;
+ 
+    // Adicionar item na lista
+    
+    n = malloc(sizeof(node));
+    if (n == NULL)
+    {
+        free(list);
+        return 1;
+    }
+    n->number = 2;
+    n->next = NULL;
+    list->next = n;
+ 
+    // Adicionar item na lista
+
+    n = malloc(sizeof(node));
+    if (n == NULL)
+    {
+        free(list->next);
+        free(list);
+        return 1;
+    }
+    n->number = 3;
+    n->next = NULL;
+    list->next->next = n;
+ 
+    // Printar lista
+
+    for (node *tmp = list; tmp != NULL; tmp = tmp->next)
+    {
+        printf("%i\n", tmp->number);
+    }
+ 
+    // Limpar lista
+    
+    while (list != NULL)
+    {
+        node *tmp = list->next;
+        free(list);
+        list = tmp;
+    }
+    return 0;
+}
 
 '''
 
@@ -229,6 +302,65 @@ Exemplo:
 for (int i = 0; i < 10; i++)
 {
     *** comandos ***
+}
+'''
+
+// Alocação de Memória
+'''
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+    // Usar malloc para alocar espaço suficiente para um array com 3 inteiros
+
+    int *list = malloc(3 * sizeof(int));
+    if (list == NULL)
+    {
+        return 1;
+    }
+
+    // Definir os valores do array
+    
+    list[0] = 1;
+    list[1] = 2;
+    list[2] = 3;
+
+    // Para salvar um valor adicional, é necessário alocar mais memória
+    
+    int *tmp = malloc(4 * sizeof(int));
+    if (tmp == NULL)
+    {
+        free(list);
+        return 1;
+    }
+
+    // Copiar a lista de tamanho 3 para a de 4
+    
+    for (int i = 0; i < 3; i++)
+    {
+        tmp[i] = list[i];
+    }
+
+    // Adicionar novo valor à lista
+    tmp[3] = 4;
+
+    // Liberar memória da lista original
+    free(list);
+
+    // Reatribuir valores à lista original
+
+    list = tmp;
+
+    // Printar lista
+
+    for (int i = 0; i < 4; i++)
+    {
+        printf("%i\n", list[i]);
+    }
+
+    // Liberar memória da nova lista
+    free(list);
 }
 '''
 
