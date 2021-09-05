@@ -54,7 +54,7 @@ frozenset() |   Transforma variável em set imutável                           
 hash()      |   Gera um hash do valor                                                                                           |   hash('valor')
 hex()       |   Retorna valor hexadecimal de número inteiro                                                                     |   hex(número)
 index()     |   Retorna o índice de um dado no objeto                                                                           |   objeto.index(valor)
-input()     |   Recebe entrada de dados pelo usuário                                                                            |   input(dados) ou input('Digite o valor aqui: ')
+input()     |   Recebe entrada de dados pelo usuário                                                                            |   input() ou input('Digite o valor aqui: ')
 len()       |   Conta quantos elementos tem no texto/objeto                                                                     |   len(texto ou objeto)
 list()      |   Transforma variável em lista                                                                                    |   list([valores] ou objeto)
 max()       |   Máximo de múltiplos dados                                                                                       |   max(valores ou objeto)
@@ -157,12 +157,16 @@ Para manipular arquivos multimídia utilizar um modo binário: rb, wb, ab
 '''
     ## Método  |   Descrição    |   Sintaxe:
 
-upper()       |     Todas as letras maiúsculas                              |   my_string.upper()
-lower()       |     Todas as letras minúsculas                              |   my_string.lower()
+upper()       |     Transforma as letras em maiúsculas                      |   my_string.upper()
+lower()       |     Transforma as letras em minúsculas                      |   my_string.lower()
 isupper()     |     Valida se são letras maiúsculas                         |   my_string.isupper()
 islower()     |     Valida se são letras minúsculas                         |   my_string.islower()
+startswith()  |     Valida se começa conforme um padrão                     |   my_string.startswith("texto")
+endswith()    |     Valida se termina conforme um padrão                    |   my_string.endswith("texto")
 title()       |     Capitaliza as primeiras letras das palavras             |   my_string.title()
 strip()       |     Remover espaços                                         |   my_string.strip()
+lstrip()      |     Remover espaços da esquerda                             |   my_string.lstrip()
+rstrip()      |     Remover espaços da direita                              |   my_string.rstrip()
 join()        |     Juntar elementos                                        |   "separador".join(elementos)
 split()       |     Separar palavras da mesma string                        |   my_string.split("separador")
 replace()     |     Substituir caracter                                     |   my_string.replace("antigo", "novo")

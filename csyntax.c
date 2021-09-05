@@ -2,14 +2,16 @@
 
 //  Bibliotecas
 '''
-#include <stdio.h>  |   Standard Input-Output
-#include <stdlib.h> |   String conversion, Memory Allocation and Pseudo Random
-#include <string.h> |   Manipulation of Character Arrays
-#include <ctype.h>  |   Testing and Mapping Characters
+#include <stdio.h>      |   Standard Input-Output
+#include <stdlib.h>     |   String conversion, Memory Allocation and Pseudo Random
+#include <string.h>     |   Manipulation of Character Arrays
+#include <ctype.h>      |   Testing and Mapping Characters
+#include <stdbool.h>    |   Utilize boolean values
 '''
 
 //  Tipos de Dados
 '''
+bool                |   1 byte      |   true or false
 char	            |   1 byte	    |   -128 to 127 or 0 to 255
 unsigned char	    |   1 byte	    |   0 to 255
 signed char	        |   1 byte	    |   -128 to 127
