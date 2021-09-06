@@ -38,6 +38,15 @@ Exemplo:
 def somar_valores(valor1, valor2):
     *** comandos ***
     return *** resultado ***
+
+    ## Funções Lambda (Função anônima simplificada que pode levar múltiplos argumentos sob uma só expressão)
+    
+x = lambda a, b : a * b
+print(x(5, 6))
+
+pessoas = {"Pessoa1": 30, "Pessoa2": 27}
+for pessoa in sorted(pessoas, key=lambda pessoa: pessoas[pessoa]):
+    print(pessoa, pessoas[pessoa])
 '''
 
 ##  Funções Padrões:
