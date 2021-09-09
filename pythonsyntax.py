@@ -326,6 +326,38 @@ count() |   Retorna a contagem da ocorrência de um valor na tupla   |   my_tupl
 zip()   |   Integra múltiplos objetos iteráveis com base nos índices de seus elementos  |   my_tuple = tuple(zip(obj1, obj2))
 '''
 
+## Regular Expressions
+'''
+Formato: r + "Expressão" + Flags
+Expressões comuns:
+
+Range                                   |   [ABC] ou [A-Z] ou [a-zA-Z] ou [0-9]
+Qualquer caracter, dígito, símbolo      |   .
+Operador OR                             |   A|B
+Operador NOT                            |   ^AB
+Zero ou mais                            |   A*
+Zero ou um                              |   A?
+Um ou mais                              |   A+
+Contagem específica                     |   A{1}
+Ao menos x vezes                        |   A{2,}
+Entre x e y vezes                       |   A{2,4}
+Backreference (Repetição do anterior)   |   (A)\1(B)\2(C)\3
+Espaço(s)                               |   \s
+Qualquer caracter menos espaço          |   \S
+Qualquer dígito                         |   \d
+Qualquer não digito                     |   \D
+Caracter alfabético                     |   \w
+Qualquer caracter não alfabético        |   \W
+Agrupamento                             |   (ABC)
+Ignorar agrupamento                     |   (?:Abcd)    
+Borda de palavras (início ou fim)       |   \b
+Não é borda de palavras                 |   \B
+Nova linha                              |   \n
+Carriage Return                         |   \r
+Tabulação                               |   \t
+Nulo                                    |   \0
+'''
+
 ##  Alguns Módulos:
 '''
     ## os (Informações do Sistema)
