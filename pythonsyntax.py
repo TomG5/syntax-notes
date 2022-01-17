@@ -30,6 +30,14 @@ x = y = z = 0
 minha_idade, sua_idade = 25, 20
 '''
 
+##  Escopo de Variáveis:
+'''
+Variável global     |   Criada na indentação raiz do código
+Variável local      |   Criada dentro de uma função
+
+*Transforme uma variável local em global incluindo a keyword 'global' antes de sua inicialização
+'''
+
 ##  Definição de Funções:
 '''
 Formato: < def nome_da_funcao(parâmetros): >
@@ -90,6 +98,7 @@ or      |   Ou
 <=      |   Menor ou igual
 %       |   Módulo
 **      |   Exponenciação
+//      |   Floor Division
 '''
 
 ##  Condicionais
@@ -328,7 +337,15 @@ zip()   |   Integra múltiplos objetos iteráveis com base nos índices de seus 
 
 ## Regular Expressions
 '''
-Formato: r + "Expressão" + Flags
+Módulo re
+Formato: re + Função + "Expressão"
+
+Funções:
+findall     |   Retorna todas as ocorrências                |   re.findall("valor", txt)
+search      |   Retorna a posição da primeira ocorrência    |   re.search("\d", txt)
+split       |   Separa o texto conforme padrão              |   re.split("\s", txt)
+sub         |   Substitui trecho do texto                   |   re.sub("\s", "9", txt)
+
 Expressões comuns:
 
 Range                                   |   [ABC] ou [A-Z] ou [a-zA-Z] ou [0-9]
