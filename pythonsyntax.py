@@ -71,7 +71,7 @@ frozenset() |   Transforma variável em set imutável                           
 hash()      |   Gera um hash do valor                                                                                           |   hash('valor')
 hex()       |   Retorna valor hexadecimal de número inteiro                                                                     |   hex(número)
 index()     |   Retorna o índice de um dado no objeto                                                                           |   objeto.index(valor)
-input()     |   Recebe entrada de dados pelo usuário                                                                            |   input() ou input('Digite o valor aqui: ')
+input()     |   Recebe entrada de dados pelo usuário                                                                            |   input() OU input('Digite o valor aqui: ')
 len()       |   Conta quantos elementos tem no texto/objeto                                                                     |   len(texto ou objeto)
 list()      |   Transforma variável em lista                                                                                    |   list([valores] ou objeto)
 max()       |   Máximo de múltiplos dados                                                                                       |   max(valores ou objeto)
@@ -265,7 +265,7 @@ my_dict[chave] = *** valor novo ***
 
     ## Método  |   Descrição    |   Sintaxe:
 
-update()  | Atualiza ou adiciona dados a um dicionário conforme chave   |   my_dict.update({chave: valor}) ou my_dict.update(chave = valor)
+update()  | Atualiza ou adiciona dados a um dicionário conforme chave   |   my_dict.update({chave: valor}) OU my_dict.update(chave = valor)
 pop()     | Remove item do dicionário                                   |   my_dict.pop(chave)
 clear()   | Limpa todo o dicionário                                     |   my_dict.clear()
 get()     | Procura dada chave e retorna valor                          |   my_dict.get(chave)
@@ -306,7 +306,7 @@ zip()       |   Integra múltiplos objetos iteráveis com base nos índices de s
 
 |   :   União
 &   :   Interseção
-–   :   Diferença             # Elementos de A que não existem em B e C
+-   :   Diferença             # Elementos de A que não existem em B e C
 ^   :   Diferença Simétrica   # Elementos que não existem em A e B, A e C ou B e C
 
     ## Set Comprehensions (Criação de conjuntos a partir de objetos iteráveis):
@@ -379,14 +379,14 @@ Nulo                                    |   \0
 '''
     ## os (Informações do Sistema)
 
-getcwd       |   Siretório atual                        |   os.getcwd()
-chdir        |   Mudar diretório                        |   os.chdir('caminho')
-listdir      |   Listar pastas e arquivos do diretório  |   os.listdir()
-mkdir        |   Criar pasta                            |   os.mkdir('diretório')
-makedirs     |   Criar múltiplos níveis de pastas       |   os.makedirs('diretórios')
-rmdir        |   Remover pasta                          |   os.rmdir('diretório')
-removedirs   |   Remover múltiplos níveis de pastas     |   os.removedirs('diretórios')
-rename       |   Renomear pasta ou arquivo              |   os.rename('nome antigo', 'nome novo')
+getcwd()       |   Siretório atual                        |   os.getcwd()
+chdir()        |   Mudar diretório                        |   os.chdir('caminho')
+listdir()      |   Listar pastas e arquivos do diretório  |   os.listdir()
+mkdir()        |   Criar pasta                            |   os.mkdir('diretório')
+makedirs()     |   Criar múltiplos níveis de pastas       |   os.makedirs('diretórios')
+rmdir()        |   Remover pasta                          |   os.rmdir('diretório')
+removedirs()   |   Remover múltiplos níveis de pastas     |   os.removedirs('diretórios')
+rename()       |   Renomear pasta ou arquivo              |   os.rename('nome antigo', 'nome novo')
 
     ## math (Cálculos)
 
@@ -445,38 +445,37 @@ punctuation()         |   Gera uma string com os caracteres especiais de pontua�
 
 ##  Algumas Bibliotecas:
 '''
-    ## matplotlib (Gerar gráficos)
+    ## numpy (Carregar e gerir arrays/matrizes)
 
-pyplot   |   Gerar gráficos  |   matplotlib.pyplot()
+numpy.arange()        |   Gerar array com base em dado range                                                                                  |
+numpy.copy()          |   Copiar dados de variável/índice para outro                                                                          |
+numpy.reshape()       |   Alterar número de linhas/colunas                                                                                    |
+numpy.linspace()      |   Gerar array com n número de linhas com base em range                                                                |
+numpy.unique()        |   Retornar relação de valores únicos                                                                                  |
 
-Exemplo:
+    ## pandas (Criar e gerir dataframes - datasets com índices)
 
-import matplotlib.pyplot as plt 'ou' from matplotlib import pyplot as plt
+pandas.DataFrame()    |   Criar tabela de dados                                                                                               |     pandas.DataFrame(dados, índices, colunas)
+pandas.read_csv()     |   Ler dados de arquivo de texto (adicionando parâmetro 'header=None' indica ausência de cabeçalho)                    |     pandas.read_csv(file)
+pandas.read_excel()   |   Ler dados de arquivo Excel                                                                                          |     pandas.read_excel(file)
 
-valores_x = [5, 4, 3, 2.5, 7]
-legenda = ["JAN", "FEV", "MAR", "ABR", "MAI"]
-
-plt.xticks([1,2,3,4,5], legenda)
-plt.plot([1,2,3,4,5], valores_x)
-plt.show()
-
-    ## numpy (Gerar e gerir arrays/matrizes)
-
-numpy.arange        |   Gerar array com base em dado range
-numpy.copy          |   Copiar dados de variável/índice para outro
-numpy.reshape       |   Alterar número de linhas/colunas
-numpy.linspace      |   Gerar array com n número de linhas com base em range
-numpy.unique        |   Retornar relação de valores únicos
-
-    ## pandas (Gerar e gerir datasets)
-
-pandas.DataFrame    |   Criar tabela de dados (dados, índices, colunas)
-pandas.read_csv     |   Ler dados de arquivo de texto
-pandas.read_excel   |   Ler dados de arquivo Excel
-
-df.head             |   Retornar apenas x primeiras linhas da tabela
-df.tail             |   Retornar apenas x últimas linhas da tabela
-df.drop             |   Remover índice, coluna ou valores de uma tabela (adicionando parâmetro 'inplace=True' efetiva a mudança)
+df.columns            |   Retornar lista de colunas da tabela                                                                                 |     df.columns
+df.dtypes             |   Retornar tipos de dados das colunas da tabela                                                                       |     df.dtypes  
+df.shape              |   Retornar quantidade de linhas e colunas da tabela                                                                   |     df.shape
+df.describe()         |   Retornar estatísticas sobre as colunas (adicionando parâmetro 'include=all' para mostrar colunas não numéricas)     |     df.describe()
+df.info()             |   Retornar sumário de informações da tabela                                                                           |     df.info()
+df.replace()          |   Substituir valores em tabela (Ex.: desconhecidos '?')                                                               |     df.replace('?', numpy.NaN) #Not a Number
+df.dropna()           |   Remove linhas (0) ou colunas (1) com registros faltantes da tabela                                                  |     df.dropna(subset=["coluna1"], axis=0)
+df.drop()             |   Remover índice, coluna ou valores de uma tabela (adicionando parâmetro 'inplace=True' efetiva a mudança na origem)  |     df.drop(item, inplace=True)
+df.drop_duplicates()  |   Remover linhas duplicadas ou apenas valores de dadas colunas da tabela                                              |     df.drop_duplicates() OU df.drop_duplicates(subset=['col1'])
+df.head()             |   Retornar apenas x primeiras linhas da tabela                                                                        |     df.head(x)
+df.tail()             |   Retornar apenas x últimas linhas da tabela                                                                          |     df.tail(x)
+df.groupby()          |   Retornar resultados agrupados por coluna                                                                            |     df.groupby('coluna')
+df.agg()              |   Retornar resultados de função agregadora (Ex.: sum, count, min, max, mean, median, mode, std, var etc.)             |     df.agg(['mean', 'std']) OU df.agg({'coluna': ['sum', 'min']})
+df.sort_values()      |   Retornar resultados ordenados por critério ascendente ou decrescente                                                |     df.sort_values('coluna1', ascending=True)
+df.to_csv()           |   Salvar tabela em arquivo CSV (sem relação de índices)                                                               |     df.to_csv("diretórioearquivo", index=False)
+df.to_excel()         |   Salvar tabela em arquivo XLSX (sem relação de índices)                                                              |     df.to_excel("diretórioearquivo", index=False)
+df.to_json()          |   Salvar tabela em arquivo JSON (sem relação de índices)                                                              |     df.to_json("diretórioearquivo", index=False)
 
 Exemplo:
 
@@ -492,6 +491,21 @@ df.drop('D', axis = 1, inplace = True)
 df.head(2)
 
 print(df)
+
+    ## matplotlib (Gerar visualizações com módulo pyplot)
+
+pyplot.hist()   |   Gerar histograma  |   pyplot.hist(df['coluna'])
+
+Exemplo:
+
+import matplotlib.pyplot as plt OU from matplotlib import pyplot as plt
+
+valores_x = [5, 4, 3, 2.5, 7]
+legenda = ["JAN", "FEV", "MAR", "ABR", "MAI"]
+
+plt.xticks([1,2,3,4,5], legenda)
+plt.plot([1,2,3,4,5], valores_x)
+plt.show()
 '''
 
 ##  Coloração de mensagens no Python (terminal)
@@ -536,9 +550,14 @@ cnxn.close()
 
 ##  Programação Orientada a Objetos
 '''
-Objeto/Instância = item utilizado no algoritmo composto por código + dados (objetos são chamados de instâncias das classes)
 Classe = classificação dos tipos de objetos
+Objeto/Instância = item membro de uma classe, sendo composto por métodos e atributos (objetos são chamados de instâncias das classes)
 Método = Funções / Atributos = Variáveis
+
+Atributos de classe são definidos dentro da classe mas fora de quaisquer métodos. Seus valores serão os mesmos para todas as instâncias
+Atributos de instâncias são definidos dentro de métodos, normalmente no __init__, definindo as propriedades a serem definidas para cada instância com seus próprios valores
+
+O parâmetro 'self' deve ser sempre o primeiro do método, pois refere-se à instância do objeto manipulado
 
 There are four basic principles of OOP. They are encapsulation, abstraction, inheritance, and polymorphism.
 
@@ -555,29 +574,21 @@ Often objects are very similar, so inheritance allows programmers to reuse commo
 - Polymorphism literally means one name and many forms, and it concerns the inheritance of the classes. Just as the name suggests, it allows programmers to define different logic of the same method. 
 So, the name (or interface) stays the same, but the actions performed may be different for each type of object. In practice, it is done with overloading or overriding.
 
-Class attributes are defined within the class but outside of any methods. Their value is the same for all instances of that class so you could consider them as the sort of "default" values for all objects.
-
-As for the instance variables, they store the data unique to each object of the class. They are defined within the class methods, notably, within the __init__ method.
-
 Exemplo:
 
 class funcionario:
 
-    num_fun = 0
+    num_fun = 0                                                 # Atributos de classe
     aumento = 1.04
 
-    def __init__(self, nome, sobrenome, salario):               # Primeira instância/objeto
-        self.nome = nome                                        # Atributos
+    def __init__(self, nome, sobrenome, salario):               # Função fundamental da classe, executada cada vez que um objeto é gerado para atribuí-lo de valores
+        self.nome = nome                                        # Atributos de instâncias
         self.sobrenome = sobrenome
         self.salario = salario
         funcionario.num_fun += 1
 
-    @property                                                   # Decodador Getter
-    def email(self):
-        return '{}.{}@email.com'.format(self.nome, self.sobrenome)
-
     @property
-    def nome_completo(self):                                    # Segunda instância/objeto
+    def nome_completo(self):                                    # Instância/objeto
         return '{} {}'.format(self.nome, self.sobrenome)        # Atributos
 
     @nome_completo.setter                                       # Decodador Setter
@@ -586,12 +597,17 @@ class funcionario:
         self.nome = nome
         self.sobrenome = sobrenome
 
+    @email.getter                                               # Decodador Getter
+    def email(self):
+        return '{}.{}@email.com'.format(self.nome, self.sobrenome)
+
     @nome_completo.deleter                                      # Decorador Deleter
     def nome_completo(self):
         self.nome = None
         self.sobrenome = None
         print("Nome deletado.")
 
+    @classmethod                                                # Método
     def aplicar_aumento(self):
         self.salario = (self.salario * self.aumento)
 

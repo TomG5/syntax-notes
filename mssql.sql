@@ -193,13 +193,13 @@ SELECT * FROM mytable WHERE id IN (id1, id2, id4, id9);
 SELECT * FROM mytable WHERE id NOT IN (id1, id2, id4, id9);
 
     -- Filter records by pattern matching
-SELECT * FROM mytable WHERE first_name LIKE 'J%';           | (Anything starting with J)
-SELECT * FROM mytable WHERE first_name NOT LIKE 'J%';       | (Anything not starting with J)
-SELECT * FROM mytable WHERE first_name LIKE '[JKL]%';       | (Anything starting with J, K or L)
-SELECT * FROM mytable WHERE first_name LIKE '[A-D]%';       | (Anything starting with A, B, C or D)
-SELECT * FROM mytable WHERE first_name LIKE '[!A-D]%';      | (Anything not starting with A, B, C or D)
-SELECT * FROM mytable WHERE first_name ILIKE 'J%';          | (Anything starting with J - Case insensitive)
-SELECT * FROM mytable WHERE salary::text LIKE '_00000';     | (Anything from 100000)
+SELECT * FROM mytable WHERE first_name LIKE 'J%';               | (Anything starting with J)
+SELECT * FROM mytable WHERE first_name NOT LIKE 'J%';           | (Anything not starting with J)
+SELECT * FROM mytable WHERE first_name LIKE '[JKL]%';           | (Anything starting with J, K or L)
+SELECT * FROM mytable WHERE first_name LIKE '[A-D]%';           | (Anything starting with A, B, C or D)
+SELECT * FROM mytable WHERE first_name LIKE '[^A-D]%';          | (Anything not starting with A, B, C or D)
+SELECT * FROM mytable WHERE first_name LIKE '_ean';             | (Anything ending with 'ean')
+SELECT * FROM mytable WHERE discount LIKE '15!%' ESCAPE '!';    | (Anything containing '15%' -> '!' is the escape character)
 
     -- Filter records by ample matching
 SELECT products FROM mytable WHERE prodID = ANY (SELECT prodID FROM mytable2 WHERE sales > 10000);      |   Returns any matching records 
@@ -261,7 +261,8 @@ SELECT AVG(time) OVER(PARTITION BY racer ORDER BY race_date ROWS BETWEEN 1 PRECE
 SELECT AVG(time) OVER(PARTITION BY racer ORDER BY race_date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) FROM mytable;
 
     -- Conditional statements
-SELECT product, price CASE WHEN price > 100 THEN 'Sell' WHEN price BETWEEN 50 AND 100 THEN 'Hold' ELSE 'Buy' END FROM mytable;
+SELECT product, price = CASE WHEN price > 100 THEN 'Sell' WHEN price BETWEEN 50 AND 100 THEN 'Hold' ELSE 'Buy' END FROM mytable;
+SELECT CASE WHEN col1 < 123 THEN NULL ELSE col1 END AS col1, col2, col3 FROM mytable1, mytable2 WHERE col3 BETWEEN x AND y ORDER BY col2 DESC, col1, col3;
 
     -- Check if results exist in subquery
 SELECT supplier FROM mytable WHERE EXISTS (SELECT ProductName FROM mytable2 WHERE mytable2.SupplierID = mytable.supplierID AND Price < 200);
@@ -277,6 +278,10 @@ SELECT ISNULL("name", 'No name provided') FROM mytable;
 
     -- Conditional NULL return
 SELECT NULLIF(value1, value2);  | Null if value1 = value2 else returns value1
+
+    -- Pivot rows in tables
+SELECT [Doctor], [Professor], [Singer], [Actor] FROM (SELECT ROW_NUMBER() OVER (PARTITION BY Occupation ORDER BY Name) num, [Name], [Occupation] FROM mytable) AS source
+PIVOT (MAX([Name]) FOR [Occupation] IN ([Doctor],[Professor],[Singer],[Actor])) AS pv ORDER BY num;
 
     -- Check actual date and/or time
 SELECT now();           | Date, time and time zone
@@ -301,9 +306,11 @@ SELECT DATE_TRUNC('year', date '2021-06-11');   | Returns '2021-01-01'
 SELECT DATE_TRUNC('month', date '2021-06-11');  | Returns '2021-06-01'
 SELECT DATE_TRUNC('month', date '2021-06-11');  | Returns '2021-06-11' -- plus truncates the time if it's a timestamp
 
-    -- Limit number of rows in output
-SELECT TOP 50 id FROM mytable;                  | First 50 records
-SELECT TOP 10 PERCENT id FROM mytable;          | First 100 records after the 10th record
+    -- Limit or jump number of rows in output
+SELECT TOP 50 id FROM mytable;                                                              | First 50 records
+SELECT TOP 10 PERCENT id FROM mytable;                                                      | First 10% of records
+SELECT id, price FROM mytable ORDER BY price DESC OFFSET 1 ROWS;                            | Get 2th highest record
+SELECT id, price FROM mytable ORDER BY price DESC OFFSET 1 ROWS FETCH NEXT 10 ROWS ONLY;    | Get 2th up to the 11th highest record
 
     -- Analyze execution
 EXPLAIN ANALYZE SELECT * FROM mytable;
@@ -358,6 +365,11 @@ DECLARE @myvar INT;
     -- Initialize the variable
 SET @myvar = 0;
 
+---- Loopings
+DECLARE @iter INT = 20;
+    
+WHILE @iter > 1 BEGIN SELECT REPLICATE('ABC', @iter) SET @iter = @iter - 1 END;
+
 ---- Stored Procedures (pre-programmed code)
     -- Create procedures
 CREATE PROCEDURE myprocedure AS SELECT * FROM mytable GO;
@@ -371,6 +383,6 @@ EXEC myprocedure2 @fieldname = 'Value';
 /*
 # "" is used for Table/Column and '' is used for strings
 # The order for operations is: FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER BY -> LIMIT
-# PostgreSQL uses ISO-8601 standard to define how to manipulate dates and times | YYYY-MM-DDTHH:MM:SS+TMZONE
-# PostgreSQL is by default configured at UTC time zone and uses it to store the data received
+# The Collation configuration contains the case sensitiveness of the database installation instance
+# SQL Server is by default configured at UTC time zone and uses it to store the data received
 */

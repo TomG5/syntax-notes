@@ -196,7 +196,7 @@ SELECT * FROM mytable WHERE first_name LIKE '[JKL]%';       | (Anything starting
 SELECT * FROM mytable WHERE first_name LIKE '[A-D]%';       | (Anything starting with A, B, C or D)
 SELECT * FROM mytable WHERE first_name LIKE '[!A-D]%';      | (Anything not starting with A, B, C or D)
 SELECT * FROM mytable WHERE first_name ILIKE 'J%';          | (Anything starting with J - Case insensitive)
-SELECT * FROM mytable WHERE salary::text LIKE '_00000';     | (Anything from 100000)
+SELECT * FROM mytable WHERE salary::text LIKE '_00000';     | (Anything ending with 00000)
 
     -- Remove duplicates
 SELECT DISTINCT profession FROM mytable;
