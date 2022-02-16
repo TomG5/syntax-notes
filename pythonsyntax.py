@@ -11,7 +11,7 @@ bool    |   Boolean   # Verdadeiro ou Falso
 ##  Estruturas de Dados:
 '''
 [A, B, C]           |   List          # Aceita valores únicos, cadeias de valores, outras variáveis etc.
-{'Blue': 'Azul'}    |   Dictionary    # Formato em pares de < Chave: Valor >
+{'Blue': 'Azul'}    |   Dictionary    # Formato em pares de Chave: Valor
 {Jan, Fev, Mar}     |   Set           # Valores já adicionados não podem ser alterados, mas pode receber novas entradas / Somente valores únicos
 ("Operação X")      |   Tuple         # Inalterável após definido
 '''

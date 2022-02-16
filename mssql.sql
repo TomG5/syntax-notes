@@ -138,7 +138,8 @@ REVOKE SELECT, INSERT, UPDATE ON mytable IN SCHEMA myschema FROM thisuser;
 CREATE DATABASE mydb;
 CREATE SCHEMA myschema;
 CREATE TABLE mytable (id INT NOT NULL, "name" VARCHAR(32) PRIMARY KEY, active BOOLEAN REFERENCES othertable(active));
-CREATE TEMPORARY TABLE disposabletable (id INT NOT NULL, newsalary FLOAT4 NOT NULL);                                    | Discarded at the end of the session
+CREATE TABLE #temporary_table (id INT NOT NULL, newsalary FLOAT4 NOT NULL);                                            | Discarded at the end of the owner session
+CREATE TABLE ##global_temporary_table (id INT NOT NULL, newsalary FLOAT4 NOT NULL);                                    | Discarded at the end of the owner session, available to all sessions until ended
 CREATE ROLE myrole [LOGIN, CREATEDB etc.];
 CREATE USER myuser WITH ENCRYPTED PASSWORD 'asdf';
 
@@ -252,6 +253,7 @@ SELECT * FROM mytable WHERE age > (SELECT AVG(age) FROM mytable2);
 SELECT department, emp, salary, AVG(salary) OVER (PARTITION BY department ORDER BY department) FROM mytable;
 SELECT department, emp, salary, AVG(salary) OVER W1 FROM mytable WINDOW W1 AS (PARTITION BY department);
 SELECT vendor, RANK() OVER(ORDER BY sales DESC) AS "Rank" FROM mytable;
+SELECT id, vendor, ROW_NUMBER() OVER(ORDER BY id) AS "RN" FROM mytable;
 SELECT vendor, DENSE_RANK() OVER(ORDER BY sales DESC) AS "Rank" FROM mytable;   | Maintains natural sequence without skipping ranks even with ties
 
 SELECT temp.number FROM (SELECT "number", LAG(number) OVER() AS "Last", LEAD(number) OVER() AS "Next", LEAD(number, 2) OVER() AS "Following Next" 
