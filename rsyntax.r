@@ -5,7 +5,7 @@
 1) tidyverse          |   Coleção de pacotes para: Manipulação, exploração e visualização de dados
 1.1) ggplot2          |   Visualização de dados
 1.2) tibble           |   Geração de versão simplificada de um data frame (denom. tibble)
-1.3) tidyr            |   Limpeza de dados
+1.3) tidyr            |   Manipulação e limpeza de dados
 1.4) readr            |   Importação de dados
 1.5) purrr            |   Programação funcional para trabalhar funções e vetores
 1.6) dplyr            |   Manipulação de dados
@@ -16,10 +16,9 @@
 1.11) jsonlite        |   Acessar arquivos JSON
 1.12) xml2            |   Acessar arquivos XML
 2) lubridate          |   Operações com Data/Hora
-3) here               |
-4) skimr              |
-5) janitor            |
-6) odbc/DBI           |   Conectar a bancos de dados
+3) skimr              |   Sumários estatísticos sobre estutruras de dados
+4) janitor            |   Limpeza de dados
+5) odbc/DBI           |   Conectar a bancos de dados
 
 OBS: Para entender melhor cada pacote, utilizar a função browseVignettes("packagename")
 '''
@@ -202,6 +201,7 @@ base.nchar()       |   Retornar número de caracteres                         |  
 base.grepl()       |   Retornar booleano se substring existe em string       |   grepl('X', 'Meu texto sem X')
 
           # Escape Character
+          
           \   Backslash             |   Habilitar caracter seguinte
           \n	New Line              |   Continuar em nova linha
           \r	Carriage Return       |   Continuar em nova linha
@@ -254,10 +254,12 @@ xml2.read_xml()         |   Acessar XML                                         
 
     # Visão Geral dos Dados
     
+utils.View()            |   Visualizar data frame                                     |   View(df)
 base.class()            |   Retornar classe de dado/estrutura                         |   class(objeto)
 base.typeof()           |   Retornar tipo de dado/estrutura                           |   typeof(objeto)
 utils.str()             |   Retornar resumo da(s) classe(s) do dado/estrutura         |   str(objeto)
 base.summary()          |   Sumarizar algumas métricas estatísticas básicas           |   summary(objeto)
+skimr.skim()            |   Sumário estatístico sobre estrutura de dados              |   skim(objeto)
 dplyr.glimpse()         |   Obter breve resumo horizontal do data frame               |   glimpse(df)
 base.rownames()         |   Obter lista de nomes das observações do data frame        |   rownames(df)
 base.colnames()         |   Obter lista de nomes das colunas do data frame            |   colnames(df)
@@ -267,19 +269,24 @@ base.length()           |   Retornar quantidade de elementos na estrutura       
 base.ncol()             |   Retornar quantidade de colunas                            |   ncol(objeto)
 base.nrow()             |   Retornar quantidade de linhas                             |   nrow(objeto)
 base.dim()              |   Retornar dimensões de uma estrutura (lin, col, dim)       |   dim(objeto)
+janitor.tabyl()         |   Gerar tabela de frequências sobre vetor                   |   tabyl(df, col1)
 
     # Tratamento de Dados
 
 tibble.as_tibble()      |   Conversão de data frame para tibble, possibilitando print simplificado            |   as_tibble(df)
+dplyr.case_when()       |   Retornar valor conforme condicional                                               |   case_when(x > y ~ 'Case1', y > z ~ 'Case2', TRUE ~ 'Other')
 dplyr.mutate()          |   Adicionar coluna a um data frame                                                  |   mutate(col2 = col1 * 2)
 tidyr.separate()        |   Separar caracteres de uma coluna em múltiplas colunas                             |   separate(col1, c('col2', 'col3'),  sep='/' )
 tidyr.extract()         |   Separar caracteres de uma coluna em múltiplas colunas via regex                   |   extract(df, col1, c('c2', 'c3'),  regex = '([abc])')
 tidyr.unite()           |   Unir colunas em uma só (com separador de valores)                                 |   unite(new_col, c('col1', 'col2'), sep = "-")
 dplyr.rename_with()     |   Renomear colunas conforme função                                                  |   rename_with(df, toupper ou tolower)
 dplyr.rename()          |   Renomear coluna                                                                   |   rename(df, new = old)
+janitor.clean_names()   |   Padronizar nomes das colunas em formato universal                                 |   clean_names(df)
+janitor.remove_empty()  |   Remover linhas ou colunas sem valores                                             |   remove_empty(df, which = 'rows' / 'cols')
 tidyr.drop_na()         |   Remover observações que tenham valores em branco                                  |   drop_na(df, col1)
 tidyr.fill()            |   Substituir valores faltantes com o valor anterior e/ou próximo                    |   fill(df, col1, .direction = 'updown')
 tidyr.replace_na()      |   Substituir valores faltantes com um determinado valor                             |   replace_na(df, list(x = 0, y = 'abc'))
+janitor.get_dupes()     |   Retornar valores duplicados em coluna                                             |   get_dupes(df, col1)
 base.rep()              |   Repetir elementos da estrutura, de forma ordenada (each) ou consecutiva (times)   |   rep(c(1,2,3), times = 3)
 base.seq()              |   Criar sequência numérica com step                                                 |   seq(0, 100, by = 20)
 base.append()           |   Adicionar item ao final de uma lista                                              |   append(minha_lista, 123)
@@ -307,15 +314,32 @@ tidyr.pivot_longer()    |   Pivotar colunas em linhas                           
 tidyr.pivot_wider()     |   Pivotar linhas em colunas                                                         |   pivot_wider(df,   names_from = col1, values_from = col2, values_fill = 0)
 dplyr.slice_sample()    |   Extrair amostra de data frame ('n' casos ou 'prop' proporção %)                   |   slice_sample(df, n = 5, replace = TRUE)
 
-          # Visualização de Dados
+          # Visualização de Dados (ggplot2)
+          
+          Componentes: Dados + Aesthetic (estrutura e estética) + Geom (forma usada)
 
-
+          ggplot(data = df) +
+            geom_point(mapping = aes(x = col1, y = col2), size = 5) +                 |   Gráfico de dispersão
+            geom_jitter(mapping = aes(x = col1, y = col2))                            |   Gráfico de dispersão com 'ruído' entre pontos para melhor visualização
+            geom_bar(mapping = aes(x = col1),  fill = col2) +                         |   Gráfico de barra
+            geom_histogram(mapping = aes(x = col1), binwidth = 0.5) +                 |   Histograma em barras
+            geom_freqpoly(mapping = aes(x = col1, colour = col2), binwidth = 0.1) +   |   Histograma em linhas
+            geom_boxplot(mapping = aes(x = col1, y = col2)) +                         |   Box plot
+            geom_count(mapping = aes(x = col1, y = col2)) +                           |   Relação entre duas variáveis categóricas, por contagem
+            geom_tile(mapping = aes(x = col1, y = col2, fill = col3)) +               |   Mapa de calor em teclas
+            geom_density(kernel = 'gaussian', aes(col1)) +                            |   Gráfico de distribuição
+            labs(title = 'Abc', subtitle = 'Bcd', caption = 'Cde') +                  |   Adicionar rótulos ao gráfico
+            
+              facet_wrap(~colx)                                                       |   Dividir em gráficos por classificações em coluna                 
+              coord_cartesian(xlim/ylim = c(0, 50))                                   |   Focar gráfico em intervalo de pontos nos eixos X ou Y
+              coord_flip()                                                            |   Inverter eixos
 
     # Extração de Dados
     
-readr.write_csv()       |   Exportar arquivo em formato CSV (separador em ,)                                  |   write_csv(df, 'C:/dfnovo.csv')
-readr.write_csv2()      |   Exportar arquivo em formato CSV (separador em ;)                                  |   write_csv2(df, 'C:/dfnovo.csv')
+readr.write_csv()       |   Exportar arquivo em formato CSV (separador em ,)                                  |   write_csv(df, 'dfnovo.csv')
+readr.write_csv2()      |   Exportar arquivo em formato CSV (separador em ;)                                  |   write_csv2(df, 'dfnovo.csv')
 utils.write.table()     |   Exportar tabela em txt (definindo separador)                                      |   write.table(df, 'dfnovo2.txt', sep = ";")
+ggplot2.ggsave()        |   Exportar gráfico em imagem                                                        |   ggsave('chart.png')
 '''
 
 ##  Manipulação de diretórios/arquivos
