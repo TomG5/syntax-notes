@@ -4,11 +4,11 @@
 '''
 1) tidyverse          |   Coleção de pacotes para: Manipulação, exploração e visualização de dados
 1.1) ggplot2          |   Visualização de dados
-1.2) tibble           |   Visualização de data frame limitado a 10 observações e quantas colunas couber na tela
+1.2) tibble           |   Geração de versão simplificada de um data frame (denom. tibble)
 1.3) tidyr            |   Limpeza de dados
 1.4) readr            |   Importação de dados
 1.5) purrr            |   Programação funcional para trabalhar funções e vetores
-1.6) dplyr            |   Manipualação de dados
+1.6) dplyr            |   Manipulação de dados
 1.7) stringr          |   Manipulação de strings
 1.8) forcats          |   Manipulação de fatores
 1.9) readxl           |   Acessar arquivos Excel
@@ -45,7 +45,7 @@ Logical      |   Valor booleano
 2) Data Frame       |   Tabela de dados com índices para cada observação      |   data.frame(x = c(1, 2, 3) , y = c(1.5, 5.5, 7.5))
 3) Matrix           |   Matriz bi-dimensional com dados do mesmo tipo         |   matrix(c(2:7), ncol = 3, nrow = 2)
 4) Array            |   Conjunto multidimensional de valores do mesmo tipo    |   array(c(1:24), dim = c(4, 3, 2)) -> 4 col, 3 lin, 2 dims
-5) Factor           |   Conjunto de variáveis categóricas                     |   factor(my_vector, levels = listof_levels)
+5) Factor           |   Conjunto de valores categóricos                       |   factor(my_vector, levels = listof_levels)
 
 OBS: Vetores permitem nomeação de elementos via função names(myvar) <- c("Item 1", "Item 2", "Item 3")
 '''
@@ -209,13 +209,17 @@ base.grepl()       |   Retornar booleano se substring existe em string       |  
 
     # Datas:
 
-lubridate.today()           |   Retornar dia atual
-lubridate.now()             |   Retornar dia e hora atual UTC
-lubridate.ymd()             |   Gerar data em formato yyyy-mm-dd               | ymd("2021-01-02")
-lubridate.mdy()             |   Gerar data em formato yyyy-mm-dd
-lubridate.dmy()             |   Gerar data em formato yyyy-mm-dd
-lubridate.dmy_hms()         |   Gerar data/hora em formato yyyy-mm-dd hh:mm:ss UTC
-lubridate.as_date()         |   Converter data/hora em data
+lubridate.today()           |   Retornar dia atual                                      |   today()
+lubridate.now()             |   Retornar dia e hora atual UTC                           |   now()
+lubridate.year()            |   Retornar ano de data                                    |   year('2021-01-02')
+lubridate.month()           |   Retornar mês de data                                    |   month('2021-01-02')
+lubridate.day()             |   Retornar dia de data                                    |   day('2021-01-02')
+lubridate.wday()            |   Retornar dia da semana                                  |   wday(date, locale = 'US', label = TRUE)
+lubridate.ymd()             |   Gerar data em formato yyyy-mm-dd                        |   ymd('2021-01-02')
+lubridate.mdy()             |   Gerar data em formato yyyy-mm-dd                        |   mdy('04/14/2019')
+lubridate.dmy()             |   Gerar data em formato yyyy-mm-dd                        |   dmy('25/02/2021')
+lubridate.ymd_hms()         |   Gerar data/hora em formato yyyy-mm-dd hh:mm:ss UTC      |   ymd_hms('2010-12-13 15:30:30')
+lubridate.as_date()         |   Converter data/hora em data                             |   as_date('2021-01-02')
 '''
 
 ##  Funções Analíticas
@@ -266,8 +270,10 @@ base.dim()              |   Retornar dimensões de uma estrutura (lin, col, dim) 
 
     # Tratamento de Dados
 
+tibble.as_tibble()      |   Conversão de data frame para tibble, possibilitando print simplificado            |   as_tibble(df)
 dplyr.mutate()          |   Adicionar coluna a um data frame                                                  |   mutate(col2 = col1 * 2)
 tidyr.separate()        |   Separar caracteres de uma coluna em múltiplas colunas                             |   separate(col1, c('col2', 'col3'),  sep='/' )
+tidyr.extract()         |   Separar caracteres de uma coluna em múltiplas colunas via regex                   |   extract(df, col1, c('c2', 'c3'),  regex = '([abc])')
 tidyr.unite()           |   Unir colunas em uma só (com separador de valores)                                 |   unite(new_col, c('col1', 'col2'), sep = "-")
 dplyr.rename_with()     |   Renomear colunas conforme função                                                  |   rename_with(df, toupper ou tolower)
 dplyr.rename()          |   Renomear coluna                                                                   |   rename(df, new = old)
@@ -279,23 +285,37 @@ base.seq()              |   Criar sequência numérica com step                   
 base.append()           |   Adicionar item ao final de uma lista                                              |   append(minha_lista, 123)
 base.rbind()            |   Adicionar linha à dataframe/matriz                                                |   rbind(objeto, c(1, 2, 3))
 base.cbind()            |   Adicionar coluna à dataframe/matriz                                               |   cbind(objeto, c(2, 3, 3))
+stringr.str_detect()    |   Retornar booleano sobre existência de substring em string/elementos               |   str_detect(objeto, coll('abc'))
+stringr.str_count()     |   Retornar contagem de substring em string ou elementos de estrutura                |   str_count(objeto, coll('a'))
+stringr.str_subset()    |   Retornar relação de elementos que possuem substring                               |   str_subset(objeto, coll('A'))
+stringr.str_locate()    |   Retornar posição de substring em cada string                                      |   str_locate(objeto, coll('im'))
+stringr.str_replace()   |   Substituir substring em cada string                                               |   str_replace(objeto, coll('antigo'), 'novo')
+stringr.str_split()     |   Dividir string conforme separador                                                 |   str_split(objeto, coll('x'))
 
     # Análise de Dados
 
+dplyr.summarize()       |   Gerar data frame com o resultado de sumarizações                                  |   summarize(new_col = mean(col1))
 base.sort()             |   Ordenar os elementos de vetor ou fator (padrão é crescente)                       |   sort(objeto, decreasing = TRUE)
 dplyr.arrange()         |   Ordenar os elementos de data frame (padrão é ascendente)                          |   arrange(df, desc(col1))
+base.which()            |   Retornar índices das observações que atendem condição                             |   which(df['Coluna1'] > 250)
+base.which.min()        |   Retornar índice da observação com menor valor                                     |   which.min(df['Coluna1'])
+base.which.max()        |   Retornar índice da observação com maior valor                                     |   which.max(df['Coluna1'])
+dplyr.select()          |   Selecionar colunas do dataframe                                                   |   select(df, col1, col2, col3)
+dplyr.filter()          |   Filtrar valores conforme condição no data frame                                   |   filter(df, df$col1 == 'Valor')
+dplyr.group_by()        |   Agrupar valores conforme coluna                                                   |   group_by(col1)
+tidyr.pivot_longer()    |   Pivotar colunas em linhas                                                         |   pivot_longer(df, cols = starts_with('Abc'), names_to = 'category_col', values_to = 'values_col')
+tidyr.pivot_wider()     |   Pivotar linhas em colunas                                                         |   pivot_wider(df,   names_from = col1, values_from = col2, values_fill = 0)
+dplyr.slice_sample()    |   Extrair amostra de data frame ('n' casos ou 'prop' proporção %)                   |   slice_sample(df, n = 5, replace = TRUE)
 
-which()       |   Retornar índices das observações que atendem condição                             |   which(df['Coluna1'] > 250)
-which.min()   |   Retornar índice da observação com menor valor                                     |   which.min(df['Coluna1'])
-which.max()   |   Retornar índice da observação com maior valor                                     |   which.max(df['Coluna1'])
-arrange()         |   Ordenar resultados
-select()          |   Selecionar colunas do dataframe
-filter()          |   Filtrar valores conforme condição no data frame                                     |   filter(df, df$col1 == 'Valor')
-group_by()        |   Agrupar valores conforme coluna                                                     |   group_by(col1)
-summarize()       |   Gerar data frame com o resultado de sumarizações                                    |   summarize(new_col = mean(col1))
-pivot_longer()    |   Pivotar colunas em linhas
-pivot_wider()     |   Pivotar linhas em colunas
-dplyr.slice_sample()    |   Extrair amostra de data frame ('n' casos ou 'prop' proporção %)       |   slice_sample(df, n = 5, replace = TRUE)
+          # Visualização de Dados
+
+
+
+    # Extração de Dados
+    
+readr.write_csv()       |   Exportar arquivo em formato CSV (separador em ,)                                  |   write_csv(df, 'C:/dfnovo.csv')
+readr.write_csv2()      |   Exportar arquivo em formato CSV (separador em ;)                                  |   write_csv2(df, 'C:/dfnovo.csv')
+utils.write.table()     |   Exportar tabela em txt (definindo separador)                                      |   write.table(df, 'dfnovo2.txt', sep = ";")
 '''
 
 ##  Manipulação de diretórios/arquivos
