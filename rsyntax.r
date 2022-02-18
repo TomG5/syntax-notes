@@ -328,7 +328,7 @@ dplyr.slice_sample()    |   Extrair amostra de data frame ('n' casos ou 'prop' p
             geom_count(mapping = aes(x = col1, y = col2)) +                           |   Relação entre duas variáveis categóricas, por contagem
             geom_tile(mapping = aes(x = col1, y = col2, fill = col3)) +               |   Mapa de calor em teclas
             geom_density(kernel = 'gaussian', aes(col1)) +                            |   Gráfico de distribuição
-            labs(title = 'Abc', subtitle = 'Bcd', caption = 'Cde') +                  |   Adicionar rótulos ao gráfico
+            labs(title = 'Abc', subtitle = 'Bcd', x = 'axis1', y = 'axis2') +         |   Adicionar rótulos ao gráfico
             
               facet_wrap(~colx)                                                       |   Dividir em gráficos por classificações em coluna                 
               coord_cartesian(xlim/ylim = c(0, 50))                                   |   Focar gráfico em intervalo de pontos nos eixos X ou Y
