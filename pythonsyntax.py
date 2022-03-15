@@ -144,11 +144,6 @@ for index, number in enumerate(my_list):
 Formato: < with open('*** arquivo ***', 'modo') >
 Exemplos:
 
-file = open('teste.txt', 'r')
-    f_content = file.read()
-    print(f_content)
-close(file)
-
 with open('teste.txt', 'w+') as file:
     f_newcontent = file.write('Novo Texto')
     print(f_content)

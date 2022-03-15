@@ -1,7 +1,7 @@
 #### R SYNTAX ####
-
+```
 ##  Pacotes Relevantes
-'''
+
 1) tidyverse          |   Coleção de pacotes para: Manipulação, exploração e visualização de dados
 1.1) ggplot2          |   Visualização de dados
 1.2) tibble           |   Geração de versão simplificada de um data frame (denom. tibble)
@@ -21,10 +21,10 @@
 5) odbc/DBI           |   Conectar a bancos de dados
 
 OBS: Para entender melhor cada pacote, utilizar a função browseVignettes("packagename")
-'''
+
 
 ##  Tipos de Dados
-'''
+
 Character    |   Cadeia de caracteres
 Integer      |   Número exclusivamente inteiro (adicionando o sufixo L)
 Numeric      |   Número inteiro ou decimal
@@ -35,10 +35,10 @@ Logical      |   Valor booleano
       as.integer()      |   Converter valor em inteiro
       as.character()    |   Converter valor em caracter
       as.logical()      |   Converter valor em booleano
-'''
+
 
 ##  Estruturas de Dados
-'''
+
 1) Vector (atomic)  |   Conjunto de dados do mesmo tipo numa sequência        |   c(x, y, z)
 1.1) List           |   Conjunto de dados de qualquer tipo numa sequência     |   list("abc", 15, TRUE)
 2) Data Frame       |   Tabela de dados com índices para cada observação      |   data.frame(x = c(1, 2, 3) , y = c(1.5, 5.5, 7.5))
@@ -47,10 +47,10 @@ Logical      |   Valor booleano
 5) Factor           |   Conjunto de valores categóricos                       |   factor(my_vector, levels = listof_levels)
 
 OBS: Vetores permitem nomeação de elementos via função names(myvar) <- c("Item 1", "Item 2", "Item 3")
-'''
+
 
 ##  Definição de Variáveis
-'''
+
 Formato: nome_variavel <- valor
 Exemplo:
 
@@ -58,10 +58,10 @@ myvar <- 15
 myvar2 <- "Hello world"
 
 OBS: Para alterar o valor de uma variável global dentro de uma função, usar o operador de atribuição <<- ao invés de <-
-'''
+
 
 ##  Definição de Funções
-'''
+
 Formato: nome_função <- function(parâmetro1, parâmetro2 = "Valor padrão" etc.) {comandos}
 Exemplos:
 
@@ -75,13 +75,15 @@ my_function("World!")
 my_function <- function(x) {
   return (5 * x)
 }
-'''
+
 
 ##  Operadores
-"
+
 !     |   Negação
 &     |   E
+&&    |   E
 |     |   Ou
+||    |   Ou
 ==    |   Igualdade
 !=    |   Desigualdade
 >=    |   Maior ou igual
@@ -98,24 +100,24 @@ my_function <- function(x) {
 my_dataset <- ToothGrowth %>%
   filter(dose == 0.5) %>%
   arrange(len)
-""
+
 
 ##  Condicionais
-'''
+
 Formato: if (condição) {código} else if (condição) {código} else {código}
 Exemplo:
 
 if (x > y & x > z) {
-print('X the greatest')
+print("X the greatest")
 } else if (y > x & y > z) {
-print('y the greatest')
+print("y the greatest")
 } else {
-print('z the greatest')
+print("z the greatest")
 }
-'''
+
 
 ##  Loopings
-'''
+
     # While
 Formato: while (condição) {comandos}
 Exemplo:
@@ -135,13 +137,13 @@ for (x in 1:10) {
 }
 
 OBS: Usar comandos next e break para respectivamente passar à próxima iteração ou parar o loop 
-'''
+
 
 ##  Acesso a Elementos em Estruturas
-'''
+
   # Data Frame
 df[1]                     |     Acessar primeira coluna
-df['Coluna1']             |     Acessar coluna específica
+df["Coluna1"]             |     Acessar coluna específica
 df$Coluna1                |     Acessar coluna específica
 df[1, 2]                  |     Primeira linha e segunda coluna
 df[2, ]                   |     Segunda linha inteira
@@ -177,28 +179,30 @@ array[2,3,2]              |     Segunda linha e terceira coluna em segunda dimen
 array[2,,1]               |     Segunda linha e todas as colunas em primeira dimensão
 array[,3,2]               |     Todas as linhas e terceira coluna em segunda dimensão
 array[2,3,2]              |     Segunda linha e terceira coluna em segunda dimensão
-'''
+
 
 ##  Funções Padrões
-'''
+
     # Matemáticas:
 
 base.min()         |   Retornar o valor mínimo                                                             |   min(atributo)
 base.max()         |   Retornar o valor máximo                                                             |   max(atributo)
 base.mean()        |   Retornar o valor médio                                                              |   mean(atributo)
 stats.median()     |   Retornar o valor mediano                                                            |   median(atributo)
-base.sqrt()        |   Retornar a raiz quadrada                                                            |   sqrt(valor)
+base.sqrt()        |   Retornar a raiz quadrada                                                            |   sqrt(atributo)
 stats.quantile()   |   Retornar o quantil ou os quartis dos dados (usar parâmetro opcional para quantil)   |   quantile(atributo, 0.75)
-base.ceiling()     |   Arredondar valor para baixo                                                         |   ceiling(valor)
-base.floor()       |   Arredondar valor para cima                                                          |   floor(valor)
-base.abs()         |   Remover sinal                                                                       |   abs(valor)
+base.round()       |   Arrendondar valor conforme n casas decimais                                         |   round(atributo, n)
+base.ceiling()     |   Arredondar valor para baixo                                                         |   ceiling(atributo)
+base.floor()       |   Arredondar valor para cima                                                          |   floor(atributo)
+base.abs()         |   Remover sinal                                                                       |   abs(atributo)
 
     # Caracteres:
 
-base.paste()       |   Concatenar valores em uma string                      |   paste('O valor é', 5)
-base.cat()         |   Concatenar e printar string sem escape characters     |   cat('Minha string separada', sep=' ')
+base.nchar()       |   Retornar quantidade de caracteres de string           |   nchar("texto")
+base.paste()       |   Concatenar valores em uma string                      |   paste("O valor é", 5)
+base.cat()         |   Concatenar e printar string sem escape characters     |   cat("Minha string separada", sep=" ")
 base.nchar()       |   Retornar número de caracteres                         |   nchar(meu_texto)
-base.grepl()       |   Retornar booleano se substring existe em string       |   grepl('X', 'Meu texto sem X')
+base.grepl()       |   Retornar booleano se substring existe em string       |   grepl("X", "Meu texto sem X")
 
           # Escape Character
           
@@ -211,19 +215,19 @@ base.grepl()       |   Retornar booleano se substring existe em string       |  
 
 lubridate.today()           |   Retornar dia atual                                      |   today()
 lubridate.now()             |   Retornar dia e hora atual UTC                           |   now()
-lubridate.year()            |   Retornar ano de data                                    |   year('2021-01-02')
-lubridate.month()           |   Retornar mês de data                                    |   month('2021-01-02')
-lubridate.day()             |   Retornar dia de data                                    |   day('2021-01-02')
-lubridate.wday()            |   Retornar dia da semana                                  |   wday(date, locale = 'US', label = TRUE)
-lubridate.ymd()             |   Gerar data em formato yyyy-mm-dd                        |   ymd('2021-01-02')
-lubridate.mdy()             |   Gerar data em formato yyyy-mm-dd                        |   mdy('04/14/2019')
-lubridate.dmy()             |   Gerar data em formato yyyy-mm-dd                        |   dmy('25/02/2021')
-lubridate.ymd_hms()         |   Gerar data/hora em formato yyyy-mm-dd hh:mm:ss UTC      |   ymd_hms('2010-12-13 15:30:30')
-lubridate.as_date()         |   Converter data/hora em data                             |   as_date('2021-01-02')
-'''
+lubridate.year()            |   Retornar ano de data                                    |   year("2021-01-02")
+lubridate.month()           |   Retornar mês de data                                    |   month("2021-01-02")
+lubridate.day()             |   Retornar dia de data                                    |   day("2021-01-02")
+lubridate.wday()            |   Retornar dia da semana                                  |   wday(date, locale = "US", label = TRUE)
+lubridate.ymd()             |   Gerar data em formato yyyy-mm-dd                        |   ymd("2021-01-02")
+lubridate.mdy()             |   Gerar data em formato yyyy-mm-dd                        |   mdy("04/14/2019")
+lubridate.dmy()             |   Gerar data em formato yyyy-mm-dd                        |   dmy("25/02/2021")
+lubridate.ymd_hms()         |   Gerar data/hora em formato yyyy-mm-dd hh:mm:ss UTC      |   ymd_hms("2010-12-13 15:30:30")
+lubridate.as_date()         |   Converter data/hora em data                             |   as_date("2021-01-02")
+
 
 ##  Funções Analíticas
-'''
+
 
     # Importação de Dados
 
@@ -232,8 +236,8 @@ readr.read_csv()        |   Acessar arquivo CSV                                 
 readr.read_tsv()        |   Acessar arquivo TSV                                           |   read_tsv(arquivo)
 readr.read_delim()      |   Acessar arquivo com delimitador específico                    |   read_delim(arquivo)
 readr.read_log()        |   Acessar arquivo LOG                                           |   read_log(arquivo)
-readxl.read_excel()     |   Acessar arquivos Excel                                        |   read_excel(arquivo, sheet = 'abc') sheet opcional
-gs4.read_sheet()        |   Acessar Google Sheets                                         |   read_sheet('caminho online')
+readxl.read_excel()     |   Acessar arquivos Excel                                        |   read_excel(arquivo, sheet = "abc") sheet opcional
+gs4.read_sheet()        |   Acessar Google Sheets                                         |   read_sheet("caminho online")
 jsonlite.fromJSON()     |   Acessar arquivo JSON                                          |   fromJSON(arquivo)
 xml2.read_xml()         |   Acessar XML                                                   |   read_xml()
 
@@ -241,14 +245,14 @@ xml2.read_xml()         |   Acessar XML                                         
 
           library(DBI)
           con <- dbConnect(odbc::odbc(),
-            driver = 'My Driver',
-            database = 'test_db',
-            uid = 'userid',
-            pwd = 'password',
-            host = 'localhost',
+            driver = "My Driver",
+            database = "test_db",
+            uid = "userid",
+            pwd = "password",
+            host = "localhost",
             port = 5432)
-          odbc_result <- dbReadTable(odbc, 'tablename')
-          dbGetQuery(con, 'SELECT speed, dist FROM cars')
+          odbc_result <- dbReadTable(odbc, "tablename")
+          dbGetQuery(con, "SELECT speed, dist FROM cars")
           
           OBS: Drivers -> ODBC Driver 17 for SQL Server / PostgreSQL Unicode(x64) / RMariaDB / bigrquery / 
 
@@ -274,45 +278,49 @@ janitor.tabyl()         |   Gerar tabela de frequências sobre vetor             
     # Tratamento de Dados
 
 tibble.as_tibble()      |   Conversão de data frame para tibble, possibilitando print simplificado            |   as_tibble(df)
-dplyr.case_when()       |   Retornar valor conforme condicional                                               |   case_when(x > y ~ 'Case1', y > z ~ 'Case2', TRUE ~ 'Other')
+dplyr.case_when()       |   Retornar valor conforme condicional                                               |   case_when(x > y ~ "Case1", y > z ~ "Case2", TRUE ~ "Other")
 dplyr.mutate()          |   Adicionar coluna a um data frame                                                  |   mutate(col2 = col1 * 2)
-tidyr.separate()        |   Separar caracteres de uma coluna em múltiplas colunas                             |   separate(col1, c('col2', 'col3'),  sep='/' )
-tidyr.extract()         |   Separar caracteres de uma coluna em múltiplas colunas via regex                   |   extract(df, col1, c('c2', 'c3'),  regex = '([abc])')
-tidyr.unite()           |   Unir colunas em uma só (com separador de valores)                                 |   unite(new_col, c('col1', 'col2'), sep = "-")
+tidyr.separate()        |   Separar caracteres de uma coluna em múltiplas colunas                             |   separate(col1, c("col2", "col3"),  sep="/" )
+tidyr.extract()         |   Separar caracteres de uma coluna em múltiplas colunas via regex                   |   extract(df, col1, c("c2", "c3"),  regex = "([abc])")
+tidyr.unite()           |   Unir colunas em uma só (com separador de valores)                                 |   unite(new_col, c("col1", "col2"), sep = "-")
 dplyr.rename_with()     |   Renomear colunas conforme função                                                  |   rename_with(df, toupper ou tolower)
 dplyr.rename()          |   Renomear coluna                                                                   |   rename(df, new = old)
 janitor.clean_names()   |   Padronizar nomes das colunas em formato universal                                 |   clean_names(df)
-janitor.remove_empty()  |   Remover linhas ou colunas sem valores                                             |   remove_empty(df, which = 'rows' / 'cols')
+janitor.remove_empty()  |   Remover linhas ou colunas sem valores                                             |   remove_empty(df, which = "rows" / "cols")
 tidyr.drop_na()         |   Remover observações que tenham valores em branco                                  |   drop_na(df, col1)
-tidyr.fill()            |   Substituir valores faltantes com o valor anterior e/ou próximo                    |   fill(df, col1, .direction = 'updown')
-tidyr.replace_na()      |   Substituir valores faltantes com um determinado valor                             |   replace_na(df, list(x = 0, y = 'abc'))
+tidyr.fill()            |   Substituir valores faltantes com o valor anterior e/ou próximo                    |   fill(df, col1, .direction = "updown")
+tidyr.replace_na()      |   Substituir valores faltantes com um determinado valor                             |   replace_na(df, list(x = 0, y = "abc"))
 janitor.get_dupes()     |   Retornar valores duplicados em coluna                                             |   get_dupes(df, col1)
 base.rep()              |   Repetir elementos da estrutura, de forma ordenada (each) ou consecutiva (times)   |   rep(c(1,2,3), times = 3)
 base.seq()              |   Criar sequência numérica com step                                                 |   seq(0, 100, by = 20)
 base.append()           |   Adicionar item ao final de uma lista                                              |   append(minha_lista, 123)
-base.rbind()            |   Adicionar linha à dataframe/matriz                                                |   rbind(objeto, c(1, 2, 3))
-base.cbind()            |   Adicionar coluna à dataframe/matriz                                               |   cbind(objeto, c(2, 3, 3))
-stringr.str_detect()    |   Retornar booleano sobre existência de substring em string/elementos               |   str_detect(objeto, coll('abc'))
-stringr.str_count()     |   Retornar contagem de substring em string ou elementos de estrutura                |   str_count(objeto, coll('a'))
-stringr.str_subset()    |   Retornar relação de elementos que possuem substring                               |   str_subset(objeto, coll('A'))
-stringr.str_locate()    |   Retornar posição de substring em cada string                                      |   str_locate(objeto, coll('im'))
-stringr.str_replace()   |   Substituir substring em cada string                                               |   str_replace(objeto, coll('antigo'), 'novo')
-stringr.str_split()     |   Dividir string conforme separador                                                 |   str_split(objeto, coll('x'))
+base.merge()            |   Mesclar tabelas/matriz (all.1 para LEFT / all.2 para RIGHT / all para OUTER)      |   merge(x, y, "col1", all.x = TRUE)
+base.rbind()            |   Adicionar linhas à dataframe/matriz                                               |   rbind(objeto1, objeto2)
+base.cbind()            |   Adicionar colunas à dataframe/matriz                                              |   cbind(objeto1, objeto2)
+base.replace()          |   Substituir valores em coluna                                                      |   replace(objeto, "antigo", "novo")
+stringr.str_detect()    |   Retornar booleano sobre existência de substring em string/elementos               |   str_detect(objeto, coll("abc"))
+stringr.str_count()     |   Retornar contagem de substring em string ou elementos de estrutura                |   str_count(objeto, coll("a"))
+stringr.str_subset()    |   Retornar relação de elementos que possuem substring                               |   str_subset(objeto, coll("A"))
+stringr.str_locate()    |   Retornar posição de substring em cada string                                      |   str_locate(objeto, coll("im"))
+stringr.str_replace()   |   Substituir substring em cada string                                               |   str_replace(objeto, coll("antigo"), "novo")
+stringr.str_split()     |   Dividir string conforme separador                                                 |   str_split(objeto, coll("x"))
 
     # Análise de Dados
 
 dplyr.summarize()       |   Gerar data frame com o resultado de sumarizações                                  |   summarize(new_col = mean(col1))
 base.sort()             |   Ordenar os elementos de vetor ou fator (padrão é crescente)                       |   sort(objeto, decreasing = TRUE)
 dplyr.arrange()         |   Ordenar os elementos de data frame (padrão é ascendente)                          |   arrange(df, desc(col1))
-base.which()            |   Retornar índices das observações que atendem condição                             |   which(df['Coluna1'] > 250)
-base.which.min()        |   Retornar índice da observação com menor valor                                     |   which.min(df['Coluna1'])
-base.which.max()        |   Retornar índice da observação com maior valor                                     |   which.max(df['Coluna1'])
+base.which()            |   Retornar índices das observações que atendem condição                             |   which(df["Coluna1"] > 250)
+base.which.min()        |   Retornar índice da observação com menor valor                                     |   which.min(df["Coluna1"])
+base.which.max()        |   Retornar índice da observação com maior valor                                     |   which.max(df["Coluna1"])
 dplyr.select()          |   Selecionar colunas do dataframe                                                   |   select(df, col1, col2, col3)
-dplyr.filter()          |   Filtrar valores conforme condição no data frame                                   |   filter(df, df$col1 == 'Valor')
+dplyr.filter()          |   Filtrar valores conforme condição no data frame                                   |   filter(df, df$col1 == "Valor")
 dplyr.group_by()        |   Agrupar valores conforme coluna                                                   |   group_by(col1)
-tidyr.pivot_longer()    |   Pivotar colunas em linhas                                                         |   pivot_longer(df, cols = starts_with('Abc'), names_to = 'category_col', values_to = 'values_col')
+tidyr.pivot_longer()    |   Pivotar colunas em linhas                                                         |   pivot_longer(df, cols = starts_with("Abc"), names_to = "category_col", values_to = "values_col")
 tidyr.pivot_wider()     |   Pivotar linhas em colunas                                                         |   pivot_wider(df,   names_from = col1, values_from = col2, values_fill = 0)
-dplyr.slice_sample()    |   Extrair amostra de data frame ('n' casos ou 'prop' proporção %)                   |   slice_sample(df, n = 5, replace = TRUE)
+dplyr.slice_head()      |   Extrair n primeiros resultados de data frame                                      |   slice_head(df, n = 10)
+dplyr.slice_tail()      |   Extrair n últimos resultados de data frame                                        |   slice_tail(df, n = 10)
+dplyr.slice_sample()    |   Extrair amostra de data frame ("n" casos ou "prop" proporção %)                   |   slice_sample(df, n = 5, replace = TRUE)
 
           # Visualização de Dados (ggplot2)
           
@@ -320,15 +328,15 @@ dplyr.slice_sample()    |   Extrair amostra de data frame ('n' casos ou 'prop' p
 
           ggplot(data = df) +
             geom_point(mapping = aes(x = col1, y = col2), size = 5) +                 |   Gráfico de dispersão
-            geom_jitter(mapping = aes(x = col1, y = col2))                            |   Gráfico de dispersão com 'ruído' entre pontos para melhor visualização
+            geom_jitter(mapping = aes(x = col1, y = col2))                            |   Gráfico de dispersão com "ruído" entre pontos para melhor visualização
             geom_bar(mapping = aes(x = col1),  fill = col2) +                         |   Gráfico de barra
             geom_histogram(mapping = aes(x = col1), binwidth = 0.5) +                 |   Histograma em barras
             geom_freqpoly(mapping = aes(x = col1, colour = col2), binwidth = 0.1) +   |   Histograma em linhas
             geom_boxplot(mapping = aes(x = col1, y = col2)) +                         |   Box plot
             geom_count(mapping = aes(x = col1, y = col2)) +                           |   Relação entre duas variáveis categóricas, por contagem
             geom_tile(mapping = aes(x = col1, y = col2, fill = col3)) +               |   Mapa de calor em teclas
-            geom_density(kernel = 'gaussian', aes(col1)) +                            |   Gráfico de distribuição
-            labs(title = 'Abc', subtitle = 'Bcd', x = 'axis1', y = 'axis2') +         |   Adicionar rótulos ao gráfico
+            geom_density(kernel = "gaussian", aes(col1)) +                            |   Gráfico de distribuição
+            labs(title = "Abc", subtitle = "Bcd", x = "axis1", y = "axis2") +         |   Adicionar rótulos ao gráfico
             
               facet_wrap(~colx)                                                       |   Dividir em gráficos por classificações em coluna                 
               coord_cartesian(xlim/ylim = c(0, 50))                                   |   Focar gráfico em intervalo de pontos nos eixos X ou Y
@@ -336,25 +344,25 @@ dplyr.slice_sample()    |   Extrair amostra de data frame ('n' casos ou 'prop' p
 
     # Extração de Dados
     
-readr.write_csv()       |   Exportar arquivo em formato CSV (separador em ,)                                  |   write_csv(df, 'dfnovo.csv')
-readr.write_csv2()      |   Exportar arquivo em formato CSV (separador em ;)                                  |   write_csv2(df, 'dfnovo.csv')
-utils.write.table()     |   Exportar tabela em txt (definindo separador)                                      |   write.table(df, 'dfnovo2.txt', sep = ";")
-ggplot2.ggsave()        |   Exportar gráfico em imagem                                                        |   ggsave('chart.png')
-'''
+readr.write_csv()       |   Exportar arquivo em formato CSV (separador em ,)                                  |   write_csv(df, "dfnovo.csv")
+readr.write_csv2()      |   Exportar arquivo em formato CSV (separador em ;)                                  |   write_csv2(df, "dfnovo.csv")
+utils.write.table()     |   Exportar tabela em txt (definindo separador)                                      |   write.table(df, "dfnovo2.txt", sep = ";")
+ggplot2.ggsave()        |   Exportar gráfico em imagem                                                        |   ggsave("chart.png")
+merge
 
 ##  Manipulação de diretórios/arquivos
-'''
-dir.create('minha-pasta')                       |   Criar diretório
-file.create('meu-arquivo.csv')                  |   Criar arquivo
-file.copy('meu-arquivo.csv', 'minha-pasta')     |   Copiar arquivo
-unlink('meu-arquivo.csv')                       |   Deletar arquivo
-'''
+
+dir.create("minha-pasta")                       |   Criar diretório
+file.create("meu-arquivo.csv")                  |   Criar arquivo
+file.copy("meu-arquivo.csv", "minha-pasta")     |   Copiar arquivo
+unlink("meu-arquivo.csv")                       |   Deletar arquivo
+
 
 ##  Notas
-'''
+
 - R é case-sensitive, portanto, nomes de variáveis, funções e pacotes devem seguir o padrão definido
 - Índices começam em 1
-'''
+
 
 ##  Links
 https://www.rdocumentation.org/
