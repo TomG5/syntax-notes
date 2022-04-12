@@ -55,6 +55,17 @@ print(x(5, 6))
 pessoas = {"Pessoa1": 30, "Pessoa2": 27}
 for pessoa in sorted(pessoas, key=lambda pessoa: pessoas[pessoa]):
     print(pessoa, pessoas[pessoa])
+
+    ## Generator (função que resulta em objeto iterável)
+
+def PowTwoGen(max):
+    n = 0
+    while n < max:
+        yield 2 ** n                # Usar yield ao invés de return
+        n += 1
+
+x = PowTwoGen(5)
+print(next(x))                      # Iterar sobre elementos do gerador
 '''
 
 ##  Funções Padrões:
@@ -324,9 +335,8 @@ my_tuple[*** índice ***]
 
     ## Método  |   Descrição    |   Sintaxe:
 
-index() |   Retorna o índice de um valor da tupla                   |   my_tuple.index(valor)
-count() |   Retorna a contagem da ocorrência de um valor na tupla   |   my_tuple.count(valor)
-
+index() |   Retorna o índice de um valor da tupla                                       |   my_tuple.index(valor)
+count() |   Retorna a contagem da ocorrência de um valor na tupla                       |   my_tuple.count(valor)
 zip()   |   Integra múltiplos objetos iteráveis com base nos índices de seus elementos  |   my_tuple = tuple(zip(obj1, obj2))
 '''
 
@@ -440,67 +450,103 @@ punctuation()         |   Gera uma string com os caracteres especiais de pontua�
 
 ##  Algumas Bibliotecas:
 '''
-    ## numpy (Carregar e gerir arrays/matrizes)
+    ## pandas (Operações com dados estruturados / Importação, criação de dataframes, preparação de dados etc.)
 
-numpy.arange()        |   Gerar array com base em dado range                                                                                  |
-numpy.copy()          |   Copiar dados de variável/índice para outro                                                                          |
-numpy.reshape()       |   Alterar número de linhas/colunas                                                                                    |
-numpy.linspace()      |   Gerar array com n número de linhas com base em range                                                                |
-numpy.unique()        |   Retornar relação de valores únicos                                                                                  |
+        # Importação
 
-    ## pandas (Criar e gerir dataframes - datasets com índices)
+read_csv()     |   Ler dados de arquivo CSV (adicionando parâmetro 'header=None' indica ausência de cabeçalho)                         |     pandas.read_csv(file)
+read_excel()   |   Ler dados de arquivo Excel                                                                                          |     pandas.read_excel(file)
+read_json()    |   Ler dados de arquivo JSON                                                                                           |     pandas.read_json(file)
 
-pandas.DataFrame()    |   Criar tabela de dados                                                                                               |     pandas.DataFrame(dados, índices, colunas)
-pandas.read_csv()     |   Ler dados de arquivo de texto (adicionando parâmetro 'header=None' indica ausência de cabeçalho)                    |     pandas.read_csv(file)
-pandas.read_excel()   |   Ler dados de arquivo Excel                                                                                          |     pandas.read_excel(file)
+        # Criação de Series ou Data Frame
 
-df.columns            |   Retornar lista de colunas da tabela                                                                                 |     df.columns
-df.dtypes             |   Retornar tipos de dados das colunas da tabela                                                                       |     df.dtypes  
-df.shape              |   Retornar quantidade de linhas e colunas da tabela                                                                   |     df.shape
-df.describe()         |   Retornar estatísticas sobre as colunas (adicionando parâmetro 'include=all' para mostrar colunas não numéricas)     |     df.describe()
-df.info()             |   Retornar sumário de informações da tabela                                                                           |     df.info()
-df.replace()          |   Substituir valores em tabela (Ex.: desconhecidos '?')                                                               |     df.replace('?', numpy.NaN) #Not a Number
-df.dropna()           |   Remove linhas (0) ou colunas (1) com registros faltantes da tabela                                                  |     df.dropna(subset=["coluna1"], axis=0)
-df.drop()             |   Remover índice, coluna ou valores de uma tabela (adicionando parâmetro 'inplace=True' efetiva a mudança na origem)  |     df.drop(item, inplace=True)
-df.drop_duplicates()  |   Remover linhas duplicadas ou apenas valores de dadas colunas da tabela                                              |     df.drop_duplicates() OU df.drop_duplicates(subset=['col1'])
-df.head()             |   Retornar apenas x primeiras linhas da tabela                                                                        |     df.head(x)
-df.tail()             |   Retornar apenas x últimas linhas da tabela                                                                          |     df.tail(x)
-df.groupby()          |   Retornar resultados agrupados por coluna                                                                            |     df.groupby('coluna')
-df.agg()              |   Retornar resultados de função agregadora (Ex.: sum, count, min, max, mean, median, mode, std, var etc.)             |     df.agg(['mean', 'std']) OU df.agg({'coluna': ['sum', 'min']})
-df.sort_values()      |   Retornar resultados ordenados por critério ascendente ou decrescente                                                |     df.sort_values('coluna1', ascending=True)
-df.to_csv()           |   Salvar tabela em arquivo CSV (sem relação de índices)                                                               |     df.to_csv("diretórioearquivo", index=False)
-df.to_excel()         |   Salvar tabela em arquivo XLSX (sem relação de índices)                                                              |     df.to_excel("diretórioearquivo", index=False)
-df.to_json()          |   Salvar tabela em arquivo JSON (sem relação de índices)                                                              |     df.to_json("diretórioearquivo", index=False)
+Series()       |   Gerar array uni-dimensional com qualquer tipo de dado                                                               |     pandas.Series(objeto OU coluna do df)
+DataFrame()    |   Gerar array bi-dimensional de dados, com índices indicando cada observação                                          |     pandas.DataFrame(dados, index=[índices], columns=[colunas])
 
-Exemplo:
+        # Visão Geral do Data Frame
 
-import numpy as np
-import pandas as pd
+head()             |   Retornar apenas x primeiras linhas da tabela (padrão de 5)                                                          |     df.head(x)
+tail()             |   Retornar apenas x últimas linhas da tabela (padrão de 5)                                                            |     df.tail(x)
+loc[]              |   Retornar a linha n da tabela                                                                                        |     df.loc[n]
+to_string()        |   Retornar a tabela inteira                                                                                           |     df.to_string()
+columns            |   Retornar lista de colunas da tabela                                                                                 |     df.columns
+dtypes             |   Retornar tipos de dados das colunas da tabela                                                                       |     df.dtypes  
+shape              |   Retornar quantidade de linhas e colunas da tabela                                                                   |     df.shape
+describe()         |   Retornar estatísticas sobre as colunas (adicionando parâmetro 'include=all' para mostrar colunas não numéricas)     |     df.describe()
+info()             |   Retornar sumário de informações da tabela                                                                           |     df.info()
 
-np.random.seed(101)
+        # Preparação de Dados
 
-df = pd.DataFrame(np.random.randn(5, 4), index = "01 02 03 04 05".split(), columns = "A B C D".split())
+replace()          |   Substituir valores específicos em tabela (Ex.: desconhecidos '?')                                                   |     df.replace('?', numpy.NaN) # Not a Number
+loc[]              |   Substituir valores em tabela (possibilita usar loop para substituição em massa)                                     |     df.loc[n, "col1"] = 12345
+fillna()           |   Substituir valores nulos em tabela                                                                                  |     df.fillna(novovalor) OU df['col1'].fillna(novovalor)
+dropna()           |   Remove linhas (0) ou colunas (1) com registros faltantes da tabela                                                  |     df.dropna(subset=["coluna1"], axis=0)
+drop()             |   Remover índice, coluna ou valores de uma tabela (adicionando parâmetro 'inplace=True' efetiva a mudança na origem)  |     df.drop(item, inplace=True)
+drop_duplicates()  |   Remover linhas duplicadas ou apenas valores de dadas colunas da tabela                                              |     df.drop_duplicates() OU df.drop_duplicates(subset=['col1'])
+duplicated()       |   Sinalizar se linha é duplicada                                                                                      |     df.duplicated()
+groupby()          |   Retornar resultados agrupados por coluna                                                                            |     df.groupby('coluna')
+agg()              |   Retornar resultados de função agregadora (Ex.: sum, count, min, max, mean, median, mode, std, var etc.)             |     df.agg(['mean', 'std']) OU df.agg({'coluna': ['sum', 'min']})
+sort_values()      |   Retornar resultados ordenados por critério ascendente ou decrescente                                                |     df.sort_values('coluna1', ascending=True)
+mean()             |   Retornar média de coluna (parâmetro opcional numeric_only=True)                                                     |     df.mean()
+median()           |   Retornar mediana de coluna (parâmetro opcional numeric_only=True)                                                   |     df.median()
+mode()             |   Retornar moda de coluna (parâmetro opcional numeric_only=True)                                                      |     df.mode(numeric_only=True) ou df['col1'].mode()[0]
+to_datetime()      |   Converter campo em formato de data                                                                                  |     pandas.to_datetime(df['col1'])
 
-df.drop('05', inplace = True)
-df.drop('D', axis = 1, inplace = True)
-df.head(2)
+        # Análise
 
-print(df)
+corr()             |   Retornar tabela com índices de correlação entre duas colunas                                                        |     df.corr()
+plot()             |   Construir representação gráfica da tabela                                                                           |     df.plot(kind = 'tipografico', x = 'col1', y = 'col2')
+Kinds: scatter, bar, hist etc.
+
+        # Exportação de Dados
+
+to_csv()           |   Salvar tabela em arquivo CSV (sem índices)                                                                          |     df.to_csv("diretórioearquivo", index=False)
+to_excel()         |   Salvar tabela em arquivo XLSX (sem índices)                                                                         |     df.to_excel("diretórioearquivo", index=False)
+to_json()          |   Salvar tabela em arquivo JSON (sem índices)                                                                         |     df.to_json("diretórioearquivo", index=False)
+
+    ## numpy (Operações com arrays - Funcionamento semelhante a estrutura padrão de Listas)
+
+array()         |   Gerar array a partir de valores                                                                                  |     numpy.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]], dtype='i')
+arange()        |   Gerar array com base em determinado intervalo numérico                                                           |     numpy.arange(início, fim)
+view()          |   Visualizar array                                                                                                 |     array.view()
+copy()          |   Copiar dados de array para um novo independente                                                                  |     array.copy()
+
+dtype()         |   Retornar tipo de dados do array                                                                                  |     array.dtype()
+astype()        |   Copiar array para novo com mudança de tipos de dados                                                             |     array.astype('S')
+shape()         |   Retornar quantidade de dimensões e quantos elementos possuem cada uma                                            |     array.shape
+reshape()       |   Alterar número de dimensões                                                                                      |     array.reshape(dimensões, qtd.elementos)
+flatten()       |   Reduzir para array uni-dimensional                                                                               |     array.flatten()
+nditer()        |   Retornar objeto iterável dos elementos de arrays n-dimensionais                                                  |     numpy.nditer(array)
+ndenumerate()   |   Retornar objeto iterável do índice das dimensões e dos elementos de arrays                                       |     numpy.ndenumerate(array)
+concatenate()   |   Concatenar arrays em um novo                                                                                     |     numpy.concatenate(array1, array2)
+stack()         |   Empilhar arrays em um novo                                                                                       |     numpy.stack(array1, array2)
+hstack()        |   Empilhar arrays com dimensões na mesma linha                                                                     |     numpy.hstack(array1, array2)
+vstack()        |   Empilhar arrays com dimensões na mesma coluna                                                                    |     numpy.vstack(array1, array2)
+array_split()   |   Separar array em n múltiplos arrays                                                                              |     numpy.array_split(array, n)
+unique()        |   Retornar relação única de elementos presentes                                                                    |     numpy.unique(array)
+where()         |   Retornar relação de índices de elementos que seguem condição                                                     |     numpy.where(array == 14)
+sort()          |   Retornar array ordenado                                                                                          |     numpy.sort(array)
+searchsorted()  |   Retornar o índice adequado onde o elemento n seria inserido no array já ordenado                                 |     numpy.searchsorted(array, n) OU numpy.searchsorted(array, n, side='right')
+
+
+        # Tipos de Dados Numpy
+
+i | integer
+b | boolean
+u | unsigned integer
+f | float
+c | complex float
+m | timedelta
+M | datetime
+O | object
+S | string
+U | unicode string
+V | fixed chunk of memory for other type (void)
 
     ## matplotlib (Gerar visualizações com módulo pyplot)
 
 pyplot.hist()   |   Gerar histograma  |   pyplot.hist(df['coluna'])
 
-Exemplo:
-
-import matplotlib.pyplot as plt OU from matplotlib import pyplot as plt
-
-valores_x = [5, 4, 3, 2.5, 7]
-legenda = ["JAN", "FEV", "MAR", "ABR", "MAI"]
-
-plt.xticks([1,2,3,4,5], legenda)
-plt.plot([1,2,3,4,5], valores_x)
-plt.show()
 '''
 
 ##  Coloração de mensagens no Python (terminal)
@@ -554,116 +600,99 @@ Atributos de instâncias são definidos dentro de métodos, normalmente no __ini
 
 O parâmetro 'self' deve ser sempre o primeiro do método, pois refere-se à instância do objeto manipulado
 
-There are four basic principles of OOP. They are encapsulation, abstraction, inheritance, and polymorphism.
+Existem quatro princípios básicos da Programação Orientada a Objetos (OOP): Encapsulation, Abstraction, Inheritance, Polymorphism
 
-- Data encapsulation is the mechanism of hiding the internal data of objects from the world. All interaction with the object and its data are performed through its public methods. 
-Encapsulation allows programmers to protect the object from inconsistency.
+Encapsulation: Mecanismo de proteção contra alterações diretas dos atributos da classe, restringindo estas operações somente aos métodos públicos do estilo 'setter' (modificadores)
+Para isto, é necessário nomear o atributo com o prefixo '_' ou '__', tornando-o assim privado
 
-- Data abstraction means that objects should provide the simplified, abstract version of their implementations. 
-The details of their internal work usually aren't necessary for the user, so there's no need to represent them. 
-Abstraction also means that only the most relevant features of the object will be presented.
+Abstraction: Mecanismo de simplificação da herança entre classes, onde uma classe abstrata fornece as diretrizes para a criação de suas derivadas, provendo forma mas não implementação de instâncias
+Para sua utilização, deve-se utilizar o módulo 'abc', carregando a classe 'ABC', a ser usada como Parent para a classe abstrata
 
-- Inheritance is a mechanism for defining parent-child relationships between classes. 
-Often objects are very similar, so inheritance allows programmers to reuse common logic and at the same time introduce unique concepts into the classes.
+Inheritance: Mecanismo para definir o relacionamento entre classes 'parent-child', onde as derivadas herdam as propriedades das originais e permitem assim os complementos necessários, economizando código
+Para isto, utiliza-se durante a criação da nova classe o formato 'class Child(Parent)'
+Caso deseje-se executar o método do Parent dentro do Child, utiliza-se a função super() seguida do método desejado
 
-- Polymorphism literally means one name and many forms, and it concerns the inheritance of the classes. Just as the name suggests, it allows programmers to define different logic of the same method. 
-So, the name (or interface) stays the same, but the actions performed may be different for each type of object. In practice, it is done with overloading or overriding.
+Polymorphism: Mecanismo de criação de interface única entre métodos semelhantes de classes, retornando como resposta a função respectiva de cada classe do objeto 
 
-Exemplo:
+        ## Exemplo:
 
-class funcionario:
+class Carro:                                                    # Classe Parent
 
-    num_fun = 0                                                 # Atributos de classe
-    aumento = 1.04
+    num_veiculos = 0                                            # Atributos de classe
 
-    def __init__(self, nome, sobrenome, salario):               # Função fundamental da classe, executada cada vez que um objeto é gerado para atribuí-lo de valores
-        self.nome = nome                                        # Atributos de instâncias
-        self.sobrenome = sobrenome
-        self.salario = salario
-        funcionario.num_fun += 1
+    def __init__(self, modelo, ano, fabricante):                # Método fundamental da classe, executada cada vez que um objeto é gerado para atribuí-lo de valores
+        self.modelo = modelo                                    # Atributos das instâncias
+        self.ano = ano
+        self.fabricante = fabricante
+        self.__status = "Disponível"
+        Carro.num_veiculos += 1                                 # Manipulação de atributo da classe
 
-    @property
-    def nome_completo(self):                                    # Instância/objeto
-        return '{} {}'.format(self.nome, self.sobrenome)        # Atributos
+    def vender_carro(self):                                     # Método de instâncias
+        self.__status = "Vendido"
 
-    @nome_completo.setter                                       # Decodador Setter
-    def nome_completo(self, name):
-        nome, sobrenome = name.split(' ')
-        self.nome = nome
-        self.sobrenome = sobrenome
+    def qtd_rodas(self):
+        print("Carro tem 4 rodas")
 
-    @email.getter                                               # Decodador Getter
-    def email(self):
-        return '{}.{}@email.com'.format(self.nome, self.sobrenome)
+carro1 = Car("Fusca", 1970, "Volkswagen")                       # Criação de objeto
+carro1.vender_carro()                                           # Utilização de método
 
-    @nome_completo.deleter                                      # Decorador Deleter
-    def nome_completo(self):
-        self.nome = None
-        self.sobrenome = None
-        print("Nome deletado.")
+class Moto(Carro):                                              # Classe Child
 
-    @classmethod                                                # Método
-    def aplicar_aumento(self):
-        self.salario = (self.salario * self.aumento)
+    def __init__(self, modelo, ano, fabricante):
+        super().__init__(modelo, ano, fabricante)               # Execução do método do Parent
+        print("Moto adicionada ao inventário")
 
-    @classmethod
-    def aplicar_novo_aumento(cls, valor):
-        cls.aumento = valor
+    def vender_moto(self):
+        self.__status = "Vendida"
 
-    @classmethod
-    def from_string(cls, texto):
-        nome, sobrenome, salario = texto.split('-')
+    def qtd_rodas(self):
+        print("Moto tem 2 rodas")
 
-    @staticmethod
-    def dia_util(dia):
-        if dia.weekday() == 5 or dia.weekday() == 6:
-            return False
-        return True
+    @staticmethod                                               # Método estático, sem acesso nem possibilidade de alteração do estado da classe
+    def alguma_coisa(valor):
+        return valor * 1.05
 
-class desenvolvedor(funcionario):                               # Nova classe com herança
+moto1 = Moto("Panigale", 2020, "Ducati")
 
-    aumento = 1.10
+def verif_rodas(self):                                          # Interface de métodos de classes
+    self.qtd_rodas()
 
-    def __init__(self, nome, sobrenome, salario, ling_prog):
-        super().__init__(nome, sobrenome, salario)
-        self.ling_prog = ling_prog
+verif_rodas(carro1)
+verif_rodas(carro2)
 
-class gerente(funcionario):                                     # Nova classe com herança
+        ## Exemplo 2:
 
-    def __init__(self, nome, sobrenome, salario, equipe = None):
-        super().__init__(nome, sobrenome, salario)
-        if equipe is None:
-            self.equipe = []
-        else:
-            self.equipe = equipe
+from abc import ABC
 
-    def add_func(self, func):
-        if func not in self.equipe:
-            self.equipe.append(func)
+class Vehicle(ABC):
+    def __init__(self, speed, year):
+        self.speed = speed
+        self.year = year
 
-    def remover_func(self, func):
-        if func in self.equipe:
-            self.equipe.remove(func)
+    def start(self):
+        print("Starting engine")
 
-    def print_funcs(self):
-        for func in self.equipe:
-            print('-->', func.nome_completo())
+    def stop(self):
+        print("Stopping engine")
 
-fun_1 = funcionario('Alberto', 'Silva', 7000)
-fun_2 = gerente('Carla', 'Souza', 4500, [fun_1])
-fun_string_1 = 'Jairo-Costa-3200-Python'
-fun_string_2 = 'Marina-Velez-6400-C++'
+    @abstractmethod                                             # Decorador indicando um método abstrato
+    def drive(self):                                            # Método abstrato que deve ser implementado pelas classes Child
+        pass
 
-fun_3 = desenvolvedor.from_string(fun_string_1)
-fun_4 = desenvolvedor.from_string(fun_string_2)
 
-# print(fun_1.nome_completo()) ou print(funcionario.nome_completo(fun_1)) para extrair o resultado do nome completo
+class Car(Vehicle):
+    def __init__(self, speed, year):
+        Vehicle.__init__(speed, year)
 
-import datetime
+    def drive(self):                                            # Implementação do método abstrato herdado
+        print("Car is in drive mode")
 
-data_atual = datetime.date(2019, 5, 31)
+        ## Métodos Especiais
 
-# print(funcionario.dia_util(data_atual)) para verificar resultado da função estática
+__str__     |   Possibilita uma representação textual do objeto ao ser printado
+__rep__     |   Possibilita uma representação textual do objeto ao ser printado
+__hash__    |   Retorna o hash de um valor
+__bool__    |   Retorna valor booleano
 '''
 
 ##  Notas

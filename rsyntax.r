@@ -1,5 +1,5 @@
 #### R SYNTAX ####
-```
+'''
 ##  Pacotes Relevantes
 
 1) tidyverse          |   Coleção de pacotes para: Manipulação, exploração e visualização de dados
@@ -96,7 +96,7 @@ my_function <- function(x) {
 "
 
 ##  Operador Pipe (realizar operações aninhadas)
-"
+
 my_dataset <- ToothGrowth %>%
   filter(dose == 0.5) %>%
   arrange(len)
