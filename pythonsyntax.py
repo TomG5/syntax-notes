@@ -210,6 +210,14 @@ var[:]      |   Pegar todos os dígitos
 \n  : Nova linha
 \t  : Tabulação
 \r  : Remove caracteres anteriores
+
+    ## Preenchimento Condicional:
+
+var1 = "Abacaxi"
+var2 = 15
+
+myvar = f"A loja comprou {var2} unidades de {var1}"
+myvar = "A loja comprou {} unidades de {}".format(var2, var1)
 '''
 
 ##  Manipulação de Listas
@@ -382,7 +390,7 @@ Nulo                                    |   \0
 
 ##  Alguns Módulos:
 '''
-    ## os (Informações do Sistema)
+    ## os (Informações do Sistema):
 
 getcwd()       |   Siretório atual                        |   os.getcwd()
 chdir()        |   Mudar diretório                        |   os.chdir('caminho')
@@ -393,7 +401,7 @@ rmdir()        |   Remover pasta                          |   os.rmdir('diretór
 removedirs()   |   Remover múltiplos níveis de pastas     |   os.removedirs('diretórios')
 rename()       |   Renomear pasta ou arquivo              |   os.rename('nome antigo', 'nome novo')
 
-    ## math (Cálculos)
+    ## math (Cálculos):
 
 ceil()          |   Arredondar para cima                                |   math.ceil(valor)
 dist()          |   Calcular a distância euclidiana                     |   math.dist(ponto1, ponto2)
@@ -408,14 +416,14 @@ pi()            |   Retornar o valor de pi                              |   math
 prod()          |   Retornar o produto de todos os valores do objeto    |   math.prod(objeto iterável)
 sqrt()          |   Calcular raiz quadrada                              |   math.sqrt(valor)
 
-    ## time (Período)
+    ## time (Período):
 
 asctime()       |   Data e hora atual em formato textual                                    |   time.asctime()
 localtime()     |   Data e hora atual                                                       |   time.localtime()
 perf_counter()  |   Retorna o período atual em segundos fracionados - usado para contagens  |   time.perf_counter()
 sleep()         |   Suspende determinado processo por x segundos                            |   time.sleep(segundos)
 
-    ## datetime (Datação)
+    ## datetime (Datação):
 
 datetime()        |   Retorna datação (YY/MM/DD/HR/MIN/SEC)   |   datetime()
 year()            |   Retorna o ano                           |   datetime.year()
@@ -424,7 +432,7 @@ day()             |   Retorna o dia                           |   datetime.day()
 weekday()         |   Retorna o índice do dia da semana       |   datetime.weekday()
 now()             |   Retorna a datação atual                 |   datetime.now()
 
-    ## random (Pseudo-Randomizações)
+    ## random (Pseudo-Randomizações):
 
 random()        |   Gera número aleatório entre 0.0 e 1.0                           |   random.random()
 randint()       |   Gera número aleatório dentro de um range de inteiros            |   random.randint(a, b)
@@ -434,12 +442,12 @@ sample()        |   Gera amostra de itens (vindo de lista ou tupla)             
 seed()          |   Gera números aleatórios com base num código de referência       |   random.seed(valor)
 shuffle()       |   Embaralha elementos de um objeto                                |   random.shuffle(objeto iterável)
 
-    ## secret (Randomizações)
+    ## secret (Randomizações):
 
 choice()        |   Gera valor aleatório dentro de uma sequência    |   secrets.choice(objeto iterável)
 randbelow()     |   Gera número aleatório dentro de range           |   secrets.randbelow(valor)
 
-    ## string (Relação de Caracteres)
+    ## string (Relação de Caracteres):
 
 ascii_letters()       |   Gera uma string com os caracteres em letra minúscula e maiúscula    |   string.ascii_letters
 ascii_lowercase()     |   Gera uma string com os caracteres em letra minúscula                |   string.ascii_lowercase
@@ -448,22 +456,22 @@ digits()              |   Gera uma string com os números base de 0 a 9         
 punctuation()         |   Gera uma string com os caracteres especiais de pontuação            |   string.punctuation
 '''
 
-##  Algumas Bibliotecas:
+##  Bibliotecas de Análise de Dados:
 '''
-    ## pandas (Operações com dados estruturados / Importação, criação de dataframes, preparação de dados etc.)
+    ## pandas (Operações com dados estruturados / Importação, criação de dataframes, preparação de dados etc.):
 
-        # Importação
+        # Importação:
 
 read_csv()     |   Ler dados de arquivo CSV (adicionando parâmetro 'header=None' indica ausência de cabeçalho)                         |     pandas.read_csv(file)
 read_excel()   |   Ler dados de arquivo Excel                                                                                          |     pandas.read_excel(file)
 read_json()    |   Ler dados de arquivo JSON                                                                                           |     pandas.read_json(file)
 
-        # Criação de Series ou Data Frame
+        # Criação de Series ou Data Frame:
 
 Series()       |   Gerar array uni-dimensional com qualquer tipo de dado                                                               |     pandas.Series(objeto OU coluna do df)
 DataFrame()    |   Gerar array bi-dimensional de dados, com índices indicando cada observação                                          |     pandas.DataFrame(dados, index=[índices], columns=[colunas])
 
-        # Visão Geral do Data Frame
+        # Visão Geral do Data Frame:
 
 head()             |   Retornar apenas x primeiras linhas da tabela (padrão de 5)                                                          |     df.head(x)
 tail()             |   Retornar apenas x últimas linhas da tabela (padrão de 5)                                                            |     df.tail(x)
@@ -475,61 +483,114 @@ shape              |   Retornar quantidade de linhas e colunas da tabela        
 describe()         |   Retornar estatísticas sobre as colunas (adicionando parâmetro 'include=all' para mostrar colunas não numéricas)     |     df.describe()
 info()             |   Retornar sumário de informações da tabela                                                                           |     df.info()
 
-        # Preparação de Dados
+        # Preparação de Dados:
 
+rename()           |   Renomear eixos da tabela conforme par de 'chave: valor'                                                             |     df.rename(mapper={'A': 'a', 'B', 'b'}, axis=1, inplace=True)
 replace()          |   Substituir valores específicos em tabela (Ex.: desconhecidos '?')                                                   |     df.replace('?', numpy.NaN) # Not a Number
 loc[]              |   Substituir valores em tabela (possibilita usar loop para substituição em massa)                                     |     df.loc[n, "col1"] = 12345
 fillna()           |   Substituir valores nulos em tabela                                                                                  |     df.fillna(novovalor) OU df['col1'].fillna(novovalor)
 dropna()           |   Remove linhas (0) ou colunas (1) com registros faltantes da tabela                                                  |     df.dropna(subset=["coluna1"], axis=0)
 drop()             |   Remover índice, coluna ou valores de uma tabela (adicionando parâmetro 'inplace=True' efetiva a mudança na origem)  |     df.drop(item, inplace=True)
-drop_duplicates()  |   Remover linhas duplicadas ou apenas valores de dadas colunas da tabela                                              |     df.drop_duplicates() OU df.drop_duplicates(subset=['col1'])
+drop_duplicates()  |   Remover linhas duplicadas ou apenas valores de dadas colunas da tabela                                              |     df.drop_duplicates() OU df.drop_duplicates(subset=['col1', 'col2'])
 duplicated()       |   Sinalizar se linha é duplicada                                                                                      |     df.duplicated()
+join()             |   Combinar tabelas com coluna/índice (chave) em comum                                                                 |     df1.join(df2, on='colx', how='left', rsuffix='sufixo')
+merge()            |   Combinar tabelas com colunas/índices em comum                                                                       |     pandas.merge(df1, df2, on='colx', how='left', sort=False)
+concat()           |   Unir índices ou colunas de tabelas                                                                                  |     pandas.concat([df1, df2], axis=1, ignore_index=True)
 groupby()          |   Retornar resultados agrupados por coluna                                                                            |     df.groupby('coluna')
 agg()              |   Retornar resultados de função agregadora (Ex.: sum, count, min, max, mean, median, mode, std, var etc.)             |     df.agg(['mean', 'std']) OU df.agg({'coluna': ['sum', 'min']})
 sort_values()      |   Retornar resultados ordenados por critério ascendente ou decrescente                                                |     df.sort_values('coluna1', ascending=True)
+explode()          |   Segregar elementos de lista em coluna para múltiplas linhas                                                         |     df.explode('col1')
+pivot()            |   Pivotar estrutura e dados de tabela                                                                                 |     df.pivot(index='col1', columns='col2', values='col3')
 mean()             |   Retornar média de coluna (parâmetro opcional numeric_only=True)                                                     |     df.mean()
 median()           |   Retornar mediana de coluna (parâmetro opcional numeric_only=True)                                                   |     df.median()
 mode()             |   Retornar moda de coluna (parâmetro opcional numeric_only=True)                                                      |     df.mode(numeric_only=True) ou df['col1'].mode()[0]
+sample()           |   Gerar amostra da tabela                                                                                             |     df.sample(n = 15, replace=True) OU df.sample(frac = 0.1)
 to_datetime()      |   Converter campo em formato de data                                                                                  |     pandas.to_datetime(df['col1'])
 
-        # Análise
+        # Análise:
 
 corr()             |   Retornar tabela com índices de correlação entre duas colunas                                                        |     df.corr()
 plot()             |   Construir representação gráfica da tabela                                                                           |     df.plot(kind = 'tipografico', x = 'col1', y = 'col2')
 Kinds: scatter, bar, hist etc.
 
-        # Exportação de Dados
+        # Exportação de Dados:
 
 to_csv()           |   Salvar tabela em arquivo CSV (sem índices)                                                                          |     df.to_csv("diretórioearquivo", index=False)
 to_excel()         |   Salvar tabela em arquivo XLSX (sem índices)                                                                         |     df.to_excel("diretórioearquivo", index=False)
 to_json()          |   Salvar tabela em arquivo JSON (sem índices)                                                                         |     df.to_json("diretórioearquivo", index=False)
 
-    ## numpy (Operações com arrays - Funcionamento semelhante a estrutura padrão de Listas)
+    ## numpy (Operações com arrays - Funcionamento semelhante a estrutura padrão de Listas):
 
-array()         |   Gerar array a partir de valores                                                                                  |     numpy.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]], dtype='i')
-arange()        |   Gerar array com base em determinado intervalo numérico                                                           |     numpy.arange(início, fim)
-view()          |   Visualizar array                                                                                                 |     array.view()
-copy()          |   Copiar dados de array para um novo independente                                                                  |     array.copy()
+array()         |   Gerar array a partir de valores                                                                             |       numpy.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]], dtype='i')
+arange()        |   Gerar array com base em determinado intervalo numérico                                                      |       numpy.arange(início, fim)
 
-dtype()         |   Retornar tipo de dados do array                                                                                  |     array.dtype()
-astype()        |   Copiar array para novo com mudança de tipos de dados                                                             |     array.astype('S')
-shape()         |   Retornar quantidade de dimensões e quantos elementos possuem cada uma                                            |     array.shape
-reshape()       |   Alterar número de dimensões                                                                                      |     array.reshape(dimensões, qtd.elementos)
-flatten()       |   Reduzir para array uni-dimensional                                                                               |     array.flatten()
-nditer()        |   Retornar objeto iterável dos elementos de arrays n-dimensionais                                                  |     numpy.nditer(array)
-ndenumerate()   |   Retornar objeto iterável do índice das dimensões e dos elementos de arrays                                       |     numpy.ndenumerate(array)
-concatenate()   |   Concatenar arrays em um novo                                                                                     |     numpy.concatenate(array1, array2)
-stack()         |   Empilhar arrays em um novo                                                                                       |     numpy.stack(array1, array2)
-hstack()        |   Empilhar arrays com dimensões na mesma linha                                                                     |     numpy.hstack(array1, array2)
-vstack()        |   Empilhar arrays com dimensões na mesma coluna                                                                    |     numpy.vstack(array1, array2)
-array_split()   |   Separar array em n múltiplos arrays                                                                              |     numpy.array_split(array, n)
-unique()        |   Retornar relação única de elementos presentes                                                                    |     numpy.unique(array)
-where()         |   Retornar relação de índices de elementos que seguem condição                                                     |     numpy.where(array == 14)
-sort()          |   Retornar array ordenado                                                                                          |     numpy.sort(array)
-searchsorted()  |   Retornar o índice adequado onde o elemento n seria inserido no array já ordenado                                 |     numpy.searchsorted(array, n) OU numpy.searchsorted(array, n, side='right')
+view()          |   Visualizar array                                                                                            |       array.view()
+copy()          |   Copiar dados de array para um novo independente                                                             |       array.copy()
+dtype()         |   Retornar tipo de dados do array                                                                             |       array.dtype()
+astype()        |   Copiar array para novo com mudança de tipos de dados                                                        |       array.astype('S')
+shape()         |   Retornar quantidade de dimensões e quantos elementos possuem cada uma                                       |       array.shape
+reshape()       |   Alterar número de dimensões                                                                                 |       array.reshape(dimensões, qtd.elementos)
+flatten()       |   Reduzir para array uni-dimensional                                                                          |       array.flatten()
 
+nditer()        |   Retornar objeto iterável dos elementos de arrays n-dimensionais                                             |       numpy.nditer(array)
+ndenumerate()   |   Retornar objeto iterável do índice das dimensões e dos elementos de arrays                                  |       numpy.ndenumerate(array)
+concatenate()   |   Concatenar arrays em um novo                                                                                |       numpy.concatenate(array1, array2)
+stack()         |   Empilhar arrays em um novo                                                                                  |       numpy.stack(array1, array2)
+hstack()        |   Empilhar arrays com dimensões na mesma linha                                                                |       numpy.hstack(array1, array2)
+vstack()        |   Empilhar arrays com dimensões na mesma coluna                                                               |       numpy.vstack(array1, array2)
+array_split()   |   Separar array em n múltiplos arrays                                                                         |       numpy.array_split(array, n)
+select()        |   Selecionar valores para coluna com base em condições do mesmo índice                                        |       numpy.select([condições], [valores])
+where()         |   Retornar relação de índices de elementos que seguem condição                                                |       numpy.where(array == 14)
+sort()          |   Retornar array ordenado                                                                                     |       numpy.sort(array)
+searchsorted()  |   Retornar o índice adequado onde o elemento n seria inserido no array já ordenado                            |       numpy.searchsorted(array, n) OU numpy.searchsorted(array, n, side='right')
+unique()        |   Retornar relação única de elementos presentes                                                               |       numpy.unique(array)
+union1d()       |   Retornar união entre conjuntos de elementos                                                                 |       numpy.union1d(array1, array2)
+intersect1d()   |   Retornar intersecção entre conjuntos de elementos                                                           |       numpy.intersect1d(array1, array2, assume_unique=True)
+setdiff1d()     |   Retornar elementos exclusivos do primeiro conjunto                                                          |       numpy.setdiff1d(array1, array2, assume_unique=True)
+setxor1d()      |   Retornar diferença simétrica (elementos que não se repetem entre os conjuntos)                              |       numpy.setxor1d(array1, array2, assume_unique=True)
+percentile()    |   Retornar valor que engloba determinado percentual de valores do conjunto de dados                           |       numpy.percentile(array, 75) 
 
-        # Tipos de Dados Numpy
+frompyfunc()    |   Criar função universal                                                                                      |       numpy.frompyfunc(função, qtd_inputs, qtd_outputs)
+sum()           |   Retornar soma dos elementos de dois arrays, combinados ou separados                                         |       numpy.sum([array1, array2]) OU numpy.sum([array1, array2], axis=1)
+cumsum()        |   Retornar soma cumulativa dos elementos de um array                                                          |       numpy.cumsum(array1)
+prod()          |   Retornar produto dos elementos de dois arrays                                                               |       numpy.prod([array1, array2])
+add()           |   Retornar vetor da soma entre elementos correspondentes de dois arrays                                       |       numpy.add(array1, array2)
+subtract()      |   Retornar vetor da subtração entre elementos correspondentes de dois arrays                                  |       numpy.subtract(array1, array2)
+multiply()      |   Retornar vetor da multiplicação entre elementos correspondentes de dois arrays                              |       numpy.multiply(array1, array2)
+divide()        |   Retornar vetor da divisão entre elementos correspondentes de dois arrays                                    |       numpy.divide(array1, array2)
+power()         |   Retornar vetor da potenciação entre elementos correspondentes de dois arrays                                |       numpy.power(array1, array2)
+mod()           |   Retornar vetor do módulo entre elementos correspondentes de dois arrays                                     |       numpy.mod(array1, array2)
+divmod()        |   Retornar vetores do quociente e módulo entre elementos correspondentes de dois arrays                       |       numpy.divmode(array1, array2)
+absolute()      |   Retornar vetor dos valores absolutos de elementos em array                                                  |       numpy.absolute(array)
+trunc()         |   Retornar vetor dos valores truncados (sem decimais) de elementos em array                                   |       numpy.trunc(array)
+log2()          |   Retornar array com logs de base 2 dos elementos                                                             |       numpy.log2(array)
+log10()         |   Retornar array com logs de base 10 dos elementos                                                            |       numpy.log10(array)
+log()           |   Retornar array com logs de base 'e' dos elementos                                                           |       numpy.log(array)
+lcm.reduce()    |   Retornar mínimo múltiplo comum entre elementos de array                                                     |       numpy.lcm.reduce(array)
+gcd.reduce()    |   Retornar máximo divisor comum entre elementos de array                                                      |       numpy.gcd.reduce(array)
+sin()           |   Retornar seno de elementos radianos de array                                                                |       numpy.sin(array)
+cos()           |   Retornar cosseno de elementos radianos de array                                                             |       numpy.cos(array)
+tan()           |   Retornar tangente de elementos radianos de array                                                            |       numpy.tan(array)
+deg2rad()       |   Retornar conversão de valores em graus para radianos                                                        |       numpy.deg2rad(array)
+rad2deg()       |   Retornar conversão de valores em radianos para graus                                                        |       numpy.rad2deg(array)
+hypot()         |   Retornar valor da hipotenusa de triangulo                                                                   |       numpy.hypot(base, lado)
+
+randint()       |   Retornar n valores pseudo-randômicos inteiros dentro de range                                               |       numpy.random.randint(range, size=(n))
+rand()          |   Retornar n valores pseudo-randômicos decimais float entre 0 e 1                                             |       numpy.random.rand(n)
+choice()        |   Retornar seleção pseudo-randômica de valores conforme lista de valores e suas probabilidades                |       numpy.random.choice([valores], p=[probabilidades], size=(quantidade))
+shuffle()       |   Permutação (embaralhamento) de valores alterando o array original                                           |       numpy.random.shuffle(array)
+permutation()   |   Permutação de valores gerando novo array                                                                    |       numpy.random.permutation(array)
+normal()        |   Gerar array de distribuição normal (Contínua)                                                               |       numpy.random.normal(loc=média, scale=desviopadrão, size=(x, y))
+binomial()      |   Gerar array de distribuição binomial (Discreta)                                                             |       numpy.random.binomial(n=tentativas, p=probabilidades, size=n)
+poisson()       |   Gerar array de distribuição Poisson (Discreta)                                                              |       numpy.random.poisson(lam=ocorrencias, size=n)
+uniform()       |   Gerar array de distribuição uniforme                                                                        |       numpy.random.uniform(size=(x, y))
+logistic()      |   Gerar array de distribuição logística                                                                       |       numpy.random.logistic(loc=média, scale=desviopadrão, size=(x, y))
+multinomial()   |   Gerar array de distribuição multinomial                                                                     |       numpy.random.multinomial(n=possibilidades, pvals=[probabilidades], size(x, y))
+exponential()   |   Gerar array de distribuição exponencial                                                                     |       numpy.random.exponential(scale=n, size=(x, y))
+chisquare()     |   Gerar array de distribuição Chi Square                                                                      |       numpy.random.chisquare(df=degrauliberdade, size=(x, y))
+pareto()        |   Gerar array de distribuição Pareto                                                                          |       numpy.random.pareto(a=formato, size=(x, y))
+
+        # Tipos de Dados Numpy:
 
 i | integer
 b | boolean
@@ -543,9 +604,58 @@ S | string
 U | unicode string
 V | fixed chunk of memory for other type (void)
 
-    ## matplotlib (Gerar visualizações com módulo pyplot)
+    ## scipy (Operações científicas)
 
-pyplot.hist()   |   Gerar histograma  |   pyplot.hist(df['coluna'])
+dir(constants)  |   Listar valores constantes utilizados em fórmulas científicas                                           |       dir(scipy.constants)
+ttest_ind()     |   Retornar t-statistic e p-value da significância entre as médias de duas variáveis                      |       scipy.stats.ttest_ind(var1, var2)
+describe()      |   Retornar um sumário estatístico dos valores em array                                                   |       scipy.stats.describe(array)
+
+    ## matplotlib (Gerar visualizações):
+
+plot()      |   Gerar diagrama dos dados para póstuma visualização                                          |       matplotlib.pyplot.plot(eixox, eixoy, marker = 'o', ls = ':')
+subplot()   |   Organizar posicionamento dos diagramas dos dados para póstuma visualização                  |       matplotlib.pyplot.subplot(linhas, colunas, posiçãoatual)
+show()      |   Visualizar gráficos dos dados                                                               |       matplotlib.pyplot.show()
+title()     |   Adicionar título do gráfico                                                                 |       matplotlib.pyplot.title("texto", loc = 'center')
+xlabel()    |   Adicionar título do eixo x                                                                  |       matplotlib.pyplot.xlabel("texto")
+ylabel()    |   Adicionar título do eixo y                                                                  |       matplotlib.pyplot.ylabel("texto")
+xticks()    |   Adicionar todos os valores no eixo x                                                        |       matplotlib.pyplot.xticks(x)
+yticks()    |   Adicionar todos os valores no eixo y                                                        |       matplotlib.pyplot.yticks(y)
+grid()      |   Adicionar linhas de grade                                                                   |       matplotlib.pyplot.grid(axis = 'y')
+
+hist()      |   Gerar histograma                                                                            |       matplotlib.pyplot.hist(array)
+scatter()   |   Gerar gráfico de dispersão                                                                  |       matplotlib.pyplot.scatter(x, y, c=array_cores, s=array_tamanhos, cmap='RdYlGn', alpha=0.5)
+bar()       |   Gerar gráfico de barras verticais                                                           |       matplotlib.pyplot.bar(x, y, color='red', width=0.1)
+hbar()      |   Gerar gráfico de barras horizontais                                                         |       matplotlib.pyplot.bar(x, y, color='green', height=0.1)
+pie()       |   Gerar gráfico de pizza                                                                      |       matplotlib.pyplot.pie(array, labels=array_legendas, explode=array_distancias, shadow=True)
+legend()    |   Mostrar barra de legenda de valores                                                         |       matplotlib.pyplot.legend(title='texto')
+colorbar()  |   Mostrar barra de legenda de cores                                                           |       matplotlib.pyplot.colorbar()
+
+        # Marcadores
+
+'o'  = Círculo
+'*'  = Estrela
+
+OBS: Usar parâmetro 'ms' para o tamanho do marcador | 'mec' para a cor da borda do marcador | 'mfc' para a cor interna do marcador
+
+        # Linhas
+
+'-'  = Linha sólida
+':'  = Linha Pontilhada
+'--' = Linha Tracejada
+'-.' = Linha Pontilhada e Tracejada
+
+OBS: Usar parâmetro 'ls' para o estilo de linha | 'c' para a cor | 'lw' para a espessura da linha
+
+        # Cores
+
+'r' = Red     /   'g' = Green    /   'b' = Blue    /   'c' = Cyan   /   'y' = Yellow    /   'k' = Black
+
+    ## seaborn (Gerar diagramas para plot - visualização):
+
+barplot()       |   Gerar diagrama de barras                                                                   |       seaborn.barplot(x=var1, y=var2, data=dados)
+scatterplot()   |   Gerar diagrama de dispersão                                                                |       seaborn.scatterplot(x=var1, y=var2, data=dados)
+boxplot()       |   Gerar diagrama de caixa                                                                    |       seaborn.boxplot(x=var1, y=var2, data=dados)
+distplot()      |   Gerar diagrama de distribuição de valores                                                  |       seaborn.distplot(valores, hist=False)
 
 '''
 
@@ -697,8 +807,8 @@ __bool__    |   Retorna valor booleano
 
 ##  Notas
 '''
--
--
+- Python é case sensitive, tanto para keywords quanto para o reconhecimento de objetos
+- PEP8 é a convenção de boas práticas de programação em Python para melhor legibilidade do código
 -
 '''
 
