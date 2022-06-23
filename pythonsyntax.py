@@ -10,10 +10,10 @@ bool    |   Boolean   # Verdadeiro ou Falso
 
 ##  Estruturas de Dados:
 '''
-[A, B, C]           |   List          # Aceita valores únicos, cadeias de valores, outras variáveis etc.
-{'Blue': 'Azul'}    |   Dictionary    # Formato em pares de Chave: Valor
+[A, B, C]           |   List          # Aceita valores individuais, cadeias de valores, outras variáveis etc.
+{'Blue': 'Azul'}    |   Dictionary    # Formato em pares de Chave: Valor                                      
 {Jan, Fev, Mar}     |   Set           # Valores já adicionados não podem ser alterados, mas pode receber novas entradas / Somente valores únicos
-("Operação X")      |   Tuple         # Inalterável após definido
+("Operação X")      |   Tuple         # Imutável após definido
 '''
 
 ##  Definição de Variáveis:
@@ -243,7 +243,7 @@ count()       |     Conta a frequência de dado elemento numa lista             
 index()       |     Retorna índice de item em lista                                     |   my_list.index(valor)
 reverse()     |     Reverte a ordem da lista                                            |   my_list.reverse()
 
-del           |     Remover item de lista por índice ou slice                                   |   del my_list[índice]
+del           |     Remover item de lista por índice ou slice, bem como uma lista inteira       |   del my_list[índice]
 sorted()      |     Ordena itens de uma lista                                                   |   sorted(my_list)
 zip()         |     Integra múltiplos objetos iteráveis com base nos índices de seus elementos  |   my_list = list(zip(obj1, obj2))
 
@@ -257,11 +257,13 @@ var[:]      |   Pegar todos os elementos
 
     ## List Comprehensions (Criação de listas a partir de objetos iteráveis):
 
-new_list = [x for x in objeto_iterável]
+new_list = [x for x in objeto]
 
-new_list = [x for x in objeto_iterável if *** condição ***]
+new_list = [x for x in objeto if *** condição ***]
 
-new_list = [x if *** condição *** for x in objeto_iterável]
+new_list = [x if *** condição *** for x in objeto]
+
+new_list = [[x[i] for x in objeto] for i in objeto2]
 
 old_list = [8, 13, -7, 4, -9, 2, 10]
 new_list = [num if num >= 0 else 0 for num in old_list]
@@ -312,6 +314,7 @@ my_set[*** índice ***]
 
 add()       |   Adiciona novos valores      |   my_set.add(valor)
 update()    |   Adiciona um set a outro     |   my_set.update(outro_set)
+remove()    |   Remove elemento indicado    |   my_set.remove(elemento)
 clear()     |   Limpa os elementos do set   |   my_set.clear()
 
 zip()       |   Integra múltiplos objetos iteráveis com base nos índices de seus elementos      |   my_set = set(zip(obj1, obj2))
@@ -364,7 +367,7 @@ Expressões comuns:
 Range                                   |   [ABC] ou [A-Z] ou [a-zA-Z] ou [0-9]
 Qualquer caracter, dígito, símbolo      |   .
 Operador OR                             |   A|B
-Operador NOT                            |   ^AB
+Operador NOT                            |   [^AB]
 Zero ou mais                            |   A*
 Zero ou um                              |   A?
 Um ou mais                              |   A+
@@ -379,7 +382,9 @@ Qualquer não digito                     |   \D
 Caracter alfabético                     |   \w
 Qualquer caracter não alfabético        |   \W
 Agrupamento                             |   (ABC)
-Ignorar agrupamento                     |   (?:Abcd)    
+Ignorar agrupamento                     |   (?:Abcd)
+Início da linha                         |   ^
+Fim da linha                            |   $    
 Borda de palavras (início ou fim)       |   \b
 Não é borda de palavras                 |   \B
 Nova linha                              |   \n
@@ -388,7 +393,16 @@ Tabulação                               |   \t
 Nulo                                    |   \0
 '''
 
-##  Alguns Módulos:
+##  Importação de Módulos:
+'''
+import módulo
+OU
+import módulo as módulo_alias
+OU
+from módulo import função1, função2
+'''
+
+##  Módulos Comuns:
 '''
     ## os (Informações do Sistema):
 
@@ -456,7 +470,7 @@ digits()              |   Gera uma string com os números base de 0 a 9         
 punctuation()         |   Gera uma string com os caracteres especiais de pontuação            |   string.punctuation
 '''
 
-##  Bibliotecas de Análise de Dados:
+##  Módulos de Análise de Dados:
 '''
     ## pandas (Operações com dados estruturados / Importação, criação de dataframes, preparação de dados etc.):
 
@@ -485,7 +499,7 @@ info()             |   Retornar sumário de informações da tabela             
 
         # Preparação de Dados:
 
-rename()           |   Renomear eixos da tabela conforme par de 'chave: valor'                                                             |     df.rename(mapper={'A': 'a', 'B', 'b'}, axis=1, inplace=True)
+rename()           |   Renomear eixos da tabela conforme par de 'chave: valor'                                                             |     df.rename(mapper={'A': 'a', 'B': 'b'}, axis=1, inplace=True)
 replace()          |   Substituir valores específicos em tabela (Ex.: desconhecidos '?')                                                   |     df.replace('?', numpy.NaN) # Not a Number
 loc[]              |   Substituir valores em tabela (possibilita usar loop para substituição em massa)                                     |     df.loc[n, "col1"] = 12345
 fillna()           |   Substituir valores nulos em tabela                                                                                  |     df.fillna(novovalor) OU df['col1'].fillna(novovalor)
@@ -494,7 +508,7 @@ drop()             |   Remover índice, coluna ou valores de uma tabela (adicion
 drop_duplicates()  |   Remover linhas duplicadas ou apenas valores de dadas colunas da tabela                                              |     df.drop_duplicates() OU df.drop_duplicates(subset=['col1', 'col2'])
 duplicated()       |   Sinalizar se linha é duplicada                                                                                      |     df.duplicated()
 join()             |   Combinar tabelas com coluna/índice (chave) em comum                                                                 |     df1.join(df2, on='colx', how='left', rsuffix='sufixo')
-merge()            |   Combinar tabelas com colunas/índices em comum                                                                       |     pandas.merge(df1, df2, on='colx', how='left', sort=False)
+merge()            |   Combinar tabelas com colunas/índices em comum                                                                       |     pandas.merge(df1, df2, on='colx', how='left', sort=True)
 concat()           |   Unir índices ou colunas de tabelas                                                                                  |     pandas.concat([df1, df2], axis=1, ignore_index=True)
 groupby()          |   Retornar resultados agrupados por coluna                                                                            |     df.groupby('coluna')
 agg()              |   Retornar resultados de função agregadora (Ex.: sum, count, min, max, mean, median, mode, std, var etc.)             |     df.agg(['mean', 'std']) OU df.agg({'coluna': ['sum', 'min']})
