@@ -5,6 +5,7 @@
 str     |   String    # Cadeia de Caracteres
 int     |   Integer   # Número Inteiro
 float   |   Float     # Número Decimal
+complex |   Complex   # Número Complexo
 bool    |   Boolean   # Verdadeiro ou Falso
 '''
 
@@ -12,7 +13,7 @@ bool    |   Boolean   # Verdadeiro ou Falso
 '''
 [A, B, C]           |   List          # Aceita valores individuais, cadeias de valores, outras variáveis etc.
 {'Blue': 'Azul'}    |   Dictionary    # Formato em pares de Chave: Valor                                      
-{Jan, Fev, Mar}     |   Set           # Valores já adicionados não podem ser alterados, mas pode receber novas entradas / Somente valores únicos
+{Jan, Fev, Mar}     |   Set           # Valores já adicionados não podem ser diretamente alterados, somente removidos, mas pode receber novas entradas / Somente valores únicos
 ("Operação X")      |   Tuple         # Imutável após definido
 '''
 
