@@ -1,0 +1,57 @@
+CONFIGURAÇÕES:
+git config --global user.name <name>		Adicionar nome padrão de usuário para todos os repositórios
+git config --global user.email <email>		Adicionar email padrão de usuário para todos os repositórios
+git remote add origin <linkrepo>		Indicar repositório remoto de destino dos commits
+git push -u origin <branch>			Indicar branch padrão de destino dos commits
+
+ESTADO DOS ARQUIVOS:
+untracked					Arquivo criado mas ainda não adicionado no repositório
+modified					Arquivo do repositório modificado
+staged						Arquivo do repositório adicionado para commit
+commited					Arquivo do repositório commitado
+
+USO GERAL:
+git clone <url>					Clonar repositório remoto
+git pull					Sincronizar com repositório remoto
+git pull --rebase				Sincronizar com repositório remoto e performar rebase do HEAD pós merge
+git fetch					Atualizar commits com repositório remoto sem mesclar o local
+git fetch origin <source>:<destiny>		Atualizar commits com repositório remoto em pontos específicos
+git init <repo>					Criar repositório
+git branch <name>				Criar branch
+git branch -d <name>				Deletar branch
+git branch -f <name> HEAD^			Mover branch para posição anterior ao HEAD
+git checkout <branch>				Alterar para nova branch ativa
+git checkout master				Retornar visualização da versão atual do repositório
+git checkout -- <path/file>			Descartar alterações pré-stage em arquivo para igualar ao repositório
+git checkout HEAD -- <path/file>		Descartar alterações pós-stage em arquivo para igualar ao repositório
+git checkout <#commit>				Visualizar repositório no estado vigente em dada commit
+git checkout HEAD^				Visualizar repositório no estado do commit anterior ao HEAD
+git checkout HEAD~n				Visualizar repositório no estado do commit n vezes anterior ao HEAD
+git rm <file>					Remover arquivo do repositório e colocar remoção em stage
+git mv <path1> <path2>				Mover diretório de local e colocar alteração em stage			
+git add .					Adicionar arquivos do diretório atual ao stage
+git add <file>					Adicionar arquivo ao stage
+git stash					Criar backup do repositório local antes de gerar commit
+git stash list					Verificar relação de itens no stash
+git stash pop					Retornar último item do stash para o repositório
+git stash drop					Descartar alterações do último item do stash
+git commit -m <message>				Criar commit indicando conteúdo na mensagem
+git commit -amend				Ajustar conteúdo do último commit gerado
+git revert <#commit>				Criar commit para reverter um outro específico remoto
+git reset <#commit>				Resetar repositório local para o estado em dado commit
+git reset --hard <#commit>			Resetar repositório para o estado em dado commit removendo stage
+git cherry-pick <#commit1> <#commitn>		Copiar commits após o HEAD do repositório ativo
+git merge <branch>				Mesclar commits de uma branch após os commits da atual
+git rebase <branch>				Mesclar commits de uma branch antes dos commits da atual
+git rebase <branch1> <branch2>			Mesclar branch2 na posição da branch1
+git rebase -i <#commit1> <#commitn>		Selecionar e reordenar commits que sucederão o commit ativo
+git tag <version>				Criar referência de tag/release do estado do código no HEAD
+git push					Enviar alterações ao repositório
+git push origin <source>:<destiny>		Enviar alterações a partir do local de origem ao de destino remoto específico
+git push origin <tag>				Enviar tag ao repositório
+git status					Retornar status do repositório indicando alterações
+git blame <file>				Verificar quem, quando e como alterou determinado arquivo
+git diff HEAD~1					Retornar diferenças entre repositório atual e estado anterior a 1 commit
+git log						Retornar relação de commits feitos
+git describe <ref>				Retornar tag ancestral e a quantidade de commits de distância da ref
+
