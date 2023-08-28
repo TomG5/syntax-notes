@@ -1,15 +1,16 @@
-//// C SYNTAX ////
+            //// C SYNTAX ////
 
-//  Bibliotecas
+///  Bibliotecas
 
 #include <stdio.h>      |   Standard Input-Output
 #include <stdlib.h>     |   String conversion, Memory Allocation and Pseudo Random
 #include <string.h>     |   Manipulation of Character Arrays
 #include <ctype.h>      |   Testing and Mapping Characters
+#include <stdint.h>     |   Utilize different integer sizes
 #include <stdbool.h>    |   Utilize boolean values
+#include <time.h>       |   Utilize date values
 
-
-//  Tipos de Dados
+///  Tipos de Dados
 
 bool                |   1 byte      |   true or false
 char	            |   1 byte	    |   -128 to 127 or 0 to 255
@@ -21,10 +22,14 @@ short               |   2 bytes     |   -32,768 to 32,767
 unsigned short      |   2 bytes     |   0 to 65,535
 long	            |   4/8 bytes   |   -9223372036854775808 to 9223372036854775807
 unsigned long	    |   8 bytes     |	0 to 18446744073709551615
-
 float	            |   4 bytes     |   6 decimal places
 double	            |   8 bytes     |   15 decimal places
 long double         |   10 bytes    |   19 decimal places
+int8_t              |   8 bytes     |   Signed to 2⁶⁴
+int16_t             |   16 bytes    |   Signed to 2¹²⁸
+uint8_t             |   8 bytes     |   Unsigned to 2⁶⁴
+uint16_t            |   16 bytes    |   Unsigned to 2¹²⁸
+...
 
     // Casting (Mudança de tipo)
 
@@ -37,10 +42,11 @@ sum_var = (float) x + (float) y;
 %lf     |   Double
 %i      |   Integer
 %li     |   Long Integer
-%d      |   Decimal Integer
+%d      |   Signed decimal/integer
+%u      |   Unsigned decimal/integer
 %o      |   Octal
 %x      |   Hexadecimal
-%s      |   String
+%s      |   String (colocar tamanho máximo da string em chars para evitar buffer overflow -> %12s)
 %p      |   Address
 
     // Escape Sequences
@@ -60,85 +66,13 @@ sum_var = (float) x + (float) y;
 
 
 
-//  Estruturas de Dados
+///  Estruturas de Dados
 
-Array       |   Grupo de n valores do mesmo tipo na mesma variável                                    |   int my_var[n] = {1, 2, 3, n};
-Linked List |   Grupo de valores do mesmo tipo na mesma variável sem uma ordenação lógica na memória  |   Exemplo abaixo*
-
-#include <stdio.h>
-#include <stdlib.h>
- 
-// Representação de um nó
-
-typedef struct node
-{
-    int number;
-    struct node *next;
-}
-node;
- 
-int main(void)
-{
-    // Iniciação de lista com tamanho 0
-
-    node *list = NULL;
- 
-    // Adicionar item na lista
-
-    node *n = malloc(sizeof(node));
-    if (n == NULL)
-    {
-        return 1;
-    }
-    n->number = 1;
-    n->next = NULL;
-    list = n;
- 
-    // Adicionar item na lista
-    
-    n = malloc(sizeof(node));
-    if (n == NULL)
-    {
-        free(list);
-        return 1;
-    }
-    n->number = 2;
-    n->next = NULL;
-    list->next = n;
- 
-    // Adicionar item na lista
-
-    n = malloc(sizeof(node));
-    if (n == NULL)
-    {
-        free(list->next);
-        free(list);
-        return 1;
-    }
-    n->number = 3;
-    n->next = NULL;
-    list->next->next = n;
- 
-    // Printar lista
-
-    for (node *tmp = list; tmp != NULL; tmp = tmp->next)
-    {
-        printf("%i\n", tmp->number);
-    }
- 
-    // Limpar lista
-    
-    while (list != NULL)
-    {
-        node *tmp = list->next;
-        free(list);
-        list = tmp;
-    }
-    return 0;
-}
+Array       |   Grupo de n valores do mesmo tipo na mesma variável                      |   int my_var[n] = {1, 2, 3, n};
+Linked List |   Grupo de valores/nós do mesmo tipo sem uma ordenação lógica na memória  |
 
 
-//  Definição de Variáveis
+///  Definição de Variáveis
 
 Formato: < tipo de dado + nome_variavel >
 Exemplo:
@@ -149,7 +83,7 @@ unsigned long id = 91249102471209;
 float my_var, that_var;
 
 
-//  Definição de Constantes
+///  Definição de Constantes
 
 Formato: < const + tipo de dado + nome_variavel >
 Exemplo:
@@ -157,14 +91,14 @@ Exemplo:
 const int total = 5;
 
 
-// Definição de Nomes Simbólicos
+/// Definição de Nomes Simbólicos
 
 Formato: < #define + Nome + Valor>
 
 #define STEPSIZE 30
 
 
-//  Definição de Funções
+///  Definição de Funções
 
 Formato: < tipo de saída + nome_funcao(argumentos) {comandos} >
 Exemplo:
@@ -214,7 +148,7 @@ int main(void)
 OBS: keyword "void" pode ser usada para indicar ausência de saída ou de argumentos 
 
 
-// Definição de Novos Tipos de Dados (Structs)
+/// Definição de Novos Tipos de Dados (Structs)
 
 Formato: < typedef + struct {tipo de dado + nome do dado} nome_novotipo >
 Exemplo:
@@ -232,24 +166,57 @@ people[0].name = "Joe";
 people[0].number = 1.85;
 
 
+/// Definição de Enums (Listas estáticas de valores para seleção)
 
-//  Operadores
+enum Level {
+  LOW = 1,          // Manualmente definido o valor inicial de 1, ao invés de 0
+  MEDIUM,
+  HIGH
+};
+
+int main() {
+  enum Level myVar = MEDIUM;
+
+  switch (myVar) {
+    case 1:
+      printf("Low Level");
+      break;
+    case 2:
+      printf("Medium level");
+      break;
+    case 3:
+      printf("High level");
+      break;
+  }
+  return 0;
+}
+
+
+///  Operadores
 
 !       |   Negação
 &&      |   E
 ||      |   Ou
+~       |   Bitwise NOT
+&       |   Bitwise AND
+|       |   Bitwise OR
+^       |   Bitwise Exclusive OR
+<<      |   Bitwise Left shift (move n bits para esquerda)
+>>      |   Bitwise Right shift
 ==      |   Igualdade
 !=      |   Desigualdade
 >=      |   Maior ou igual
 <=      |   Menor ou igual
 %       |   Módulo
 **      |   Exponenciação
+++X     |   Prefixo de adição (executado antes da lógica onde a variável é aplicada)
+X++     |   Sufixo de adição (executado após a lógica onde a variável é aplicada)
 
 &       |   Retornar endereço na memória
 *       |   Acessar endereço na memória
+?:      |   Criar condicional (num > 10 ?: true : false)
 
-
-//  Condicionais
+///  Condicionais
 
 Formato 1: < if (condição) {comandos} >
 Exemplo:
@@ -282,7 +249,7 @@ switch(my_guess)
         printf("Not a valid guess.\n");
 }
 
-Formato 3: < var = (condição) ? {comandos se verdadeiro} : {comandos se falso} >
+Formato 3 (Ternary): < var = (condição) ? {comandos se verdadeiro} : {comandos se falso} >
 Exemplo:
 
 int main() 
@@ -292,7 +259,7 @@ int main()
 }
 
 
-//  Loopings
+///  Loopings
 
     // While:
 
@@ -330,8 +297,39 @@ for (int i = 0; i < 10; i++)
     *** comandos ***
 }
 
+/// Definição de Ponteiros (Variáveis que guardam endereços na memória de valores)
 
-// Alocação de Memória
+Formato: <tipo> + <*> + <nome>
+Exemplos:
+int* my_ptr;
+int *my_ptr; 
+int **my_ptr2; // Ponteiro de ponteiro
+
+    // Implementação
+
+#include <stdio.h>
+
+int mynum = 5;
+int *ptr = &mynum;
+int **ptr2 = &ptr;
+
+int main() {
+    printf("No endereço %p está o valor %d com o tamanho de %d bytes!\n", ptr, *ptr, sizeof(**ptr2));
+    return 0;
+}
+
+
+/// Storage Classes
+
+1) typedef: atribuir um novo nome a um tipo de dado
+2) _Thread_local: definir a duração de uma variável em dada thread
+2.1 auto (gerenciamento automático da memória em stack, somente para variáveis locais)
+2.2 register (salva na memória do registrador da CPU)
+2.3 static (memória fica salva ao longo da execução do programa, iniciada uma vez no início)
+2.4 extern (possibilita acessar a memória por outros arquivos do programa)
+
+
+/// Alocação de Memória
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -389,14 +387,50 @@ int main(void)
     free(list);
 }
 
+/// Operações com arquivos
 
-// Notas
+    // Declaração
+
+FILE *file_pointer;
+
+file_pointer = fopen("path\filename.txt", "w");
+
+fprintf(file_pointer, "Valor a ser inserido");
+
+fclose(file_pointer);
+
+    // Modos
+
+    w = write
+    a = append
+    r = read
+
+    // Exemplo
+
+FILE *fptr;
+
+        // Open a file in read mode
+fptr = fopen("filename.txt", "r");
+
+        // Store the content of the file
+char myString[100];
+
+        // Read the content and print it
+while(fgets(myString, 100, fptr)) {
+  printf("%s", myString);
+}
+
+        // Close the file
+fclose(fptr);
+
+
+/// Notas
 
 - Para sequências de caracteres, utilizar "", para caracteres individuais, apenas ''
 - Strings são encerradas na leitura da memória com o caracter nulo ''\0''
 - Um Pointer é uma variável que carrega o endereço de um dado valor
 
 
-// Links
+/// Links
 
 https://manual.cs50.io/
